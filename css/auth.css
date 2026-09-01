@@ -29,13 +29,16 @@
   margin-bottom: var(--espaciado-xl);
 }
 
-.auth-icono-img {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
+.auth-logo {
+  display: block;
+  margin: 0 auto var(--espaciado-xs);
+}
+
+.auth-marca {
+  font-family: var(--font-titulo);
+  font-size: 1.05rem;
+  color: var(--color-chocolate);
   margin-bottom: var(--espaciado-md);
-  border: 3px solid var(--color-rosa);
 }
 
 .auth-header h1 {
@@ -74,7 +77,7 @@
   font-size: 0.95rem;
 }
 
-.auth-form .mensaje-error {
+.auth-form .mensaje-error.visible {
   min-height: 1.2em;
 }
 
@@ -115,4 +118,31 @@
   .auth-header h1 {
     font-size: 1.5rem;
   }
+}
+
+/* ---------- Cuentas de prueba (solo para la demostración) ---------- */
+.auth-demo {
+  margin-top: var(--espaciado-lg);
+  padding: var(--espaciado-md);
+  background: var(--color-crema);
+  border-radius: var(--radio-md);
+  font-size: 0.82rem;
+  color: var(--color-texto);
+}
+
+.auth-demo h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--espaciado-xs);
+}
+
+.auth-demo li {
+  margin-bottom: 0.15rem;
+}
+
+/* ---------- Mensaje de éxito dentro de la tarjeta ---------- */
+.auth-card .mensaje-exito-container {
+  box-shadow: none;
+  padding: var(--espaciado-lg) 0 0;
 }

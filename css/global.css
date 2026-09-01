@@ -148,12 +148,43 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-texto-claro);
 }
 
+/* El campo válido se declara primero para que, ante cualquier duda,
+   el estado de error sea el que gane en la cascada. */
+.campo-valido {
+  border-color: var(--color-exito) !important;
+}
+
 .campo-error {
   border-color: var(--color-error) !important;
 }
 
-.campo-valido {
-  border-color: var(--color-exito) !important;
+/* Nota de campos obligatorios al inicio de un formulario */
+.form-nota {
+  font-size: 0.82rem;
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-sm);
+}
+
+/* Texto de ayuda bajo la etiqueta: la "sugerencia" que pide la rúbrica */
+.campo-ayuda {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--color-texto-claro);
+  margin-top: 0.2rem;
+}
+
+/* Contador de caracteres para los campos con largo máximo */
+.contador-caracteres {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-texto-claro);
+  text-align: right;
+  margin-top: 0.2rem;
+}
+
+.contador-limite {
+  color: var(--color-error);
+  font-weight: 700;
 }
 
 .mensaje-error {
@@ -161,6 +192,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 0.8rem;
   margin-top: 0.25rem;
   font-weight: 600;
+}
+
+/* Solo ocupa espacio cuando efectivamente hay un mensaje que mostrar */
+.mensaje-error.visible {
+  min-height: 1.2em;
 }
 
 .mensaje-exito {
@@ -413,5 +449,201 @@ h1, h2, h3, h4, h5, h6 {
   .footer-contenido {
     grid-template-columns: 1fr;
     text-align: center;
+  }
+}
+
+
+/* ============================================================================
+   UTILIDADES COMPARTIDAS — Integrante A (Módulo 1)
+   ========================================================================== */
+
+/* ---------- Mostrar / ocultar bloques desde JavaScript ---------- */
+.hidden {
+  display: none !important;
+}
+
+/* ---------- Enlace de salto (accesibilidad) ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 200;
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 var(--radio-md) 0;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* ---------- Video embebido responsivo (16:9) ---------- */
+.video-contenedor {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-media);
+  background: var(--color-negro);
+}
+
+.video-contenedor iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-figura {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
+.video-figura figcaption {
+  margin-top: var(--espaciado-sm);
+  font-size: 0.85rem;
+  color: var(--color-texto-claro);
+  font-style: italic;
+  text-align: center;
+}
+
+/* ---------- Sesión activa en el header ---------- */
+.sesion-activa {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sesion-nombre {
+  font-weight: 700;
+  color: var(--color-chocolate);
+  font-size: 0.9rem;
+}
+
+.sesion-rol {
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio-xl);
+}
+
+.btn-panel,
+.btn-salir {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radio-xl);
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.btn-panel {
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+}
+
+.btn-panel:hover {
+  background: var(--color-chocolate-claro);
+}
+
+.btn-salir {
+  border: 2px solid var(--color-chocolate);
+  color: var(--color-chocolate);
+  background: transparent;
+}
+
+.btn-salir:hover {
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+}
+
+/* ---------- Aviso general de un formulario ---------- */
+.aviso-formulario {
+  background: #FDECEA;
+  border-left: 4px solid var(--color-error);
+  color: #8B2C22;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--espaciado-md);
+}
+
+/* ---------- Bloque de beneficios detectados (caso Forma C) ---------- */
+.bloque-beneficios {
+  background: #FFF8E7;
+  border: 2px dashed var(--color-rosa-oscuro);
+  border-radius: var(--radio-md);
+  padding: 0.85rem 1rem;
+  margin-bottom: var(--espaciado-md);
+  font-size: 0.88rem;
+  color: var(--color-texto);
+}
+
+.bloque-beneficios ul {
+  margin-top: 0.4rem;
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.bloque-beneficios li {
+  margin-bottom: 0.2rem;
+}
+
+/* ---------- Mensaje de éxito reutilizable ---------- */
+.mensaje-exito-container {
+  text-align: center;
+  padding: var(--espaciado-xl);
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+}
+
+.mensaje-exito-container .icono-exito {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: var(--color-exito);
+  color: var(--color-blanco);
+  font-size: 1.75rem;
+  margin-bottom: var(--espaciado-md);
+}
+
+.mensaje-exito-container ul {
+  list-style: disc;
+  text-align: left;
+  display: inline-block;
+  margin: var(--espaciado-md) 0;
+  padding-left: 1.2rem;
+}
+
+/* ---------- Responsive de las utilidades ---------- */
+@media (max-width: 768px) {
+  .sesion-activa {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  .sesion-nombre {
+    font-size: 0.8rem;
+  }
+
+  .btn-panel,
+  .btn-salir {
+    font-size: 0.78rem;
+    padding: 0.3rem 0.65rem;
   }
 }
