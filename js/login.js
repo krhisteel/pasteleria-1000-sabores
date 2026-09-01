@@ -1,144 +1,169 @@
 /* ============================================================================
    LOGIN.JS — Validación del formulario de inicio de sesión
    ---------------------------------------------------------------------------
-   Utiliza js/validaciones.js (especialista)
-   
-   Guarda la sesión activa y el rol del usuario en localStorage con la clave
-   "usuarioActivo" (acuerdo del equipo para integración con módulos).
+   Integrante A (Módulo 1). Usa js/validaciones.js (rol especialista).
+
+   Reglas del Anexo 1:
+     - Correo: requerido, máx. 100, solo @duoc.cl, @profesor.duoc.cl y @gmail.com
+     - Contraseña: requerida, entre 4 y 10 caracteres
+
+   Al iniciar sesión guarda el usuario y su rol en localStorage con la clave
+   "usuarioActivo" (acuerdo del equipo). El Integrante C lee esa clave desde
+   el panel de administración para mostrar u ocultar el menú según el rol.
    ========================================================================== */
 
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
   const formulario = document.getElementById("formLogin");
-
   if (!formulario) return;
 
-  /* ---------- Validación en tiempo real ---------- */
-  document.getElementById("correo").addEventListener("input", function () {
-    validarCampoCorreo();
-  });
+  const campoCorreo = document.getElementById("correo");
+  const campoPassword = document.getElementById("password");
+  const avisoLogin = document.getElementById("avisoLogin");
 
-  document.getElementById("password").addEventListener("input", function () {
-    validarCampoPassword();
-  });
+  sembrarUsuariosDemo();
+
+  /* ---------- Validación en tiempo real ---------- */
+  campoCorreo.addEventListener("input", validarCampoCorreo);
+  campoPassword.addEventListener("input", validarCampoPassword);
 
   /* ---------- Envío del formulario ---------- */
   formulario.addEventListener("submit", function (e) {
     e.preventDefault();
+    ocultarAviso();
 
     const correoOk = validarCampoCorreo();
     const passwordOk = validarCampoPassword();
 
-    if (correoOk && passwordOk) {
-      const correo = document.getElementById("correo").value.trim();
-      const password = document.getElementById("password").value;
+    if (!correoOk || !passwordOk) {
+      mostrarAviso("Revisa los campos marcados en rojo antes de continuar.");
+      return;
+    }
 
-      // Buscar usuario en localStorage
-      const usuario = buscarUsuario(correo, password);
+    const usuario = buscarUsuario(campoCorreo.value.trim(), campoPassword.value);
 
-      if (usuario) {
-        // Guardar sesión activa
-        guardarSesion(usuario);
+    if (!usuario) {
+      mostrarAviso("Correo o contraseña incorrectos. Verifica tus datos o regístrate.");
+      campoPassword.focus();
+      return;
+    }
 
-        // Redirigir según el tipo de usuario
-        if (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor") {
-          window.location.href = "admin-home.html";
-        } else {
-          window.location.href = "index.html";
-        }
-      } else {
-        mostrarError(document.getElementById("password"), "Correo o contraseña incorrectos");
-      }
+    guardarSesion(usuario);
+
+    // Redirigir según el rol (Anexo 1: Administrador y Vendedor van al panel)
+    if (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor") {
+      window.location.href = "admin-home.html";
+    } else {
+      window.location.href = "index.html";
     }
   });
 
   /* ---------- Funciones de validación ---------- */
   function validarCampoCorreo() {
-    const valor = document.getElementById("correo").value.trim();
+    const valor = campoCorreo.value.trim();
+
     if (!validarNoVacio(valor)) {
-      mostrarError(document.getElementById("correo"), "El correo es obligatorio");
-      return false;
+      return mostrarError(campoCorreo, "El correo es obligatorio.");
+    }
+    if (!validarLargoMaximo(valor, LARGOS.correo)) {
+      return mostrarError(campoCorreo, "El correo no puede superar los " + LARGOS.correo + " caracteres.");
     }
     if (!validarCorreo(valor)) {
-      mostrarError(document.getElementById("correo"), "Ingrese un correo válido");
-      return false;
+      return mostrarError(campoCorreo, "Solo se aceptan correos " + TEXTO_DOMINIOS + ".");
     }
-    marcarValido(document.getElementById("correo"));
-    return true;
+    return marcarValido(campoCorreo);
   }
 
   function validarCampoPassword() {
-    const valor = document.getElementById("password").value;
-    if (!validarPassword(valor)) {
-      mostrarError(document.getElementById("password"), "La contraseña debe tener entre 4 y 10 caracteres");
-      return false;
+    const valor = campoPassword.value;
+
+    if (!validarNoVacio(valor)) {
+      return mostrarError(campoPassword, "La contraseña es obligatoria.");
     }
-    marcarValido(document.getElementById("password"));
-    return true;
+    if (!validarPassword(valor)) {
+      return mostrarError(campoPassword, "La contraseña debe tener entre 4 y 10 caracteres.");
+    }
+    return marcarValido(campoPassword);
   }
 
-  /* ---------- Buscar Usuario ---------- */
+  /* ---------- Aviso general del formulario ---------- */
+  function mostrarAviso(texto) {
+    if (!avisoLogin) return;
+    avisoLogin.textContent = texto;
+    avisoLogin.classList.remove("hidden");
+  }
+
+  function ocultarAviso() {
+    if (!avisoLogin) return;
+    avisoLogin.textContent = "";
+    avisoLogin.classList.add("hidden");
+  }
+
+  /* ---------- Buscar usuario registrado ---------- */
   function buscarUsuario(correo, password) {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+      const correoBuscado = correo.toLowerCase();
       return usuarios.find(function (u) {
-        return u.correo === correo && u.password === password;
-      });
+        return String(u.correo).toLowerCase() === correoBuscado && u.password === password;
+      }) || null;
     } catch (e) {
       return null;
     }
   }
 
-  /* ---------- Guardar Sesión ---------- */
+  /* ---------- Guardar sesión activa ---------- */
   function guardarSesion(usuario) {
     try {
       const sesion = {
+        run: usuario.run,
         nombre: usuario.nombre,
         apellidos: usuario.apellidos,
         correo: usuario.correo,
         tipo: usuario.tipo || "Cliente",
+        beneficios: usuario.beneficios || [],
         fechaLogin: new Date().toISOString()
       };
-      localStorage.setItem("usuarioActivo", JSON.stringify(sesion));
+      localStorage.setItem(CLAVE_SESION, JSON.stringify(sesion));
     } catch (e) {
-      console.error("Error al guardar sesión:", e);
+      mostrarAviso("No se pudo guardar la sesión en este navegador.");
+    }
+  }
+
+  /* ---------- Usuarios de demostración ----------
+     Solo se crean la primera vez, si aún no hay ningún usuario registrado.
+     Sirven para poder demostrar los tres roles del Anexo 1 en la presentación
+     sin tener que registrarse antes.                                        */
+  function sembrarUsuariosDemo() {
+    try {
+      const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+      if (usuarios.length > 0) return;
+
+      const demo = [
+        {
+          run: "190110222", nombre: "Ana", apellidos: "Soto Pérez",
+          correo: "admin@duoc.cl", password: "admin123",
+          region: "Metropolitana de Santiago", comuna: "Santiago",
+          direccion: "Av. Dulce 123", tipo: "Administrador", beneficios: []
+        },
+        {
+          run: "156789011", nombre: "Luis", apellidos: "Vera Rojas",
+          correo: "vendedor@duoc.cl", password: "venta123",
+          region: "Metropolitana de Santiago", comuna: "Providencia",
+          direccion: "Av. Dulce 123", tipo: "Vendedor", beneficios: []
+        },
+        {
+          run: "123456785", nombre: "Camila", apellidos: "Díaz Muñoz",
+          correo: "cliente@gmail.com", password: "cliente1",
+          region: "Valparaíso", comuna: "Viña del Mar",
+          direccion: "Calle Las Flores 45", tipo: "Cliente", beneficios: []
+        }
+      ];
+
+      localStorage.setItem("usuarios", JSON.stringify(demo));
+    } catch (e) {
+      // Si el navegador bloquea localStorage, el login simplemente no encontrará usuarios
     }
   }
 });
-
-/* ---------- Función global para cerrar sesión ---------- */
-function cerrarSesion() {
-  localStorage.removeItem("usuarioActivo");
-  window.location.href = "login.html";
-}
-
-/* ---------- Función global para obtener el usuario actual ---------- */
-function obtenerUsuarioActual() {
-  try {
-    return JSON.parse(localStorage.getItem("usuarioActivo") || "null");
-  } catch (e) {
-    return null;
-  }
-}
-
-/* ---------- Función global para verificar si hay sesión ---------- */
-function haySesion() {
-  return obtenerUsuarioActual() !== null;
-}
-
-/* ---------- Función global para verificar el rol ---------- */
-function esAdministrador() {
-  const usuario = obtenerUsuarioActual();
-  return usuario && usuario.tipo === "Administrador";
-}
-
-function esVendedor() {
-  const usuario = obtenerUsuarioActual();
-  return usuario && usuario.tipo === "Vendedor";
-}
-
-function esCliente() {
-  const usuario = obtenerUsuarioActual();
-  return usuario && usuario.tipo === "Cliente";
-}
