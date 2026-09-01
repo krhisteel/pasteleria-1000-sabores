@@ -80,38 +80,16 @@ select.campo {
   padding-right: 2.5rem;
 }
 
-.mensaje-error {
-  color: var(--color-error);
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-  font-weight: 600;
-  min-height: 1.2em;
-}
-
 .btn-enviar {
   width: 100%;
   padding: 1rem;
   font-size: 1.1rem;
 }
 
-/* ---------- Mensaje de Éxito ---------- */
+/* ---------- Mensaje de Éxito ----------
+   La caja base vive en global.css; aquí solo se ajusta a esta página. */
 .mensaje-exito-container {
-  text-align: center;
-  padding: var(--espaciado-xl);
-  background: var(--color-blanco);
-  border-radius: var(--radio-lg);
-  box-shadow: var(--sombra-suave);
   margin-top: var(--espaciado-lg);
-}
-
-.mensaje-exito-container.hidden {
-  display: none;
-}
-
-.icono-exito {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: var(--espaciado-md);
 }
 
 .mensaje-exito-container h3 {
