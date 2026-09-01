@@ -117,7 +117,13 @@
   font-family: var(--font-titulo);
   font-size: 2rem;
   color: var(--color-chocolate);
-  margin-bottom: var(--espaciado-xl);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.valores-intro {
+  max-width: 560px;
+  margin: 0 auto var(--espaciado-xl);
+  color: var(--color-texto-claro);
 }
 
 .valores-grid {
@@ -140,7 +146,7 @@
 
 .valor-foto {
   width: 100%;
-  height: 140px;
+  height: 170px;
   overflow: hidden;
 }
 
@@ -148,6 +154,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform var(--transicion-normal);
+}
+
+.valor-card:hover .valor-foto img {
+  transform: scale(1.05);
 }
 
 .valor-card h3 {
