@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosotros — Pastelería 1000 Sabores</title>
+  <meta name="description" content="Conoce la historia de Pastelería 1000 Sabores, más de 20 años de repostería artesanal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/nosotros.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER (COMPARTIDO - INTEGRANTE A) ===================== -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icono">🎂</span>
+        <span class="logo-texto">Pastelería 1000 Sabores</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html" class="active">Nosotros</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+
+      <div class="nav-acciones">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn-registro">Registrarse</a>
+        <a href="carrito.html" class="btn-carrito">
+          🛒 Cart (<span id="contador-carrito">0</span>)
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main>
+
+    <!-- Hero de Nosotros -->
+    <section class="nosotros-hero">
+      <h1>Nuestra Historia</h1>
+      <p>Más de 20 años creando momentos dulces</p>
+    </section>
+
+    <!-- Historia -->
+    <section class="historia">
+      <div class="historia-contenido">
+        <h2>De un sueño a una tradición</h2>
+        <p>
+          Pastelería 1000 Sabores nació en 2005 del sueño de Doña María García, 
+          una apasionada de la repostería que comenzó hornear en su cocina familiar 
+          con recetas transmitidas por generaciones.
+        </p>
+        <p>
+          Lo que empezó como un pequeño emprendimiento en el barrio, se convirtió 
+          en un referente de la repostería artesanal en Santiago. Cada torta, cada 
+          cupcake y cada pieza de pan lleva el sello de la calidad y el amor que 
+          le ponemos a nuestro trabajo.
+        </p>
+        <p>
+          Hoy, con más de 20 años de experiencia, seguimos fieles a nuestros valores: 
+          ingredientes naturales, recetas tradicionales y la sonrisa de nuestros 
+          clientes como nuestra mayor recompensa.
+        </p>
+      </div>
+      <div class="historia-imagen">
+        <span class="imagen-placeholder">👩‍🍳</span>
+      </div>
+    </section>
+
+    <!-- Video Institucional -->
+    <section class="video-institucional">
+      <h2>Conoce Nuestro Mundo</h2>
+      <p>Un vistazo a cómo creamos nuestros dulces favoritos</p>
+      <div class="video-contenedor">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+          title="Video institucional Pastelería 1000 Sabores"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Valores -->
+    <section class="valores">
+      <h2>Nuestros Valores</h2>
+      <div class="valores-grid">
+        <article class="valor-card">
+          <span class="valor-icono">❤️</span>
+          <h3>Pasión</h3>
+          <p>Cada pieza es elaborada con amor y dedicación, como si fuera para nuestra propia familia.</p>
+        </article>
+        <article class="valor-card">
+          <span class="valor-icono">🌟</span>
+          <h3>Calidad</h3>
+          <p>Utilizamos solo los mejores ingredientes naturales, sin conservantes artificiales.</p>
+        </article>
+        <article class="valor-card">
+          <span class="valor-icono">🤝</span>
+          <h3>Compromiso</h3>
+          <p>Cumplimos cada encargo con puntualidad y superamos las expectativas de nuestros clientes.</p>
+        </article>
+        <article class="valor-card">
+          <span class="valor-icono">💡</span>
+          <h3>Innovación</h3>
+          <p>Constantemente creamos nuevos sabores y diseños para sorprenderte.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Equipo -->
+    <section class="equipo">
+      <h2>Nuestro Equipo</h2>
+      <div class="equipo-grid">
+        <article class="miembro-card">
+          <div class="miembro-foto">👩‍🍳</div>
+          <h3>María García</h3>
+          <p class="miembro-cargo">Fundadora y Pastelera Jefe</p>
+          <p class="miembro-bio">Más de 30 años de experiencia en repostería artesanal.</p>
+        </article>
+        <article class="miembro-card">
+          <div class="miembro-foto">👨‍🍳</div>
+          <h3>Carlos Rodríguez</h3>
+          <p class="miembro-cargo">Chef Pastelero</p>
+          <p class="miembro-bio">Especialista en tortas decoradas y chocolate belga.</p>
+        </article>
+        <article class="miembro-card">
+          <div class="miembro-foto">👩‍🍳</div>
+          <h3>Ana Martínez</h3>
+          <p class="miembro-cargo">Panadera</p>
+          <p class="miembro-bio">Maestra del pan artesanal y la masa fermentada.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="nosotros-cta">
+      <h2>¿Quieres Conocernos?</h2>
+      <p>Visítanos y descubre por qué somos los favoritos del barrio</p>
+      <div class="cta-botones">
+        <a href="contacto.html" class="btn-primary">Contáctanos</a>
+        <a href="productos.html" class="btn-secondary">Ver Productos</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (COMPARTIDO - INTEGRANTE A) ===================== -->
+  <footer class="site-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>🎂 Pastelería 1000 Sabores</h3>
+        <p>Repostería artesanal con amor desde 2005. Los mejores sabores para los momentos más dulces de tu vida.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Av. Dulce 123, Santiago</li>
+          <li>📞 +56 9 1234 5678</li>
+          <li>✉️ contacto@1000sabores.cl</li>
+          <li>🕐 Lun-Dom: 9:00 - 20:00</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <div class="redes-sociales">
+          <a href="#" aria-label="Facebook">📘 Facebook</a>
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
