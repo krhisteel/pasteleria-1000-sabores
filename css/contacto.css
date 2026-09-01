@@ -162,11 +162,8 @@ select.campo {
 
 .contacto-logo {
   display: block;
-  margin: 0 auto var(--espaciado-xs);
-}
-
-.contacto-nombre-empresa {
-  font-family: var(--font-titulo);
-  font-size: 1.15rem;
-  color: var(--color-chocolate);
+  width: auto;
+  max-width: 150px;
+  height: auto;
+  margin: 0 auto;
 }

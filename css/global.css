@@ -273,15 +273,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .logo-img {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-.logo-svg {
-  width: 36px;
-  height: 36px;
+  width: auto;
+  height: 38px;
+  object-fit: contain;
   flex-shrink: 0;
 }
 
@@ -746,9 +740,8 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1rem;
   }
 
-  .logo-svg {
-    width: 28px;
-    height: 28px;
+  .logo-img {
+    height: 30px;
   }
 
   .menu-toggle {

@@ -31,14 +31,10 @@
 
 .auth-logo {
   display: block;
-  margin: 0 auto var(--espaciado-xs);
-}
-
-.auth-marca {
-  font-family: var(--font-titulo);
-  font-size: 1.05rem;
-  color: var(--color-chocolate);
-  margin-bottom: var(--espaciado-md);
+  width: auto;
+  max-width: 160px;
+  height: auto;
+  margin: 0 auto var(--espaciado-md);
 }
 
 .auth-header h1 {
