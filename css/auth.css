@@ -1,0 +1,120 @@
+/* ============================================================================
+   AUTH.CSS — Estilos compartidos para Login y Registro
+   ========================================================================== */
+
+/* ---------- Main Auth ---------- */
+.auth-main {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaciado-xl) 1.5rem;
+  background: linear-gradient(135deg, var(--color-crema) 0%, var(--color-rosa) 100%);
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 480px;
+}
+
+.auth-card {
+  background: var(--color-blanco);
+  border-radius: var(--radio-xl);
+  box-shadow: var(--sombra-fuerte);
+  padding: var(--espaciado-xl);
+  overflow: hidden;
+}
+
+/* ---------- Header ---------- */
+.auth-header {
+  text-align: center;
+  margin-bottom: var(--espaciado-xl);
+}
+
+.auth-icono {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--espaciado-md);
+}
+
+.auth-header h1 {
+  font-family: var(--font-titulo);
+  font-size: 1.8rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.auth-header p {
+  font-size: 0.95rem;
+  color: var(--color-texto-claro);
+}
+
+/* ---------- Formulario ---------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-md);
+}
+
+.auth-form .campo-grupo {
+  margin-bottom: 0;
+}
+
+.auth-form .campo-grupo label {
+  display: block;
+  font-weight: 700;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-xs);
+  font-size: 0.9rem;
+}
+
+.auth-form .campo {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+}
+
+.auth-form .mensaje-error {
+  min-height: 1.2em;
+}
+
+.btn-auth {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.05rem;
+  margin-top: var(--espaciado-sm);
+}
+
+/* ---------- Footer Auth ---------- */
+.auth-footer {
+  text-align: center;
+  margin-top: var(--espaciado-lg);
+  padding-top: var(--espaciado-lg);
+  border-top: 1px solid var(--color-crema);
+}
+
+.auth-footer p {
+  font-size: 0.9rem;
+  color: var(--color-texto-claro);
+}
+
+.auth-footer a {
+  color: var(--color-chocolate);
+  font-weight: 700;
+  transition: color var(--transicion-rapida);
+}
+
+.auth-footer a:hover {
+  color: var(--color-chocolate-claro);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .auth-card {
+    padding: var(--espaciado-lg);
+  }
+
+  .auth-header h1 {
+    font-size: 1.5rem;
+  }
+}

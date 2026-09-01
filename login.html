@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión — Pastelería 1000 Sabores</title>
+  <meta name="description" content="Inicia sesión para realizar pedidos y acceder a ofertas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER (COMPARTIDO) ===================== -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icono">🎂</span>
+        <span class="logo-texto">Pastelería 1000 Sabores</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="nav-acciones">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn-registro">Registrarse</a>
+        <a href="carrito.html" class="btn-carrito">🛒 Cart (<span id="contador-carrito">0</span>)</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main class="auth-main">
+    <div class="auth-container">
+      <div class="auth-card">
+        <div class="auth-header">
+          <span class="auth-icono">👋</span>
+          <h1>Iniciar Sesión</h1>
+          <p>Ingresa tus credenciales para continuar</p>
+        </div>
+
+        <form id="formLogin" class="auth-form" novalidate>
+          <!-- Correo -->
+          <div class="campo-grupo">
+            <label for="correo">Correo Electrónico *</label>
+            <input type="email" id="correo" name="correo" class="campo" placeholder="tu@correo.com">
+            <div class="mensaje-error" id="error-correo"></div>
+          </div>
+
+          <!-- Contraseña -->
+          <div class="campo-grupo">
+            <label for="password">Contraseña * (4 a 10 caracteres)</label>
+            <input type="password" id="password" name="password" class="campo" placeholder="Tu contraseña">
+            <div class="mensaje-error" id="error-password"></div>
+          </div>
+
+          <button type="submit" class="btn-primary btn-auth">Iniciar Sesión</button>
+        </form>
+
+        <div class="auth-footer">
+          <p>¿No tienes cuenta? <a href="registro.html">Regístrate aquí</a></p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===================== FOOTER (COMPARTIDO) ===================== -->
+  <footer class="site-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>🎂 Pastelería 1000 Sabores</h3>
+        <p>Repostería artesanal con amor desde 2005.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Av. Dulce 123, Santiago</li>
+          <li>📞 +56 9 1234 5678</li>
+          <li>✉️ contacto@1000sabores.cl</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <div class="redes-sociales">
+          <a href="#">📘 Facebook</a>
+          <a href="#">📷 Instagram</a>
+          <a href="#">🎵 TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/validaciones.js"></script>
+  <script src="js/login.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
