@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Pastelería 1000 Sabores</title>
+  <meta name="description" content="Blog de repostería: recetas, consejos y tendencias del mundo pastelero.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/blogs.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER (COMPARTIDO) ===================== -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icono">🎂</span>
+        <span class="logo-texto">Pastelería 1000 Sabores</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html" class="active">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="nav-acciones">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn-registro">Registrarse</a>
+        <a href="carrito.html" class="btn-carrito">🛒 Cart (<span id="contador-carrito">0</span>)</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main>
+
+    <section class="blog-hero">
+      <h1>Nuestro Blog</h1>
+      <p>Recetas, consejos y todo sobre el mundo de la repostería</p>
+    </section>
+
+    <section class="blog-listado">
+      <div class="blog-grid">
+
+        <article class="blog-card">
+          <div class="blog-card-imagen">🍫</div>
+          <div class="blog-card-contenido">
+            <span class="blog-categoria">Recetas</span>
+            <h2>Los Secretos del Chocolate Artesanal</h2>
+            <p>Descubre los ingredientes y técnicas que hacen único a nuestro chocolate belga, desde la selección del cacao hasta el temperado perfecto.</p>
+            <div class="blog-meta">
+              <span>📅 15 Agosto 2026</span>
+              <span>👤 María García</span>
+            </div>
+            <a href="blog-detalle-1.html" class="btn-leer-mas">Leer Más →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-imagen">🧁</div>
+          <div class="blog-card-contenido">
+            <span class="blog-categoria">Tendencias</span>
+            <h2>Tendencias en Repostería 2026</h2>
+            <p>Los sabores, colores y técnicas que marcarán la repostería este año. ¡No te pierdas las novedades!</p>
+            <div class="blog-meta">
+              <span>📅 10 Agosto 2026</span>
+              <span>👤 Carlos Rodríguez</span>
+            </div>
+            <a href="blog-detalle-2.html" class="btn-leer-mas">Leer Más →</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (COMPARTIDO) ===================== -->
+  <footer class="site-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>🎂 Pastelería 1000 Sabores</h3>
+        <p>Repostería artesanal con amor desde 2005.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Av. Dulce 123, Santiago</li>
+          <li>📞 +56 9 1234 5678</li>
+          <li>✉️ contacto@1000sabores.cl</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <div class="redes-sociales">
+          <a href="#">📘 Facebook</a>
+          <a href="#">📷 Instagram</a>
+          <a href="#">🎵 TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
