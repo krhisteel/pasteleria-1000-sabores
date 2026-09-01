@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pastelería 1000 Sabores — Inicio</title>
+  <meta name="description" content="Pastelería 1000 Sabores - Repostería artesanal, tortas personalizadas y sabores únicos.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+  <!-- ===================== HEADER (COMPARTIDO - INTEGRANTE A) ===================== -->
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <span class="logo-icono">🎂</span>
+        <span class="logo-texto">Pastelería 1000 Sabores</span>
+      </a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+
+      <div class="nav-acciones">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn-registro">Registrarse</a>
+        <a href="carrito.html" class="btn-carrito">
+          🛒 Cart (<span id="contador-carrito">0</span>)
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
+  <main>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+      <div class="hero-contenido">
+        <h1 class="hero-titulo">Pastelería <span>1000 Sabores</span></h1>
+        <p class="hero-subtitulo">Repodería artesanal con los mejores ingredientes y sabores únicos que enamoran</p>
+        <a href="productos.html" class="btn-hero">Ver Productos</a>
+      </div>
+    </section>
+
+    <!-- Categorías Destacadas -->
+    <section class="categorias-destacadas">
+      <h2 class="seccion-titulo">Nuestras Categorías</h2>
+      <div class="categorias-grid">
+        <a href="productos.html?cat=tortas" class="categoria-card">
+          <span class="categoria-icono">🎂</span>
+          <h3>Tortas</h3>
+          <p>Tortas personalizadas para toda ocasión</p>
+        </a>
+        <a href="productos.html?cat=pasteleria" class="categoria-card">
+          <span class="categoria-icono">🧁</span>
+          <h3>Pastelería</h3>
+          <p>Cupcakes, muffins y delicias variadas</p>
+        </a>
+        <a href="productos.html?cat=panaderia" class="categoria-card">
+          <span class="categoria-icono">🥐</span>
+          <h3>Panadería</h3>
+          <p>Pan artesanal recién horneado</p>
+        </a>
+        <a href="productos.html?cat=bebidas" class="categoria-card">
+          <span class="categoria-icono">☕</span>
+          <h3>Bebidas</h3>
+          <p>Café, chocolates y bebidas especiales</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- Productos Estrella -->
+    <section class="productos-estrella">
+      <h2 class="seccion-titulo">Productos Estrella</h2>
+      <div class="productos-grid">
+        <article class="producto-card">
+          <div class="producto-imagen">🎂</div>
+          <div class="producto-info">
+            <h3>Torta de Chocolate</h3>
+            <p class="producto-desc">Triple capa de chocolate belga con ganache</p>
+            <span class="producto-precio">$28.990</span>
+            <a href="producto-detalle.html?id=1" class="btn-ver-mas">Ver Detalle</a>
+          </div>
+        </article>
+        <article class="producto-card">
+          <div class="producto-imagen">🧁</div>
+          <div class="producto-info">
+            <h3>Cupcakes de Vainilla</h3>
+            <p class="producto-desc">Docena de cupcakes con frosting de mantequilla</p>
+            <span class="producto-precio">$15.990</span>
+            <a href="producto-detalle.html?id=2" class="btn-ver-mas">Ver Detalle</a>
+          </div>
+        </article>
+        <article class="producto-card">
+          <div class="producto-imagen">🥐</div>
+          <div class="producto-info">
+            <h3>Croissants Franceses</h3>
+            <p class="producto-desc">Masa hojaldre fermentada 48 horas</p>
+            <span class="producto-precio">$8.990</span>
+            <a href="producto-detalle.html?id=3" class="btn-ver-mas">Ver Detalle</a>
+          </div>
+        </article>
+      </div>
+      <a href="productos.html" class="btn-ver-todos">Ver Todos los Productos →</a>
+    </section>
+
+    <!-- Video Institucional -->
+    <section class="video-seccion">
+      <h2 class="seccion-titulo">Conoce Nuestra Historia</h2>
+      <div class="video-contenedor">
+        <iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+          title="Video institucional Pastelería 1000 Sabores"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Sobre Nosotros (Resumen) -->
+    <section class="sobre-nosotros-preview">
+      <div class="sobre-contenido">
+        <h2>Más de 20 años de pasión</h2>
+        <p>Desde 2005, Pastelería 1000 Sabores ha sido el lugar donde los sueños dulces se hacen realidad. Cada pieza es elaborada con amor, tradition y los mejores ingredientes naturales.</p>
+        <a href="nosotros.html" class="btn-mas-info">Conoce Más →</a>
+      </div>
+      <div class="sobre-imagen">
+        <span class="imagen-placeholder">👩‍🍳</span>
+      </div>
+    </section>
+
+    <!-- Call to Action Final -->
+    <section class="cta-final">
+      <h2>¿Listo para Endulzar tu Día?</h2>
+      <p>Explora nuestros más de 100 sabores y encuentra tu favorito</p>
+      <a href="productos.html" class="btn-cta">Explorar Menú</a>
+    </section>
+
+  </main>
+
+  <!-- ===================== FOOTER (COMPARTIDO - INTEGRANTE A) ===================== -->
+  <footer class="site-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>🎂 Pastelería 1000 Sabores</h3>
+        <p>Repostería artesanal con amor desde 2005. Los mejores sabores para los momentos más dulces de tu vida.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>📍 Av. Dulce 123, Santiago</li>
+          <li>📞 +56 9 1234 5678</li>
+          <li>✉️ contacto@1000sabores.cl</li>
+          <li>🕐 Lun-Dom: 9:00 - 20:00</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <div class="redes-sociales">
+          <a href="#" aria-label="Facebook">📘 Facebook</a>
+          <a href="#" aria-label="Instagram">📷 Instagram</a>
+          <a href="#" aria-label="TikTok">🎵 TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
