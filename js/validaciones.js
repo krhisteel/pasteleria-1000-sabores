@@ -1,10 +1,10 @@
 /* ============================================================================
    VALIDACIONES REUTILIZABLES
    ----------------------------------------------------------------------------
-   Archivo especialista creado por Integrante A (Módulo 1).
+   Archivo especialista creado por Aileen Oyaneder (Módulo 1).
    Utilizado por:
-     - Integrante A: js/registro.js, js/contacto.js, js/login.js
-     - Integrante C: js/admin-usuarios.js
+     - Aileen Oyaneder: js/registro.js, js/contacto.js, js/login.js
+     - Jael Reyes: js/admin-usuarios.js
 
    Reglas de negocio tomadas del Anexo 1 de la evaluación:
      - Correo: solo @duoc.cl, @profesor.duoc.cl y @gmail.com (máx. 100)

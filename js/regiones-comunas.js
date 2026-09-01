@@ -1,9 +1,10 @@
 /* ============================================================================
    REGIONES-COMUNAS.JS — Arreglo de regiones y comunas de Chile
    ----------------------------------------------------------------------------
-   Archivo compartido: creado por Integrante C, utilizado por:
-     - Integrante A: js/registro.js (registro.html)
-     - Integrante C: js/admin-usuarios.js (panel de administración)
+   Archivo compartido, asignado a Jael Reyes (Módulo 3).
+   Versión inicial creada por Aileen Oyaneder. Utilizado por:
+     - Aileen Oyaneder: js/registro.js (registro.html)
+     - Jael Reyes: js/admin-usuarios.js (panel de administración)
    ========================================================================== */
 
 "use strict";

@@ -6,13 +6,11 @@ Tienda online desarrollada con HTML5, CSS3 y JavaScript sin frameworks.
 
 ## Integrantes del equipo
 
-> Reemplazar los nombres antes de la entrega.
-
 | Nombre | Rol de especialista | Módulo |
 |--------|---------------------|--------|
-| *(Integrante A)* | Estructura HTML semántica + validaciones JS | Módulo 1 — Contenido y Acceso |
-| *(Integrante B)* | Lógica de negocio (catálogo y carrito) | Módulo 2 — Compra |
-| *(Integrante C)* | Hoja de estilos global | Módulo 3 — Administración |
+| Aileen Oyaneder | Estructura HTML semántica + validaciones JS | Módulo 1 — Contenido y Acceso |
+| Benjamín Riquelme | Lógica de negocio (catálogo y carrito) | Módulo 2 — Compra |
+| Jael Reyes | Hoja de estilos global | Módulo 3 — Administración |
 
 ## Cómo ejecutar
 
@@ -52,7 +50,7 @@ pasteleria mil sabores/
 ├── registro.html           Registro de usuario validado
 ├── login.html              Inicio de sesión validado
 ├── css/
-│   ├── global.css          Variables, reset, header, footer y utilidades (Integrante C)
+│   ├── global.css          Variables, reset, header, footer y utilidades (Jael Reyes)
 │   ├── home.css            Estilos de index.html
 │   ├── nosotros.css        Estilos de nosotros.html
 │   ├── blogs.css           Estilos de blogs.html y de los detalles
@@ -60,11 +58,11 @@ pasteleria mil sabores/
 │   └── auth.css            Estilos de registro.html y login.html
 ├── js/
 │   ├── main.js             Menú responsive, sesión de usuario y contador de carrito
-│   ├── validaciones.js     Funciones de validación reutilizables (Integrante A)
+│   ├── validaciones.js     Funciones de validación reutilizables (Aileen Oyaneder)
 │   ├── contacto.js         Validación del formulario de contacto
 │   ├── registro.js         Validación del registro y cálculo de beneficios
 │   ├── login.js            Validación del login y guardado de la sesión
-│   └── regiones-comunas.js Arreglo de regiones y comunas (Integrante C)
+│   └── regiones-comunas.js Arreglo de regiones y comunas (Jael Reyes)
 ├── img/                    Imágenes propias del proyecto
 └── README.md
 ```
@@ -139,9 +137,9 @@ Claves compartidas en `localStorage`:
 
 | Clave | La escribe | La leen |
 |-------|------------|---------|
-| `usuarios` | Integrante A (`registro.js`) | Integrante A (`login.js`), Integrante C (`admin-usuarios.js`) |
-| `usuarioActivo` | Integrante A (`login.js`) | Integrante A (`main.js`), Integrante C (panel admin) |
-| `carrito` | Integrante B (`carrito.js`) | Integrante A (`main.js`, contador del header) |
+| `usuarios` | Aileen Oyaneder (`registro.js`) | Aileen Oyaneder (`login.js`), Jael Reyes (`admin-usuarios.js`) |
+| `usuarioActivo` | Aileen Oyaneder (`login.js`) | Aileen Oyaneder (`main.js`), Jael Reyes (panel admin) |
+| `carrito` | Benjamín Riquelme (`carrito.js`) | Aileen Oyaneder (`main.js`, contador del header) |
 
 Funciones globales expuestas por `js/main.js` para el resto del equipo:
 `obtenerUsuarioActual()`, `haySesion()`, `cerrarSesion()`, `esAdministrador()`,

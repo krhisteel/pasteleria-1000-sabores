@@ -1,15 +1,15 @@
 /* ============================================================================
    MAIN.JS — Funciones globales del sitio
    ----------------------------------------------------------------------------
-   Integrante A (Módulo 1). Se carga en TODAS las páginas del sitio.
+   Aileen Oyaneder (Módulo 1). Se carga en TODAS las páginas del sitio.
      - Menú responsive (hamburguesa)
      - Contador de carrito (lee de localStorage)
      - Sesión de usuario y rol persistente (clave "usuarioActivo")
 
    Acuerdos de integración con el equipo:
-     - "carrito"       -> arreglo del carrito (Integrante B, js/carrito.js)
-     - "usuarioActivo" -> sesión iniciada (Integrante A, js/login.js)
-     - "usuarios"      -> usuarios registrados (Integrante A / Integrante C)
+     - "carrito"       -> arreglo del carrito (Benjamín Riquelme, js/carrito.js)
+     - "usuarioActivo" -> sesión iniciada (Aileen Oyaneder, js/login.js)
+     - "usuarios"      -> usuarios registrados (Aileen Oyaneder / Jael Reyes)
    ========================================================================== */
 
 "use strict";
@@ -17,7 +17,7 @@
 /* ============================================================================
    SESIÓN DE USUARIO
    Estas funciones viven aquí (y no en login.js) porque main.js se carga en
-   todas las páginas: así el Integrante C puede leer el rol desde el panel
+   todas las páginas: así Jael Reyes puede leer el rol desde el panel
    de administración sin depender de la página de login.
    ========================================================================== */
 
@@ -125,8 +125,8 @@ function renderizarSesionEnHeader() {
 /**
  * Actualiza el número del carrito en el header.
  * Lee la cantidad total desde localStorage.
- * El Integrante B crea la función original en js/carrito.js;
- * el Integrante A la reimplementa aquí para que el contador funcione en
+ * Benjamín Riquelme crea la función original en js/carrito.js;
+ * Aileen Oyaneder la reimplementa aquí para que el contador funcione en
  * todas las páginas del Módulo 1 aunque carrito.js no esté cargado.
  */
 function actualizarContadorCarrito() {

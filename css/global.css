@@ -1,7 +1,8 @@
 /* ============================================================================
    GLOBAL.CSS — Estilos globales compartidos
    ----------------------------------------------------------------------------
-   Creado por Integrante C (Especialista CSS).
+   Asignado a Jael Reyes (rol especialista CSS, Módulo 3).
+   Versión inicial creada por Aileen Oyaneder.
    Este archivo define variables de color, tipografías y reset base.
    
    Colores de la marca:
@@ -454,7 +455,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* ============================================================================
-   UTILIDADES COMPARTIDAS — Integrante A (Módulo 1)
+   UTILIDADES COMPARTIDAS — Aileen Oyaneder (Módulo 1)
    ========================================================================== */
 
 /* ---------- Mostrar / ocultar bloques desde JavaScript ---------- */
@@ -650,7 +651,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* ============================================================================
-   NEWSLETTER Y MEDIOS DE PAGO EN EL FOOTER — Integrante A (Módulo 1)
+   NEWSLETTER Y MEDIOS DE PAGO EN EL FOOTER — Aileen Oyaneder (Módulo 1)
    ========================================================================== */
 
 /* Etiqueta visible solo para lectores de pantalla */

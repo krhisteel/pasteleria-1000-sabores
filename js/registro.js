@@ -1,8 +1,8 @@
 /* ============================================================================
    REGISTRO.JS — Validación del formulario de registro
    ---------------------------------------------------------------------------
-   Integrante A (Módulo 1).
-   Usa js/validaciones.js (rol especialista) y js/regiones-comunas.js (Integrante C).
+   Aileen Oyaneder (Módulo 1).
+   Usa js/validaciones.js (rol especialista) y js/regiones-comunas.js (Jael Reyes).
 
    Reglas del Anexo 1 (registro = crear usuario):
      - RUN: requerido, válido, sin puntos ni guion, mín. 7 y máx. 9

@@ -1,7 +1,7 @@
 /* ============================================================================
    CONTACTO.JS — Validación del formulario de contacto
    ---------------------------------------------------------------------------
-   Integrante A (Módulo 1). Usa js/validaciones.js (rol especialista).
+   Aileen Oyaneder (Módulo 1). Usa js/validaciones.js (rol especialista).
 
    Reglas del Anexo 1:
      - Nombre: requerido, máx. 100 caracteres

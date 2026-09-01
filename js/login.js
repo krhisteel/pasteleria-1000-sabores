@@ -1,14 +1,14 @@
 /* ============================================================================
    LOGIN.JS — Validación del formulario de inicio de sesión
    ---------------------------------------------------------------------------
-   Integrante A (Módulo 1). Usa js/validaciones.js (rol especialista).
+   Aileen Oyaneder (Módulo 1). Usa js/validaciones.js (rol especialista).
 
    Reglas del Anexo 1:
      - Correo: requerido, máx. 100, solo @duoc.cl, @profesor.duoc.cl y @gmail.com
      - Contraseña: requerida, entre 4 y 10 caracteres
 
    Al iniciar sesión guarda el usuario y su rol en localStorage con la clave
-   "usuarioActivo" (acuerdo del equipo). El Integrante C lee esa clave desde
+   "usuarioActivo" (acuerdo del equipo). Jael Reyes lee esa clave desde
    el panel de administración para mostrar u ocultar el menú según el rol.
    ========================================================================== */
 
