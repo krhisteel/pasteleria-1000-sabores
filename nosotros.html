@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cpath%20d='M25%2055%20L30%2090%20L70%2090%20L75%2055%20Z'%20fill='%238B4513'/%3E%3Cpath%20d='M25%2055%20Q30%2035%2037%2042%20Q42%2025%2050%2030%20Q58%2025%2063%2042%20Q70%2035%2075%2055%20Z'%20fill='%23FFC0CB'/%3E%3Ccircle%20cx='50'%20cy='14'%20r='7'%20fill='%23FF4500'/%3E%3C/svg%3E">
   <title>Nosotros — Pastelería 1000 Sabores</title>
   <meta name="description" content="Conoce la historia de Pastelería 1000 Sabores, más de 20 años de repostería artesanal.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,6 +13,8 @@
   <link rel="stylesheet" href="css/nosotros.css">
 </head>
 <body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
   <!-- ===================== HEADER (COMPARTIDO) ===================== -->
   <header class="site-header">
@@ -43,7 +46,8 @@
         </svg>
         <span class="logo-texto">Pastelería 1000 Sabores</span>
       </a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Menú">
+      <button type="button" class="menu-toggle" id="menuToggle"
+              aria-label="Abrir menú de navegación" aria-controls="navLinks" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="navLinks">
@@ -65,7 +69,7 @@
   </header>
 
   <!-- ===================== CONTENIDO PRINCIPAL ===================== -->
-  <main>
+  <main id="contenido">
 
     <section class="nosotros-hero">
       <h1>Nuestra Historia</h1>
@@ -100,17 +104,18 @@
     <section class="video-institucional">
       <h2>Conoce Nuestro Mundo</h2>
       <p>Un vistazo a cómo creamos nuestros dulces favoritos</p>
-      <div class="video-contenedor">
-        <iframe 
-          width="560" 
-          height="315" 
-          src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-          title="Video institucional Pastelería 1000 Sabores"
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen>
-        </iframe>
-      </div>
+      <figure class="video-figura">
+        <div class="video-contenedor">
+          <iframe
+            src="https://www.youtube.com/embed/KX-7KnPD1JA"
+            title="Los secretos de la pastelería francesa explicados por una experta"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <figcaption>Las técnicas clásicas que inspiran nuestras recetas desde 2005.</figcaption>
+      </figure>
     </section>
 
     <section class="valores">
@@ -173,6 +178,45 @@
           <h3>Ana Martínez</h3>
           <p class="miembro-cargo">Panadera</p>
           <p class="miembro-bio">Maestra del pan artesanal y la masa fermentada.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Equipo de desarrollo: requisito del Anexo 1 para la vista "Nosotros" -->
+    <section class="desarrolladores">
+      <h2>Equipo de Desarrollo</h2>
+      <p class="desarrolladores-intro">
+        Este sitio fue construido con HTML5, CSS3 y JavaScript por estudiantes de
+        Desarrollo Fullstack II (DSY1104), Duoc UC. Cada integrante es responsable
+        de un módulo completo del proyecto.
+      </p>
+      <div class="equipo-grid">
+        <article class="miembro-card">
+          <h3>Integrante A</h3>
+          <p class="miembro-cargo">Módulo 1 — Contenido y Acceso</p>
+          <p class="miembro-bio">
+            Home, Nosotros, Blogs, Contacto, Registro y Login. Especialista en la
+            estructura HTML semántica compartida (header y footer) y en las
+            validaciones reutilizables de JavaScript.
+          </p>
+        </article>
+        <article class="miembro-card">
+          <h3>Integrante B</h3>
+          <p class="miembro-cargo">Módulo 2 — Compra</p>
+          <p class="miembro-bio">
+            Catálogo de productos, detalle del producto y carrito de compras.
+            Responsable de la lógica de negocio y de la persistencia del carrito
+            en localStorage.
+          </p>
+        </article>
+        <article class="miembro-card">
+          <h3>Integrante C</h3>
+          <p class="miembro-cargo">Módulo 3 — Administración</p>
+          <p class="miembro-bio">
+            Panel de administración con los mantenedores de productos y usuarios.
+            Especialista en la hoja de estilos global y en los datos de regiones
+            y comunas.
+          </p>
         </article>
       </div>
     </section>

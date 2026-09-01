@@ -239,16 +239,9 @@
   text-align: center;
 }
 
-.video-contenedor {
-  display: flex;
-  justify-content: center;
+/* El contenedor 16:9 del video vive en global.css; aquí solo el espaciado. */
+.video-seccion .video-figura {
   margin-top: var(--espaciado-lg);
-}
-
-.video-contenedor iframe {
-  border-radius: var(--radio-lg);
-  box-shadow: var(--sombra-media);
-  max-width: 100%;
 }
 
 /* ---------- Sobre Nosotros Preview ---------- */
@@ -377,9 +370,4 @@
     max-width: 250px;
   }
 
-  .video-contenedor iframe {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
 }
