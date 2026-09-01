@@ -1,0 +1,176 @@
+/* ============================================================================
+   CONTACTO.CSS — Estilos de la página de Contacto
+   ========================================================================== */
+
+/* ---------- Hero ---------- */
+.contacto-hero {
+  background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
+  padding: 4rem 1.5rem;
+  text-align: center;
+}
+
+.contacto-hero h1 {
+  font-family: var(--font-titulo);
+  font-size: 2.5rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.contacto-hero p {
+  font-size: 1.1rem;
+  color: var(--color-texto);
+  opacity: 0.9;
+}
+
+/* ---------- Contenido ---------- */
+.contacto-contenido {
+  padding: var(--espaciado-xxl) 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contacto-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--espaciado-xl);
+  align-items: start;
+}
+
+/* ---------- Formulario ---------- */
+.contacto-formulario {
+  background: var(--color-blanco);
+  padding: var(--espaciado-xl);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+}
+
+.contacto-formulario h2 {
+  font-size: 1.5rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-lg);
+}
+
+.campo-grupo {
+  margin-bottom: var(--espaciado-lg);
+}
+
+.campo-grupo label {
+  display: block;
+  font-weight: 700;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-sm);
+  font-size: 0.95rem;
+}
+
+.campo-grupo .campo {
+  width: 100%;
+}
+
+textarea.campo {
+  resize: vertical;
+  min-height: 120px;
+}
+
+select.campo {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235D4037' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+.mensaje-error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+  min-height: 1.2em;
+}
+
+.btn-enviar {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+/* ---------- Mensaje de Éxito ---------- */
+.mensaje-exito-container {
+  text-align: center;
+  padding: var(--espaciado-xl);
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  margin-top: var(--espaciado-lg);
+}
+
+.mensaje-exito-container.hidden {
+  display: none;
+}
+
+.icono-exito {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: var(--espaciado-md);
+}
+
+.mensaje-exito-container h3 {
+  font-size: 1.5rem;
+  color: var(--color-exito);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.mensaje-exito-container p {
+  color: var(--color-texto-claro);
+}
+
+/* ---------- Información de Contacto ---------- */
+.contacto-info {
+  background: var(--color-blanco);
+  padding: var(--espaciado-xl);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+}
+
+.contacto-info h2 {
+  font-size: 1.5rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-lg);
+}
+
+.info-card {
+  display: flex;
+  gap: var(--espaciado-md);
+  padding: var(--espaciado-md) 0;
+  border-bottom: 1px solid var(--color-crema);
+}
+
+.info-card:last-child {
+  border-bottom: none;
+}
+
+.info-icono {
+  font-size: 1.5rem;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-xs);
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--color-texto-claro);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .contacto-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contacto-hero h1 {
+    font-size: 2rem;
+  }
+}
