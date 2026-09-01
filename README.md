@@ -131,6 +131,99 @@ completa el formulario:
 - 10% de descuento de por vida con el código promocional `FELICES50`.
 - Torta gratis de cumpleaños para correos de la comunidad Duoc.
 
+## Cómo trabajar en equipo
+
+### 1. Aceptar la invitación
+
+Aileen invita a cada integrante como colaborador del repositorio. Llega un correo
+de GitHub con el asunto *"invited you to collaborate"*: hay que aceptarlo antes de
+poder subir cambios.
+
+### 2. Clonar el proyecto
+
+```bash
+git clone https://github.com/krhisteel/pasteleria-1000-sabores.git
+cd pasteleria-1000-sabores
+```
+
+### 3. Configurar tu identidad (IMPORTANTE)
+
+Sin este paso tus commits quedan a nombre de otra persona, y la evaluación
+revisa explícitamente que las tareas estén distribuidas entre el equipo
+(indicadores IE1.3.1 e IE1.3.2). Házlo **una sola vez**, dentro de la carpeta
+del proyecto:
+
+```bash
+git config user.name "Tu Nombre Apellido"
+```
+
+```bash
+git config user.email "tu.correo@duocuc.cl"
+```
+
+Usa el mismo correo con el que está registrada tu cuenta de GitHub, para que los
+commits aparezcan asociados a tu perfil. Para comprobarlo:
+
+```bash
+git config user.name && git config user.email
+```
+
+### 4. Trabajar en tu propia rama
+
+Cada integrante trabaja en la rama de su módulo, para no pisarse:
+
+| Integrante | Rama |
+|------------|------|
+| Aileen Oyaneder | `modulo-1-contenido` |
+| Benjamín Riquelme | `modulo-2-compra` |
+| Jael Reyes | `modulo-3-admin` |
+
+```bash
+git checkout -b modulo-2-compra
+```
+
+### 5. Guardar y subir tus cambios
+
+```bash
+git add .
+```
+
+```bash
+git commit -m "Agregar productos.html con el listado del catalogo"
+```
+
+```bash
+git push -u origin modulo-2-compra
+```
+
+El mensaje del commit debe decir **qué hiciste**, no "cambios" ni "avance".
+La rúbrica evalúa que sean claros y coherentes.
+
+### 6. Integrar tu rama a master
+
+Cuando tu parte funcione:
+
+```bash
+git checkout master && git pull && git merge modulo-2-compra && git push
+```
+
+### 7. Antes de empezar a trabajar cada día
+
+Trae lo que subieron los demás, para evitar conflictos:
+
+```bash
+git checkout master && git pull
+```
+
+### Reglas acordadas
+
+- **Cada integrante hace sus propios commits.** No sirve que una persona suba el
+  trabajo de otra: la evaluación es individual y se revisa el historial.
+- No editar archivos de otro módulo sin avisar. Si necesitas tocar
+  `css/global.css` o el header, coordínalo antes.
+- Al integrar un recurso compartido en tus páginas, haz **tu propio commit**:
+  así queda evidencia individual de los indicadores IE1.1.2 e IE1.3.1.
+
 ## Acuerdos de integración entre módulos
 
 Claves compartidas en `localStorage`:
