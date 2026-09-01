@@ -242,6 +242,12 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: cover;
 }
 
+.logo-svg {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
 .nav-links {
   display: flex;
   gap: 1.5rem;
