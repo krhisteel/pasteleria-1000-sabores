@@ -1,0 +1,13 @@
+# Archivos del sistema
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Navegador
+*.log
