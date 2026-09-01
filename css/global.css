@@ -1,0 +1,408 @@
+/* ============================================================================
+   GLOBAL.CSS — Estilos globales compartidos
+   ----------------------------------------------------------------------------
+   Creado por Integrante C (Especialista CSS).
+   Este archivo define variables de color, tipografías y reset base.
+   
+   Colores de la marca:
+     - Crema Pastel: #FFF5E1
+     - Rosa: #FFC0CB
+     - Chocolate: #8B4513
+     - Texto: #5D4037
+   
+   Tipografías:
+     - Pacifico: para títulos decorativos
+     - Lato: para todo el texto del sitio
+   ========================================================================== */
+
+/* ---------- Variables CSS ---------- */
+:root {
+  /* Colores de la marca */
+  --color-crema: #FFF5E1;
+  --color-rosa: #FFC0CB;
+  --color-rosa-oscuro: #E8A0B0;
+  --color-chocolate: #8B4513;
+  --color-chocolate-claro: #A0522D;
+  --color-texto: #5D4037;
+  --color-texto-claro: #8D6E63;
+  --color-blanco: #FFFFFF;
+  --color-negro: #2C1810;
+
+  /* Colores de utilidad */
+  --color-exito: #4CAF50;
+  --color-error: #F44336;
+  --color-advertencia: #FF9800;
+
+  /* Tipografías */
+  --font-titulo: 'Pacifico', cursive;
+  --font-cuerpo: 'Lato', sans-serif;
+
+  /* Espaciado */
+  --espaciado-xs: 0.25rem;
+  --espaciado-sm: 0.5rem;
+  --espaciado-md: 1rem;
+  --espaciado-lg: 1.5rem;
+  --espaciado-xl: 2rem;
+  --espaciado-xxl: 3rem;
+
+  /* Bordes */
+  --radio-sm: 4px;
+  --radio-md: 8px;
+  --radio-lg: 16px;
+  --radio-xl: 24px;
+
+  /* Sombras */
+  --sombra-suave: 0 2px 8px rgba(93, 64, 55, 0.1);
+  --sombra-media: 0 4px 16px rgba(93, 64, 55, 0.15);
+  --sombra-fuerte: 0 8px 32px rgba(93, 64, 55, 0.2);
+
+  /* Transiciones */
+  --transicion-rapida: 0.15s ease;
+  --transicion-normal: 0.3s ease;
+}
+
+/* ---------- Reset Base ---------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-cuerpo);
+  color: var(--color-texto);
+  background-color: var(--color-crema);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transicion-rapida);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* ---------- Utilidades de texto ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cuerpo);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-chocolate);
+}
+
+/* ---------- Contenedor principal ---------- */
+.site-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--espaciado-md);
+}
+
+/* ---------- Estilos de formulario ---------- */
+.campo {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--color-rosa);
+  border-radius: var(--radio-md);
+  background: var(--color-blanco);
+  color: var(--color-texto);
+  font-size: 1rem;
+  transition: border-color var(--transicion-rapida), box-shadow var(--transicion-rapida);
+}
+
+.campo:focus {
+  outline: none;
+  border-color: var(--color-chocolate);
+  box-shadow: 0 0 0 3px rgba(139, 69, 19, 0.1);
+}
+
+.campo::placeholder {
+  color: var(--color-texto-claro);
+}
+
+.campo-error {
+  border-color: var(--color-error) !important;
+}
+
+.campo-valido {
+  border-color: var(--color-exito) !important;
+}
+
+.mensaje-error {
+  color: var(--color-error);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+.mensaje-exito {
+  color: var(--color-exito);
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+/* ---------- Botones ---------- */
+.btn-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-chocolate);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: var(--radio-md);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transicion-rapida), transform var(--transicion-rapida);
+}
+
+.btn-primary:hover {
+  background: var(--color-chocolate-claro);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--color-chocolate);
+  border: 2px solid var(--color-chocolate);
+  border-radius: var(--radio-md);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.btn-secondary:hover {
+  background: var(--color-chocolate);
+  color: var(--color-blanco);
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  background: var(--color-blanco);
+  box-shadow: var(--sombra-suave);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-titulo);
+  font-size: 1.25rem;
+  color: var(--color-chocolate);
+}
+
+.logo-icono {
+  font-size: 1.75rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  font-weight: 600;
+  color: var(--color-texto);
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transicion-rapida), border-color var(--transicion-rapida);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-chocolate);
+  border-bottom-color: var(--color-chocolate);
+}
+
+.nav-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.btn-login {
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+.btn-login:hover {
+  color: var(--color-chocolate);
+}
+
+.btn-registro {
+  padding: 0.5rem 1rem;
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  border-radius: var(--radio-md);
+  font-weight: 700;
+}
+
+.btn-registro:hover {
+  background: var(--color-rosa-oscuro);
+}
+
+.btn-carrito {
+  font-weight: 700;
+  color: var(--color-chocolate);
+}
+
+/* Menú hamburguesa */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+}
+
+.menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--color-chocolate);
+  border-radius: 2px;
+  transition: transform var(--transicion-rapida);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+  padding-top: var(--espaciado-xxl);
+}
+
+.footer-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem var(--espaciado-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--espaciado-xl);
+}
+
+.footer-col h3,
+.footer-col h4 {
+  color: var(--color-blanco);
+  margin-bottom: var(--espaciado-md);
+}
+
+.footer-col p,
+.footer-col li {
+  color: var(--color-crema);
+  opacity: 0.9;
+  line-height: 1.8;
+}
+
+.footer-col a {
+  color: var(--color-crema);
+  opacity: 0.9;
+  transition: opacity var(--transicion-rapida);
+}
+
+.footer-col a:hover {
+  opacity: 1;
+  color: var(--color-rosa);
+}
+
+.redes-sociales {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 245, 225, 0.2);
+  padding: var(--espaciado-md) 1.5rem;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-blanco);
+    flex-direction: column;
+    padding: 1rem;
+    box-shadow: var(--sombra-media);
+    gap: 0;
+  }
+
+  .nav-links.activo {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-crema);
+  }
+
+  .nav-acciones {
+    gap: 0.5rem;
+  }
+
+  .btn-login,
+  .btn-registro {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.75rem;
+  }
+
+  .footer-contenido {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
