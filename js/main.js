@@ -143,6 +143,71 @@ function actualizarContadorCarrito() {
 }
 
 /* ============================================================================
+   NEWSLETTER DEL FOOTER
+   El footer es compartido, así que el formulario existe en las 8 páginas.
+   Usa las funciones de js/validaciones.js (rol especialista).
+   ========================================================================== */
+
+/**
+ * Conecta la validación del formulario de suscripción del footer.
+ * Aplica la misma regla de dominios que el resto del sitio.
+ */
+function conectarNewsletter() {
+  const formulario = document.getElementById("formNewsletter");
+  if (!formulario) return;
+
+  // Si validaciones.js no está cargado, no se engancha nada
+  if (typeof validarCorreo !== "function") return;
+
+  const campo = document.getElementById("correoNewsletter");
+  const exito = document.getElementById("newsletterExito");
+
+  function validarCampo() {
+    const valor = campo.value.trim();
+
+    if (!validarNoVacio(valor)) {
+      return mostrarError(campo, "Escribe tu correo para suscribirte.");
+    }
+    if (!validarLargoMaximo(valor, LARGOS.correo)) {
+      return mostrarError(campo, "El correo no puede superar los " + LARGOS.correo + " caracteres.");
+    }
+    if (!validarCorreo(valor)) {
+      return mostrarError(campo, "Solo se aceptan correos " + TEXTO_DOMINIOS + ".");
+    }
+    return marcarValido(campo);
+  }
+
+  campo.addEventListener("input", validarCampo);
+
+  formulario.addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (!validarCampo()) return;
+
+    // Suscripción simulada: no hay backend en esta entrega
+    guardarSuscriptor(campo.value.trim().toLowerCase());
+
+    formulario.classList.add("hidden");
+    if (exito) exito.classList.remove("hidden");
+  });
+}
+
+/**
+ * Guarda el correo suscrito en localStorage, sin duplicados.
+ * @param {string} correo
+ */
+function guardarSuscriptor(correo) {
+  try {
+    const suscriptores = JSON.parse(localStorage.getItem("suscriptores") || "[]");
+    if (suscriptores.indexOf(correo) === -1) {
+      suscriptores.push(correo);
+      localStorage.setItem("suscriptores", JSON.stringify(suscriptores));
+    }
+  } catch (e) {
+    // Si el navegador bloquea localStorage, la suscripción igual se confirma en pantalla
+  }
+}
+
+/* ============================================================================
    ARRANQUE
    ========================================================================== */
 
@@ -171,4 +236,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderizarSesionEnHeader();
   actualizarContadorCarrito();
+  conectarNewsletter();
 });

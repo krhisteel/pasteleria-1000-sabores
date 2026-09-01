@@ -180,9 +180,33 @@
           <a href="#">TikTok</a>
         </div>
       </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p class="newsletter-texto">Suscríbete y entérate de nuestras novedades y promociones.</p>
+        <form class="newsletter-form" id="formNewsletter" novalidate>
+          <div class="campo-grupo">
+            <label class="sr-only" for="correoNewsletter">Correo electrónico para el newsletter</label>
+            <div class="newsletter-fila">
+              <input type="email" id="correoNewsletter" name="correoNewsletter"
+                     class="campo newsletter-campo" placeholder="tunombre@duoc.cl"
+                     maxlength="100" autocomplete="email" required
+                     aria-describedby="error-newsletter">
+              <button type="submit" class="btn-newsletter">Suscribirse</button>
+            </div>
+            <div class="mensaje-error" id="error-newsletter" role="alert" aria-live="polite"></div>
+          </div>
+        </form>
+        <p class="newsletter-exito hidden" id="newsletterExito" role="status">¡Gracias! Ya estás suscrito.</p>
+      </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+      <ul class="medios-pago" aria-label="Medios de pago aceptados">
+        <li>Visa</li>
+        <li>Mastercard</li>
+        <li>American Express</li>
+        <li>Webpay</li>
+      </ul>
     </div>
   </footer>
 

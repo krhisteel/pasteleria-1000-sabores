@@ -30,6 +30,7 @@ const LARGOS = {
   apellidos: 100,
   direccion: 300,
   comentario: 500,
+  telefono: 20,
   password: 10
 };
 
@@ -135,6 +136,22 @@ function validarPassword(password) {
   if (!password || typeof password !== "string") return false;
   const longitud = password.trim().length;
   return longitud >= 4 && longitud <= 10;
+}
+
+/**
+ * Valida un teléfono. Acepta dígitos, espacios, guiones, paréntesis y el signo +.
+ * Debe contener entre 8 y 15 dígitos (formato chileno: +56 9 1234 5678).
+ * @param {string} telefono - El teléfono a validar
+ * @returns {boolean} true si es válido
+ */
+function validarTelefono(telefono) {
+  if (!telefono || typeof telefono !== "string") return false;
+
+  // Solo se permiten dígitos y los separadores habituales
+  if (!/^[\d\s+()-]+$/.test(telefono.trim())) return false;
+
+  const digitos = telefono.replace(/\D/g, "");
+  return digitos.length >= 8 && digitos.length <= 15;
 }
 
 /**

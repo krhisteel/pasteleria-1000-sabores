@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectRegion = document.getElementById("region");
   const selectComuna = document.getElementById("comuna");
   const campoDireccion = document.getElementById("direccion");
+  const campoTelefono = document.getElementById("telefono");
   const campoPassword = document.getElementById("password");
   const campoConfirm = document.getElementById("confirmPassword");
   const campoPromocion = document.getElementById("codigoPromocional");
@@ -65,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   selectComuna.addEventListener("change", validarCampoComuna);
   campoDireccion.addEventListener("input", validarCampoDireccion);
+  campoTelefono.addEventListener("input", validarCampoTelefono);
   campoPassword.addEventListener("input", function () {
     validarCampoPassword();
     // Si ya escribió la confirmación, se revisa de nuevo al cambiar la contraseña
@@ -99,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
       validarCampoRegion(),
       validarCampoComuna(),
       validarCampoDireccion(),
+      validarCampoTelefono(),
       validarCampoPassword(),
       validarCampoConfirmPassword(),
       validarCampoPromocion()
@@ -123,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
       region: selectRegion.value,
       comuna: selectComuna.value,
       direccion: campoDireccion.value.trim(),
+      telefono: campoTelefono.value.trim() || null,
       codigoPromocional: campoPromocion ? campoPromocion.value.trim().toUpperCase() : "",
       beneficios: beneficios,
       tipo: "Cliente",
@@ -283,6 +287,23 @@ document.addEventListener("DOMContentLoaded", function () {
       return mostrarError(campoDireccion, "La dirección no puede superar los " + LARGOS.direccion + " caracteres.");
     }
     return marcarValido(campoDireccion);
+  }
+
+  /** El teléfono es opcional (solo aparece en el mockup del Anexo). */
+  function validarCampoTelefono() {
+    const valor = campoTelefono.value.trim();
+
+    if (valor === "") {
+      limpiarEstado(campoTelefono);
+      return true;
+    }
+    if (!validarLargoMaximo(valor, LARGOS.telefono)) {
+      return mostrarError(campoTelefono, "El teléfono no puede superar los " + LARGOS.telefono + " caracteres.");
+    }
+    if (!validarTelefono(valor)) {
+      return mostrarError(campoTelefono, "Ingresa un teléfono válido, entre 8 y 15 dígitos. Ejemplo: +56 9 1234 5678");
+    }
+    return marcarValido(campoTelefono);
   }
 
   function validarCampoPassword() {

@@ -647,3 +647,121 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.3rem 0.65rem;
   }
 }
+
+
+/* ============================================================================
+   NEWSLETTER Y MEDIOS DE PAGO EN EL FOOTER — Integrante A (Módulo 1)
+   ========================================================================== */
+
+/* Etiqueta visible solo para lectores de pantalla */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.newsletter-texto {
+  font-size: 0.88rem;
+  margin-bottom: var(--espaciado-sm);
+}
+
+.newsletter-fila {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.newsletter-campo {
+  flex: 1 1 140px;
+  min-width: 0;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  border-width: 1px;
+}
+
+.btn-newsletter {
+  flex: 0 0 auto;
+  padding: 0.55rem 1rem;
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  border-radius: var(--radio-md);
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: background var(--transicion-rapida);
+}
+
+.btn-newsletter:hover {
+  background: var(--color-rosa-oscuro);
+}
+
+/* El rojo de error no se lee bien sobre el chocolate del footer */
+.site-footer .mensaje-error {
+  color: #FFB4AB;
+}
+
+.newsletter-exito {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-rosa);
+}
+
+.medios-pago {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: var(--espaciado-sm);
+}
+
+.medios-pago li {
+  border: 1px solid rgba(255, 245, 225, 0.45);
+  border-radius: var(--radio-sm);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+
+/* ---------- Pantallas muy angostas: el header no cabe en una sola fila ----------
+   Por debajo de 560px el logo más los botones de sesión y carrito superan el
+   ancho de la pantalla, así que las acciones bajan a una segunda fila. */
+@media (max-width: 560px) {
+  .nav-container {
+    flex-wrap: wrap;
+    row-gap: 0.5rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+  }
+
+  .logo-svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .menu-toggle {
+    order: 2;
+  }
+
+  .nav-acciones {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .sesion-activa {
+    flex: 1 1 100%;
+    justify-content: flex-start;
+  }
+}
