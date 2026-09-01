@@ -235,8 +235,11 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-chocolate);
 }
 
-.logo-icono {
-  font-size: 1.75rem;
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 .nav-links {

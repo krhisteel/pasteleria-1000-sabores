@@ -2,7 +2,6 @@
    AUTH.CSS — Estilos compartidos para Login y Registro
    ========================================================================== */
 
-/* ---------- Main Auth ---------- */
 .auth-main {
   min-height: calc(100vh - 200px);
   display: flex;
@@ -25,16 +24,18 @@
   overflow: hidden;
 }
 
-/* ---------- Header ---------- */
 .auth-header {
   text-align: center;
   margin-bottom: var(--espaciado-xl);
 }
 
-.auth-icono {
-  font-size: 3rem;
-  display: block;
+.auth-icono-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-bottom: var(--espaciado-md);
+  border: 3px solid var(--color-rosa);
 }
 
 .auth-header h1 {
@@ -49,7 +50,6 @@
   color: var(--color-texto-claro);
 }
 
-/* ---------- Formulario ---------- */
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -85,7 +85,6 @@
   margin-top: var(--espaciado-sm);
 }
 
-/* ---------- Footer Auth ---------- */
 .auth-footer {
   text-align: center;
   margin-top: var(--espaciado-lg);
@@ -108,7 +107,6 @@
   color: var(--color-chocolate-claro);
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 480px) {
   .auth-card {
     padding: var(--espaciado-lg);

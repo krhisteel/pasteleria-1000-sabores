@@ -2,7 +2,6 @@
    BLOGS.CSS — Estilos para páginas de Blog
    ========================================================================== */
 
-/* ---------- Hero del Blog ---------- */
 .blog-hero {
   background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
   padding: 4rem 1.5rem;
@@ -22,7 +21,6 @@
   opacity: 0.9;
 }
 
-/* ---------- Listado de Blogs ---------- */
 .blog-listado {
   padding: var(--espaciado-xxl) 1.5rem;
   max-width: 1000px;
@@ -36,7 +34,7 @@
 
 .blog-card {
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 280px 1fr;
   background: var(--color-blanco);
   border-radius: var(--radio-lg);
   overflow: hidden;
@@ -50,12 +48,19 @@
 }
 
 .blog-card-imagen {
-  background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
-  min-height: 200px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.blog-card-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transicion-normal);
+}
+
+.blog-card:hover .blog-card-imagen img {
+  transform: scale(1.05);
 }
 
 .blog-card-contenido {
@@ -79,7 +84,7 @@
 }
 
 .blog-card h2 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--color-chocolate);
   margin-bottom: var(--espaciado-sm);
   line-height: 1.3;
@@ -117,7 +122,6 @@
   background: var(--color-chocolate-claro);
 }
 
-/* ---------- Detalle de Blog ---------- */
 .blog-detalle {
   max-width: 800px;
   margin: 0 auto;
@@ -150,14 +154,16 @@
 }
 
 .blog-detalle-hero {
-  background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
-  height: 300px;
-  border-radius: var(--radio-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 8rem;
   margin-bottom: var(--espaciado-xl);
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  box-shadow: var(--sombra-media);
+}
+
+.blog-detalle-hero img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .blog-detalle-contenido {
@@ -197,9 +203,11 @@
 }
 
 .blog-detalle-contenido li::before {
-  content: "🎂";
+  content: "•";
   position: absolute;
   left: 0;
+  color: var(--color-chocolate);
+  font-weight: 700;
 }
 
 .blog-detalle-contenido blockquote {
@@ -238,24 +246,18 @@
   background: var(--color-chocolate-claro);
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .blog-card {
     grid-template-columns: 1fr;
   }
 
   .blog-card-imagen {
-    min-height: 150px;
+    height: 200px;
   }
 
   .blog-meta {
     flex-direction: column;
     gap: var(--espaciado-xs);
-  }
-
-  .blog-detalle-hero {
-    height: 200px;
-    font-size: 5rem;
   }
 
   .blog-detalle-header h1 {

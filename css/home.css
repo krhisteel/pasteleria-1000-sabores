@@ -9,17 +9,16 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background-image: url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?w=1400&h=500&fit=crop');
+  background-size: cover;
+  background-position: center;
 }
 
 .hero::before {
-  content: "🎂🧁🥐🍰";
+  content: "";
   position: absolute;
-  font-size: 8rem;
-  opacity: 0.1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  white-space: nowrap;
+  inset: 0;
+  background: rgba(255, 245, 225, 0.85);
   pointer-events: none;
 }
 
@@ -89,12 +88,12 @@
 
 .categoria-card {
   background: var(--color-blanco);
-  padding: var(--espaciado-xl);
   border-radius: var(--radio-lg);
-  text-align: center;
+  overflow: hidden;
   box-shadow: var(--sombra-suave);
   transition: transform var(--transicion-normal), box-shadow var(--transicion-normal);
   border: 2px solid transparent;
+  text-align: center;
 }
 
 .categoria-card:hover {
@@ -103,21 +102,33 @@
   border-color: var(--color-rosa);
 }
 
-.categoria-icono {
-  font-size: 3rem;
-  display: block;
-  margin-bottom: var(--espaciado-md);
+.categoria-foto {
+  width: 100%;
+  height: 160px;
+  overflow: hidden;
+}
+
+.categoria-foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transicion-normal);
+}
+
+.categoria-card:hover .categoria-foto img {
+  transform: scale(1.05);
 }
 
 .categoria-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   color: var(--color-chocolate);
-  margin-bottom: var(--espaciado-sm);
+  margin: var(--espaciado-md) var(--espaciado-md) var(--espaciado-xs);
 }
 
 .categoria-card p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--color-texto-claro);
+  padding: 0 var(--espaciado-md) var(--espaciado-md);
 }
 
 /* ---------- Productos Estrella ---------- */
@@ -149,12 +160,19 @@
 }
 
 .producto-imagen {
-  height: 180px;
-  background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5rem;
+  height: 200px;
+  overflow: hidden;
+}
+
+.producto-imagen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transicion-normal);
+}
+
+.producto-card:hover .producto-imagen img {
+  transform: scale(1.05);
 }
 
 .producto-info {
@@ -279,9 +297,12 @@
   align-items: center;
 }
 
-.imagen-placeholder {
-  font-size: 10rem;
-  opacity: 0.8;
+.sobre-imagen img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-media);
+  object-fit: cover;
 }
 
 /* ---------- CTA Final ---------- */
@@ -321,6 +342,14 @@
   box-shadow: var(--sombra-fuerte);
 }
 
+/* ---------- Logo ---------- */
+.logo-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 768px) {
   .hero-titulo {
@@ -344,8 +373,8 @@
     order: -1;
   }
 
-  .imagen-placeholder {
-    font-size: 6rem;
+  .sobre-imagen img {
+    max-width: 250px;
   }
 
   .video-contenedor iframe {
