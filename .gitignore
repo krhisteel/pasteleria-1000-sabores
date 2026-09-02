@@ -11,3 +11,6 @@ Desktop.ini
 
 # Navegador
 *.log
+
+# Configuracion local del editor asistido
+.claude/
