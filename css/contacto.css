@@ -1,8 +1,6 @@
-/* ============================================================================
-   CONTACTO.CSS — Estilos de la página de Contacto
-   ========================================================================== */
+/*  CONTACTO.CSS — Estilos de la página de Contacto  */
 
-/* ---------- Hero ---------- */
+/*  Hero  */
 .contacto-hero {
   background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
   padding: 4rem 1.5rem;
@@ -22,7 +20,7 @@
   opacity: 0.9;
 }
 
-/* ---------- Contenido ---------- */
+/*  Contenido  */
 .contacto-contenido {
   padding: var(--espaciado-xxl) 1.5rem;
   max-width: 1100px;
@@ -36,7 +34,7 @@
   align-items: start;
 }
 
-/* ---------- Formulario ---------- */
+/*  Formulario  */
 .contacto-formulario {
   background: var(--color-blanco);
   padding: var(--espaciado-xl);
@@ -86,8 +84,10 @@ select.campo {
   font-size: 1.1rem;
 }
 
-/* ---------- Mensaje de Éxito ----------
-   La caja base vive en global.css; aquí solo se ajusta a esta página. */
+/*
+  Mensaje de Éxito
+  La caja base vive en global.css; aquí solo se ajusta a esta página.
+*/
 .mensaje-exito-container {
   margin-top: var(--espaciado-lg);
 }
@@ -102,7 +102,7 @@ select.campo {
   color: var(--color-texto-claro);
 }
 
-/* ---------- Información de Contacto ---------- */
+/*  Información de Contacto  */
 .contacto-info {
   background: var(--color-blanco);
   padding: var(--espaciado-xl);
@@ -142,7 +142,7 @@ select.campo {
   color: var(--color-texto-claro);
 }
 
-/* ---------- Responsive ---------- */
+/*  Responsive  */
 @media (max-width: 768px) {
   .contacto-grid {
     grid-template-columns: 1fr;
@@ -153,8 +153,7 @@ select.campo {
   }
 }
 
-
-/* ---------- Logo y nombre de la empresa sobre el formulario (mockup Anexo) ---------- */
+/*  Logo y nombre de la empresa sobre el formulario (mockup Anexo)  */
 .contacto-marca {
   text-align: center;
   margin-bottom: var(--espaciado-md);

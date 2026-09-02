@@ -1,13 +1,8 @@
-/* ============================================================================
-   CONTACTO.JS — Validación del formulario de contacto
-   ---------------------------------------------------------------------------
-   Aileen Oyaneder (Módulo 1). Usa js/validaciones.js (rol especialista).
-
-   Reglas del Anexo 1:
-     - Nombre: requerido, máx. 100 caracteres
-     - Correo: máx. 100, solo @duoc.cl, @profesor.duoc.cl y @gmail.com
-     - Comentario: requerido, máx. 500 caracteres
-   ========================================================================== */
+/*
+  CONTACTO.JS — Validación del formulario de contacto
+  Aileen Oyaneder (Módulo 1).
+  Anexo 1: nombre máx. 100, correo máx. 100, comentario máx. 500.
+*/
 
 "use strict";
 
@@ -21,16 +16,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensajeExito = document.getElementById("mensajeExito");
   const botonOtro = document.getElementById("btnOtroMensaje");
 
-  /* ---------- Contadores de caracteres (sugerencia en vivo) ---------- */
   conectarContador(campoNombre, LARGOS.nombreContacto);
   conectarContador(campoComentario, LARGOS.comentario);
 
-  /* ---------- Validación en tiempo real ---------- */
   campoNombre.addEventListener("input", validarCampoNombre);
   campoCorreo.addEventListener("input", validarCampoCorreo);
   campoComentario.addEventListener("input", validarCampoComentario);
 
-  /* ---------- Envío del formulario ---------- */
   formulario.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -52,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
     limpiarMarcas();
   });
 
-  /* ---------- Permitir escribir otro mensaje ---------- */
   if (botonOtro) {
     botonOtro.addEventListener("click", function () {
       mensajeExito.classList.add("hidden");
@@ -61,7 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  /* ---------- Funciones de validación ---------- */
   function validarCampoNombre() {
     const valor = campoNombre.value.trim();
 
@@ -107,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoComentario);
   }
 
-  /** Deja los campos sin marca de error ni de válido después de enviar. */
   function limpiarMarcas() {
     [campoNombre, campoCorreo, campoComentario].forEach(limpiarEstado);
   }

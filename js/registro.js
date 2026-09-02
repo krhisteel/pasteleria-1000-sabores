@@ -1,24 +1,11 @@
-/* ============================================================================
-   REGISTRO.JS — Validación del formulario de registro
-   ---------------------------------------------------------------------------
-   Aileen Oyaneder (Módulo 1).
-   Usa js/validaciones.js (rol especialista) y js/regiones-comunas.js (Jael Reyes).
-
-   Reglas del Anexo 1 (registro = crear usuario):
-     - RUN: requerido, válido, sin puntos ni guion, mín. 7 y máx. 9
-     - Nombre: requerido, máx. 50
-     - Apellidos: requerido, máx. 100
-     - Correo: requerido, máx. 100, solo @duoc.cl, @profesor.duoc.cl y @gmail.com
-     - Fecha de nacimiento: OPCIONAL
-     - Región y Comuna: la comuna se carga según la región elegida
-     - Dirección: requerida, máx. 300
-     - Contraseña: entre 4 y 10 caracteres
-
-   Beneficios del caso (Forma C — Pastelería 1000 Sabores):
-     - 50% de descuento de por vida para mayores de 50 años
-     - 10% de descuento de por vida con el código "FELICES50"
-     - Torta gratis de cumpleaños para correos Duoc
-   ========================================================================== */
+/*
+  REGISTRO.JS — Validación del registro de usuarios
+  Aileen Oyaneder (Módulo 1).
+  Anexo 1: RUN válido (7-9), nombre máx. 50, apellidos máx. 100,
+  correo máx. 100, fecha de nacimiento opcional, dirección máx. 300.
+  Beneficios del caso: 50% a mayores de 50, 10% con FELICES50,
+  torta gratis con correo Duoc.
+*/
 
 "use strict";
 
@@ -42,17 +29,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const mensajeExito = document.getElementById("mensajeExitoRegistro");
   const listaBeneficios = document.getElementById("listaBeneficios");
 
-  /* ---------- Carga inicial ---------- */
   cargarRegiones();
   conectarContador(campoDireccion, LARGOS.direccion);
 
-  /* ---------- Región → Comuna ---------- */
   selectRegion.addEventListener("change", function () {
     cargarComunas(selectRegion.value);
     validarCampoRegion();
   });
 
-  /* ---------- Validación en tiempo real ---------- */
   campoRun.addEventListener("input", validarCampoRun);
   campoNombre.addEventListener("input", validarCampoNombre);
   campoApellidos.addEventListener("input", validarCampoApellidos);
@@ -88,7 +72,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* ---------- Envío del formulario ---------- */
   formulario.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -138,8 +121,6 @@ document.addEventListener("DOMContentLoaded", function () {
     mostrarExito(usuario, beneficios);
   });
 
-  /* ============================ Regiones y comunas ======================= */
-
   function cargarRegiones() {
     selectRegion.innerHTML = '<option value="">Selecciona una región</option>';
 
@@ -172,8 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     selectComuna.disabled = false;
   }
-
-  /* ============================== Validaciones =========================== */
 
   function validarCampoRun() {
     const valor = campoRun.value.trim();
@@ -236,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoCorreo);
   }
 
-  /** La fecha de nacimiento es OPCIONAL según el Anexo 1. */
   function validarCampoFecha() {
     const valor = campoFecha.value;
 
@@ -289,7 +267,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoDireccion);
   }
 
-  /** El teléfono es opcional (solo aparece en el mockup del Anexo). */
   function validarCampoTelefono() {
     const valor = campoTelefono.value.trim();
 
@@ -330,7 +307,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoConfirm);
   }
 
-  /** El código promocional es opcional, pero si se escribe debe existir. */
   function validarCampoPromocion() {
     if (!campoPromocion) return true;
 
@@ -346,13 +322,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoPromocion);
   }
 
-  /* ========================= Beneficios del caso ========================= */
-
-  /**
-   * Calcula la edad en años a partir de una fecha "AAAA-MM-DD".
-   * @param {string} fechaTexto
-   * @returns {number} edad en años cumplidos
-   */
   function calcularEdad(fechaTexto) {
     const nacimiento = new Date(fechaTexto + "T00:00:00");
     const hoy = new Date();
@@ -364,10 +333,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return edad;
   }
 
-  /**
-   * Determina los beneficios que le corresponden al usuario según el caso.
-   * @returns {string[]} lista de beneficios en texto
-   */
   function calcularBeneficios() {
     const beneficios = [];
     const correo = campoCorreo.value.trim().toLowerCase();
@@ -386,7 +351,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return beneficios;
   }
 
-  /** Muestra en vivo, mientras el usuario escribe, los beneficios que va ganando. */
   function refrescarBeneficios() {
     if (!bloqueBeneficios) return;
 
@@ -405,13 +369,6 @@ document.addEventListener("DOMContentLoaded", function () {
     bloqueBeneficios.classList.remove("hidden");
   }
 
-  /* ============================ Persistencia ============================= */
-
-  /**
-   * Guarda el usuario en localStorage bajo la clave "usuarios".
-   * @param {object} usuario
-   * @returns {boolean} true si se guardó
-   */
   function guardarUsuario(usuario) {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
@@ -442,8 +399,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return false;
     }
   }
-
-  /* ========================= Mensaje de éxito ============================ */
 
   function mostrarExito(usuario, beneficios) {
     if (!mensajeExito) return;

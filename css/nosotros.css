@@ -1,6 +1,4 @@
-/* ============================================================================
-   NOSOTROS.CSS — Estilos de la página Nosotros
-   ========================================================================== */
+/*  NOSOTROS.CSS — Estilos de la página Nosotros  */
 
 .nosotros-hero {
   background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
@@ -73,7 +71,7 @@
   margin-bottom: var(--espaciado-lg);
 }
 
-/* El contenedor 16:9 del video vive en global.css. */
+/*  El contenedor 16:9 del video vive en global.css.  */
 .video-institucional .video-figura {
   margin-top: var(--espaciado-lg);
 }
@@ -279,8 +277,7 @@
 
 }
 
-
-/* ---------- Misión y Visión (definidas en el caso) ---------- */
+/*  Misión y Visión (definidas en el caso)  */
 .mision-vision {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

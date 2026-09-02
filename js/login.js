@@ -1,16 +1,9 @@
-/* ============================================================================
-   LOGIN.JS — Validación del formulario de inicio de sesión
-   ---------------------------------------------------------------------------
-   Aileen Oyaneder (Módulo 1). Usa js/validaciones.js (rol especialista).
-
-   Reglas del Anexo 1:
-     - Correo: requerido, máx. 100, solo @duoc.cl, @profesor.duoc.cl y @gmail.com
-     - Contraseña: requerida, entre 4 y 10 caracteres
-
-   Al iniciar sesión guarda el usuario y su rol en localStorage con la clave
-   "usuarioActivo" (acuerdo del equipo). Jael Reyes lee esa clave desde
-   el panel de administración para mostrar u ocultar el menú según el rol.
-   ========================================================================== */
+/*
+  LOGIN.JS — Validación del inicio de sesión
+  Aileen Oyaneder (Módulo 1).
+  Anexo 1: correo máx. 100 con dominios permitidos, contraseña 4-10.
+  Guarda la sesión y el rol en localStorage bajo "usuarioActivo".
+*/
 
 "use strict";
 
@@ -24,11 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   sembrarUsuariosDemo();
 
-  /* ---------- Validación en tiempo real ---------- */
   campoCorreo.addEventListener("input", validarCampoCorreo);
   campoPassword.addEventListener("input", validarCampoPassword);
 
-  /* ---------- Envío del formulario ---------- */
   formulario.addEventListener("submit", function (e) {
     e.preventDefault();
     ocultarAviso();
@@ -59,7 +50,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  /* ---------- Funciones de validación ---------- */
   function validarCampoCorreo() {
     const valor = campoCorreo.value.trim();
 
@@ -87,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoPassword);
   }
 
-  /* ---------- Aviso general del formulario ---------- */
   function mostrarAviso(texto) {
     if (!avisoLogin) return;
     avisoLogin.textContent = texto;
@@ -100,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
     avisoLogin.classList.add("hidden");
   }
 
-  /* ---------- Buscar usuario registrado ---------- */
   function buscarUsuario(correo, password) {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
@@ -113,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ---------- Guardar sesión activa ---------- */
   function guardarSesion(usuario) {
     try {
       const sesion = {
@@ -131,10 +118,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  /* ---------- Usuarios de demostración ----------
-     Solo se crean la primera vez, si aún no hay ningún usuario registrado.
-     Sirven para poder demostrar los tres roles del Anexo 1 en la presentación
-     sin tener que registrarse antes.                                        */
   function sembrarUsuariosDemo() {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");

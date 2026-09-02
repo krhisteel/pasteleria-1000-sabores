@@ -1,6 +1,4 @@
-/* ============================================================================
-   HOME.CSS — Estilos de la página principal (index.html)
-   ========================================================================== */
+/*  HOME.CSS — Estilos de la página principal (index.html)  */
 
 /*  Hero Banner  */
 .hero {
@@ -239,7 +237,7 @@
   text-align: center;
 }
 
-/* El contenedor 16:9 del video vive en global.css; aquí solo el espaciado. */
+/*  El contenedor 16:9 del video vive en global.css; aquí solo el espaciado.  */
 .video-seccion .video-figura {
   margin-top: var(--espaciado-lg);
 }
