@@ -1,0 +1,121 @@
+/* PRODUCTOS.CSS — Módulo 2 (Compra) */
+
+.pagina-productos {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--espaciado-xl) var(--espaciado-md);
+}
+
+.subtitulo-pagina {
+  text-align: center;
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-xl);
+}
+
+.filtros {
+  display: flex;
+  gap: var(--espaciado-md);
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: var(--espaciado-xl);
+}
+
+.filtro-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-xs);
+  min-width: 240px;
+}
+
+.filtro-grupo label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--espaciado-lg);
+}
+
+.producto-card {
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transicion-rapida), box-shadow var(--transicion-rapida);
+  cursor: pointer;
+}
+
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-media);
+}
+
+.producto-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--color-crema);
+}
+
+.producto-info {
+  padding: var(--espaciado-md);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-xs);
+}
+
+.producto-info h3 {
+  font-size: 1rem;
+}
+
+.producto-categoria {
+  color: var(--color-texto-claro);
+  font-size: 0.85rem;
+}
+
+.producto-precio {
+  color: var(--color-chocolate);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: auto;
+}
+
+.btn-ver-mas {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--color-chocolate);
+  padding: var(--espaciado-sm) 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transicion-rapida);
+}
+
+.btn-ver-mas:hover {
+  border-bottom-color: var(--color-chocolate);
+}
+
+.btn-agregar {
+  width: 100%;
+}
+
+.btn-agotado {
+  background: var(--color-texto-claro);
+  cursor: not-allowed;
+}
+
+.sin-resultados {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--espaciado-xxl);
+  color: var(--color-texto-claro);
+}
+
+@media (max-width: 640px) {
+  .filtro-grupo {
+    min-width: 100%;
+  }
+}
