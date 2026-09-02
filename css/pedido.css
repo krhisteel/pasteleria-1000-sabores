@@ -1,0 +1,347 @@
+/* ============================================================================
+   PEDIDO.CSS — Página "Mis pedidos" (seguimiento de envío del cliente)
+   Sección separada del carrito en su propia página (pedido.html).
+   ============================================================================ */
+
+.pagina-pedido {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--espaciado-xl) var(--espaciado-md);
+}
+
+.subtitulo-pagina {
+  text-align: center;
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-xl);
+}
+
+/* ============================================================================
+   PANEL DE SEGUIMIENTO DE ENVÍO (dinámico)
+   ============================================================================ */
+
+.seguimiento-panel {
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-media);
+  overflow: hidden;
+  margin-top: var(--espaciado-xl);
+}
+
+/* ---------- Cabecera del panel ---------- */
+.seguimiento-cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--espaciado-md);
+  flex-wrap: wrap;
+  padding: var(--espaciado-lg) var(--espaciado-xl);
+  background: linear-gradient(135deg, var(--color-chocolate), #7a4b2a);
+  color: var(--color-blanco);
+}
+
+.seguimiento-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radio-xl);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--espaciado-sm);
+}
+
+.seguimiento-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7CFC9E;
+  box-shadow: 0 0 0 3px rgba(124, 252, 158, 0.25);
+  animation: seg-pulso 1.6s infinite;
+}
+
+.seguimiento-dot.entregado {
+  background: var(--color-blanco);
+  animation: none;
+}
+
+@keyframes seg-pulso {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.seguimiento-cabecera h2 {
+  font-family: var(--font-titulo);
+  font-weight: 400;
+  font-size: 1.6rem;
+  margin-bottom: 0.15rem;
+}
+
+.seguimiento-subtitulo {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
+
+.seguimiento-fecha-box {
+  text-align: right;
+}
+
+.seguimiento-fecha-etiqueta {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.seguimiento-fecha {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+/* ---------- Barra de progreso ---------- */
+.seguimiento-progreso {
+  padding: var(--espaciado-lg) var(--espaciado-xl) 0;
+}
+
+.seguimiento-bar {
+  height: 10px;
+  background: var(--color-crema);
+  border-radius: var(--radio-xl);
+  overflow: hidden;
+}
+
+.seguimiento-bar-fill {
+  height: 100%;
+  border-radius: var(--radio-xl);
+  background: linear-gradient(90deg, var(--color-rosa), var(--color-chocolate));
+  transition: width 0.8s ease;
+}
+
+/* ---------- Etapas del envío ---------- */
+.seguimiento-etapas {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--espaciado-md);
+  padding: var(--espaciado-md) var(--espaciado-xl);
+}
+
+.seguimiento-etapa {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+  background: var(--color-crema);
+  border: 2px solid transparent;
+  border-radius: var(--radio-md);
+  padding: var(--espaciado-sm) var(--espaciado-md);
+  opacity: 0.55;
+  position: relative;
+}
+
+.seguimiento-etapa.completa {
+  opacity: 1;
+  border-color: var(--color-chocolate);
+  background: #fdf6ec;
+}
+
+.seguimiento-etapa.actual {
+  opacity: 1;
+  border-color: var(--color-rosa);
+  background: #fff0f5;
+  box-shadow: var(--sombra-suave);
+}
+
+.etapa-circulo {
+  font-size: 1.4rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.etapa-contenido {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.etapa-titulo {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.etapa-fecha {
+  font-size: 0.75rem;
+  color: var(--color-texto-claro);
+  text-transform: capitalize;
+}
+
+.etapa-estado {
+  margin-left: auto;
+  font-weight: 900;
+  color: var(--color-chocolate);
+  font-size: 0.85rem;
+}
+
+/* ---------- Grid de contenido ---------- */
+.seguimiento-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--espaciado-lg);
+  padding: 0 var(--espaciado-xl) var(--espaciado-xl);
+}
+
+.seguimiento-tarjeta {
+  background: var(--color-crema);
+  border-radius: var(--radio-md);
+  padding: var(--espaciado-md);
+}
+
+.seguimiento-tarjeta h3 {
+  font-size: 0.95rem;
+  margin-bottom: var(--espaciado-sm);
+  color: var(--color-chocolate);
+}
+
+/* ---------- Productos ---------- */
+.sp-producto {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+  padding: var(--espaciado-sm) 0;
+  border-bottom: 1px solid rgba(255, 192, 203, 0.5);
+}
+
+.sp-producto:last-child {
+  border-bottom: none;
+}
+
+.sp-producto img {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radio-sm);
+  object-fit: cover;
+  background: var(--color-blanco);
+}
+
+.sp-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.sp-nombre {
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.sp-cant {
+  font-size: 0.78rem;
+  color: var(--color-texto-claro);
+}
+
+.sp-producto > strong {
+  color: var(--color-chocolate);
+  font-size: 0.85rem;
+}
+
+.seguimiento-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--espaciado-sm);
+  padding-top: var(--espaciado-sm);
+  border-top: 2px solid var(--color-rosa);
+}
+
+.seguimiento-total strong {
+  font-size: 1.2rem;
+  color: var(--color-chocolate);
+}
+
+/* ---------- Estado actual ---------- */
+.seguimiento-estado-bloque {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--espaciado-sm);
+  padding: var(--espaciado-sm) 0;
+}
+
+.seguimiento-estado-ic {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.seguimiento-estado-bloque strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.seguimiento-estado-bloque p {
+  font-size: 0.82rem;
+  color: var(--color-texto-claro);
+}
+
+.seguimiento-milestone {
+  margin-top: var(--espaciado-sm);
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: var(--color-chocolate);
+  background: #fff0f5;
+  border-radius: var(--radio-sm);
+  padding: var(--espaciado-sm);
+  text-align: center;
+}
+
+/* ---------- Acciones ---------- */
+.seguimiento-acciones {
+  display: flex;
+  gap: var(--espaciado-md);
+  flex-wrap: wrap;
+  padding: 0 var(--espaciado-xl) var(--espaciado-xl);
+}
+
+/* ---------- Estado vacío (sin pedidos) ---------- */
+.seguimiento-vacio {
+  text-align: center;
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-xxl);
+  margin-top: var(--espaciado-xl);
+}
+
+.seguimiento-vacio h2 {
+  font-family: var(--font-titulo);
+  font-size: 1.6rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.seguimiento-vacio p {
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-lg);
+}
+
+@media (max-width: 820px) {
+  .seguimiento-etapas {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .seguimiento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .seguimiento-etapas {
+    grid-template-columns: 1fr;
+  }
+}
