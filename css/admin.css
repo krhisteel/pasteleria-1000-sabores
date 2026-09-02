@@ -328,6 +328,8 @@
 }
 
 .btn-accion {
+  display: inline-block;
+  text-align: center;
   padding: 0.35rem 0.7rem;
   border-radius: var(--radio-sm);
   font-size: 0.78rem;
@@ -398,6 +400,16 @@
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+.admin-detalle-imagen figcaption {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-align: center;
+  padding: 0.5rem 0.75rem;
+  color: var(--color-texto);
+  background: var(--color-blanco);
+  border-top: 2px solid var(--color-rosa);
 }
 
 .admin-detalle-lista {

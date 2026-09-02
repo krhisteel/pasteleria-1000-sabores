@@ -547,8 +547,8 @@ function validarCampoImagenProducto(campo) {
   const valor = campo.value.trim();
   if (!validarNoVacio(valor)) return limpiarEstado(campo);
 
-  const ok = /^(https?:\/\/|\/|\.\/|\.\.\/)/.test(valor) && /\.(png|jpe?g|gif|webp|svg|avif)(\?|#|$)/i.test(valor);
-  if (!ok) return mostrarError(campo, "Escribe una URL válida de imagen, o déjalo vacío.");
+  const ok = /\.(png|jpe?g|gif|webp|svg|avif)(\?[^#]*)?(#.*)?$/i.test(valor);
+  if (!ok) return mostrarError(campo, "Escribe una URL válida de imagen (png, jpg, gif, webp, svg, avif) o déjalo vacío.");
 
   return marcarValido(campo);
 }
@@ -768,7 +768,9 @@ function inicializarDetalleProducto() {
 
   cuerpo.innerHTML =
     '<div class="admin-detalle">' +
-      '<figure class="admin-detalle-imagen">' + imagen + '</figure>' +
+      '<figure class="admin-detalle-imagen">' + imagen +
+        '<figcaption>' + producto.nombre + ' (' + producto.codigo + ')</figcaption>' +
+      '</figure>' +
       '<dl class="admin-detalle-lista">' +
         '<div class="admin-detalle-fila"><dt>Código</dt><dd>' + producto.codigo + '</dd></div>' +
         '<div class="admin-detalle-fila"><dt>Categoría</dt><dd><span class="admin-badge admin-badge-categoria">' + producto.categoria + '</span></dd></div>' +

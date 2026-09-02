@@ -877,7 +877,7 @@ function inicializarDetalleUsuario() {
     '</div>' +
     '<div class="admin-detalle-acciones">' +
       '<a href="admin-usuarios.html" class="btn-secondary">Volver al listado</a>' +
-      '<a href="admin-usuario-editar.html?run=' + encodeURIComponent(usuario.run) + '" class="btn-accion btn-editar" style="text-align:center;">Editar</a>' +
+      '<a href="admin-usuario-editar.html?run=' + encodeURIComponent(usuario.run) + '" class="btn-accion btn-editar">Editar</a>' +
     '</div>';
 }
 
