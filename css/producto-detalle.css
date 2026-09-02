@@ -1,0 +1,107 @@
+/* PRODUCTO-DETALLE.CSS — Módulo 2 (Compra) */
+
+.pagina-detalle {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--espaciado-xl) var(--espaciado-md);
+}
+
+.detalle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaciado-xl);
+  align-items: start;
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-lg);
+}
+
+.detalle-imagen img {
+  width: 100%;
+  border-radius: var(--radio-md);
+  background: var(--color-crema);
+}
+
+.detalle-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-sm);
+}
+
+.detalle-categoria {
+  display: inline-block;
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: var(--espaciado-xs) var(--espaciado-md);
+  border-radius: var(--radio-xl);
+  align-self: flex-start;
+}
+
+.detalle-nombre {
+  font-family: var(--font-titulo);
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.detalle-precio {
+  color: var(--color-chocolate);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.detalle-descripcion {
+  color: var(--color-texto);
+  line-height: 1.6;
+}
+
+.detalle-stock {
+  color: var(--color-texto-claro);
+  font-size: 0.9rem;
+}
+
+.detalle-form {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-md);
+  flex-wrap: wrap;
+  margin-top: var(--espaciado-sm);
+}
+
+.detalle-form label {
+  font-weight: 700;
+}
+
+.campo-cantidad {
+  width: 80px;
+}
+
+.detalle-agotado {
+  color: var(--color-error);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: var(--espaciado-sm);
+}
+
+.detalle-volver {
+  margin-top: var(--espaciado-md);
+}
+
+.sin-resultados {
+  text-align: center;
+  padding: var(--espaciado-xxl);
+  color: var(--color-texto-claro);
+}
+
+@media (max-width: 720px) {
+  .detalle-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detalle-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
