@@ -751,13 +751,15 @@ function inicializarDetalleProducto() {
 
   const imagen = producto.imagen
     ? '<img src="' + producto.imagen + '" alt="Imagen de ' + producto.nombre + '">'
-    : '<div class="admin-sin-imagen" style="width:100%;height:300px;border-radius:var(--radio-lg);font-size:0.9rem;" role="img" aria-label="Producto sin imagen">Producto sin imagen</div>';
+    : '<div class="admin-sin-imagen admin-sin-imagen-grande" role="img" aria-label="Producto sin imagen">Producto sin imagen</div>';
 
-  let filaStock = "<dd>" + producto.stock + "</dd>";
+  let filaStock = '<div class="admin-detalle-fila"><dt>Stock</dt><dd>' + producto.stock + '</dd></div>';
   if (esStockAgotado(producto)) {
-    filaStock = '<dd style="position:relative;">' + producto.stock + ' <span class="admin-badge admin-badge-stock-agotado">Agotado</span></dd>';
+    filaStock = '<div class="admin-detalle-fila stock-critico"><dt>Stock</dt><dd>' + producto.stock +
+      ' <span class="admin-badge admin-badge-stock-agotado">Agotado</span></dd></div>';
   } else if (esStockCritico(producto)) {
-    filaStock = '<dd style="position:relative;">' + producto.stock + ' <span class="admin-badge admin-badge-stock-critico">Stock crítico</span></dd>';
+    filaStock = '<div class="admin-detalle-fila stock-critico"><dt>Stock</dt><dd>' + producto.stock +
+      ' <span class="admin-badge admin-badge-stock-critico">Stock crítico</span></dd></div>';
   }
 
   const stockCriticoTexto = (producto.stockCritico !== "" && producto.stockCritico !== null && producto.stockCritico !== undefined)
@@ -771,14 +773,14 @@ function inicializarDetalleProducto() {
         '<div class="admin-detalle-fila"><dt>Código</dt><dd>' + producto.codigo + '</dd></div>' +
         '<div class="admin-detalle-fila"><dt>Categoría</dt><dd><span class="admin-badge admin-badge-categoria">' + producto.categoria + '</span></dd></div>' +
         '<div class="admin-detalle-fila"><dt>Precio</dt><dd class="admin-precio">' + formatearPrecio(producto.precio) + '</dd></div>' +
-        '<div class="admin-detalle-fila"><dt>Stock</dt>' + filaStock + '</div>' +
+        filaStock +
         '<div class="admin-detalle-fila"><dt>Stock crítico</dt><dd>' + stockCriticoTexto + '</dd></div>' +
         '<div class="admin-detalle-fila"><dt>Descripción</dt><dd>' + (producto.descripcion || "Sin descripción.") + '</dd></div>' +
       '</dl>' +
     '</div>' +
     '<div class="admin-detalle-acciones">' +
       '<a href="admin-productos.html" class="btn-secondary">Volver al listado</a>' +
-      (esAdministrador() ? '<a href="admin-producto-editar.html?codigo=' + encodeURIComponent(producto.codigo) + '" class="btn-editar btn-accion" style="text-align:center;">Editar</a>' : "") +
+      (esAdministrador() ? '<a href="admin-producto-editar.html?codigo=' + encodeURIComponent(producto.codigo) + '" class="btn-accion btn-editar">Editar</a>' : "") +
     '</div>';
 }
 

@@ -1,0 +1,84 @@
+/* ============================================================================
+   ADMIN-USUARIOS.CSS — Estilos específicos del mantenedor de usuarios
+   ----------------------------------------------------------------------------
+   Jael Reyes (Módulo 3). Complementa a css/admin.css. Estiliza el filtro por
+   rol, las filas de la tabla de usuarios, el combo región/comuna del
+   formulario y los badges según el tipo de usuario (Administrador, Vendedor,
+   Cliente).
+   ========================================================================== */
+
+/* ---------- Filtro por rol en el listado ---------- */
+.admin-filtro-barra select {
+  flex-basis: 220px;
+  max-width: 260px;
+}
+
+/* ---------- Badge según tipo de usuario ---------- */
+.admin-badge-admin {
+  background: var(--color-chocolate);
+  color: var(--color-blanco);
+}
+
+.admin-badge-vendedor {
+  background: var(--color-rosa-oscuro);
+  color: var(--color-blanco);
+}
+
+.admin-badge-cliente {
+  background: var(--color-crema);
+  border: 1px solid var(--color-chocolate);
+  color: var(--color-chocolate);
+}
+
+/* ---------- Fila que resalta al usuario con sesión activa ---------- */
+.admin-tabla tr.usuario-activo {
+  background: rgba(255, 192, 203, 0.15);
+}
+
+/* ---------- Región y comuna en el formulario ---------- */
+.admin-campos-region {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaciado-md);
+}
+
+/* Pista visual del perfil seleccionado en el formulario */
+.admin-perfil-pista {
+  font-size: 0.82rem;
+  color: var(--color-texto-claro);
+  margin-top: 0.2rem;
+}
+
+/* ---------- Detalle de usuario ---------- */
+.admin-detalle-fila dd .admin-badge {
+  margin-right: 0.25rem;
+}
+
+/* Avatar del usuario en el detalle */
+.admin-detalle-usuario {
+  border: 2px solid var(--color-rosa);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1 / 1;
+}
+
+.admin-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  font-family: var(--font-titulo);
+  font-size: 3.5rem;
+}
+
+/* Responsive de región/comuna */
+@media (max-width: 640px) {
+  .admin-campos-region {
+    grid-template-columns: 1fr;
+  }
+}

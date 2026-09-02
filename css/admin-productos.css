@@ -86,9 +86,17 @@
   color: var(--color-chocolate);
 }
 
-/* ---------- Detalle con stock crítico destacado ---------- */
+/* Descripción destacando el estado crítico/agotado en el detalle */
 .admin-detalle-fila.stock-critico dd {
   color: var(--color-error);
+}
+
+/* Placeholder grande para el detalle del producto */
+.admin-sin-imagen-grande {
+  width: 100%;
+  height: 300px;
+  border-radius: var(--radio-lg);
+  font-size: 0.9rem;
 }
 
 /* Responsive puntual del filtro */
