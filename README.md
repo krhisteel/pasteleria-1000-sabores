@@ -49,35 +49,35 @@ pasteleria mil sabores/
 ├── contacto.html           Formulario de contacto validado
 ├── registro.html           Registro de usuario validado
 ├── login.html              Inicio de sesión validado
-├── admin-home.html         Panel: portada con resumen (Jael Reyes)
-├── admin-productos.html    Panel: listado de productos (Jael Reyes)
-├── admin-producto-nuevo.html   Panel: crear producto (Jael Reyes)
-├── admin-producto-editar.html  Panel: editar producto (Jael Reyes)
-├── admin-producto-mostrar.html Panel: detalle de producto (Jael Reyes)
-├── admin-usuarios.html     Panel: listado de usuarios (Jael Reyes)
-├── admin-usuario-nuevo.html    Panel: crear usuario (Jael Reyes)
-├── admin-usuario-editar.html   Panel: editar usuario (Jael Reyes)
-├── admin-usuario-mostrar.html  Panel: detalle de usuario (Jael Reyes)
+├── admin-home.html         Panel: portada con resumen (Benjamín Riquelme)
+├── admin-productos.html    Panel: listado de productos (Benjamín Riquelme)
+├── admin-producto-nuevo.html   Panel: crear producto (Benjamín Riquelme)
+├── admin-producto-editar.html  Panel: editar producto (Benjamín Riquelme)
+├── admin-producto-mostrar.html Panel: detalle de producto (Benjamín Riquelme)
+├── admin-usuarios.html     Panel: listado de usuarios (Benjamín Riquelme)
+├── admin-usuario-nuevo.html    Panel: crear usuario (Benjamín Riquelme)
+├── admin-usuario-editar.html   Panel: editar usuario (Benjamín Riquelme)
+├── admin-usuario-mostrar.html  Panel: detalle de usuario (Benjamín Riquelme)
 ├── css/
-│   ├── global.css          Variables, reset, header, footer y utilidades (Jael Reyes)
+│   ├── global.css          Variables, reset, header, footer y utilidades (Benjamín Riquelme)
 │   ├── home.css            Estilos de index.html
 │   ├── nosotros.css        Estilos de nosotros.html
 │   ├── blogs.css           Estilos de blogs.html y de los detalles
 │   ├── contacto.css        Estilos de contacto.html
 │   ├── auth.css            Estilos de registro.html y login.html
-│   ├── admin.css           Panel: layout general y menú lateral (Jael Reyes)
-│   ├── admin-productos.css Panel: mantenedor de productos (Jael Reyes)
-│   └── admin-usuarios.css  Panel: mantenedor de usuarios (Jael Reyes)
+│   ├── admin.css           Panel: layout general y menú lateral (Benjamín Riquelme)
+│   ├── admin-productos.css Panel: mantenedor de productos (Benjamín Riquelme)
+│   └── admin-usuarios.css  Panel: mantenedor de usuarios (Benjamín Riquelme)
 ├── js/
 │   ├── main.js             Menú responsive, sesión de usuario y contador de carrito
 │   ├── validaciones.js     Funciones de validación reutilizables (Aileen Oyaneder)
 │   ├── contacto.js         Validación del formulario de contacto
 │   ├── registro.js         Validación del registro y cálculo de beneficios
 │   ├── login.js            Validación del login y guardado de la sesión
-│   ├── regiones-comunas.js Arreglo de regiones y comunas (Jael Reyes)
-│   ├── admin.js            Panel: protección por rol, menú y portada (Jael Reyes)
-│   ├── admin-productos.js  Panel: CRUD de productos + validaciones (Jael Reyes)
-│   └── admin-usuarios.js   Panel: CRUD de usuarios + validaciones (Jael Reyes)
+│   ├── regiones-comunas.js Arreglo de regiones y comunas (Benjamín Riquelme)
+│   ├── admin.js            Panel: protección por rol, menú y portada (Benjamín Riquelme)
+│   ├── admin-productos.js  Panel: CRUD de productos + validaciones (Benjamín Riquelme)
+│   └── admin-usuarios.js   Panel: CRUD de usuarios + validaciones (Benjamín Riquelme)
 ├── img/                    Imágenes propias del proyecto
 └── README.md
 ```
@@ -255,8 +255,8 @@ Cada integrante trabaja en la rama de su módulo, para no pisarse:
 | Integrante | Rama |
 |------------|------|
 | Aileen Oyaneder | `modulo-1-contenido` |
-| Benjamín Riquelme | `modulo-2-compra` |
-| Jael Reyes | `modulo-3-admin` |
+| Jael Reyes | `modulo-2-compra` |
+| Benjamín Riquelme | `modulo-3-admin` |
 
 ```bash
 git checkout -b modulo-2-compra
@@ -310,10 +310,10 @@ Claves compartidas en `localStorage`:
 
 | Clave | La escribe | La leen |
 |-------|------------|---------|
-| `usuarios` | Aileen Oyaneder (`registro.js`) | Aileen Oyaneder (`login.js`), Jael Reyes (`admin-usuarios.js`) |
-| `usuarioActivo` | Aileen Oyaneder (`login.js`) | Aileen Oyaneder (`main.js`), Jael Reyes (panel admin) |
-| `carrito` | Benjamín Riquelme (`carrito.js`) | Aileen Oyaneder (`main.js`, contador del header) |
-| `productos` | Jael Reyes (`admin-productos.js`) | Benjamín Riquelme (`productos-data.js`, catálogo) |
+| `usuarios` | Aileen Oyaneder (`registro.js`) | Aileen Oyaneder (`login.js`), Benjamín Riquelme (`admin-usuarios.js`) |
+| `usuarioActivo` | Aileen Oyaneder (`login.js`) | Aileen Oyaneder (`main.js`), Benjamín Riquelme (panel admin) |
+| `carrito` | Jael Reyes (`carrito.js`) | Aileen Oyaneder (`main.js`, contador del header) |
+| `productos` | Benjamín Riquelme (`admin-productos.js`) | Jael Reyes (`productos-data.js`, catálogo) |
 
 Funciones globales expuestas por `js/main.js` para el resto del equipo:
 `obtenerUsuarioActual()`, `haySesion()`, `cerrarSesion()`, `esAdministrador()`,
