@@ -1,38 +1,13 @@
-/* ============================================================================
-   ADMIN-USUARIOS.JS — Mantenedor de usuarios (CRUD simulado)
-   ----------------------------------------------------------------------------
-   Jael Reyes (Módulo 3). Usa js/validaciones.js (Aileen Oyaneder) y
-   js/regiones-comunas.js (Jael Reyes). Comparte la clave "usuarios" de
-   localStorage con el registro del Módulo 1 (acuerdo del equipo).
-
-   Reglas de negocio del Anexo 1 (usuarios):
-     - RUN: requerido, dígito verificador válido, sin puntos ni guion,
-       entre 7 y 9 caracteres.
-     - Nombre: requerido, máx. 50 caracteres.
-     - Apellidos: requerido, máx. 100 caracteres.
-     - Correo: requerido, máx. 100, solo @duoc.cl, @profesor.duoc.cl y
-       @gmail.com (validado con validarCorreo).
-     - Fecha de nacimiento: opcional, no puede ser futura.
-     - Tipo de usuario: select con Administrador, Cliente y Vendedor.
-     - Región y Comuna: requeridas; las comunas cambian según la región.
-     - Dirección: requerida, máx. 300 caracteres.
-     - Contraseña: entre 4 y 10 caracteres (reutiliza validarPassword).
-
-   Roles del sistema (Anexo 1):
-     - Administrador: acceso total al panel.
-     - Vendedor: solo visualiza productos y sus detalles (y órdenes).
-     - Cliente: solo la tienda.
-   ========================================================================== */
-
+// admin-usuarios.js — CRUD de usuarios con validaciones RUN/regiones
 "use strict";
 
-/* ---------- Clave compartida con el registro del Módulo 1 ---------- */
+// Clave compartida con el registro del Módulo 1
 const CLAVE_USUARIOS = "usuarios";
 
-/* ---------- Tipos de usuario de la aplicación ---------- */
+// Perfiles de usuario
 const TIPOS_USUARIOS = ["Administrador", "Vendedor", "Cliente"];
 
-/* ---------- Límites de validación ---------- */
+// Límites de validación
 const USUARIO_LIMITES = {
   runMin: 7,
   runMax: 9,
@@ -42,23 +17,16 @@ const USUARIO_LIMITES = {
   direccion: 300
 };
 
-/* ---------- Texto de ayuda para los perfiles ---------- */
+// Descripción de cada perfil para la pista en el formulario
 const DESCRIPCION_PERFIL = {
   Administrador: "Acceso total al sistema de administración.",
   Vendedor: "Solo puede visualizar el listado y el detalle de productos (y de órdenes).",
   Cliente: "Solo accede a la tienda."
 };
 
-/* ============================================================================
-   ACCESO A LOS DATOS
-   ========================================================================== */
+// --- Acceso a los datos ---
 
-/**
- * Devuelve el arreglo de usuarios guardado en localStorage.
- * Si la clave aún no existe, entra vacío (los usuarios de prueba los sella
- * el propio login.js del Módulo 1).
- * @returns {Array<object>}
- */
+// Devuelve el arreglo de usuarios de localStorage
 function obtenerUsuarios() {
   try {
     return JSON.parse(localStorage.getItem(CLAVE_USUARIOS) || "[]");
@@ -67,11 +35,7 @@ function obtenerUsuarios() {
   }
 }
 
-/**
- * Guarda el arreglo completo de usuarios en localStorage.
- * @param {Array<object>} usuarios
- * @returns {boolean} true si se guardó
- */
+// Guarda el arreglo completo de usuarios
 function guardarUsuarios(usuarios) {
   try {
     localStorage.setItem(CLAVE_USUARIOS, JSON.stringify(usuarios));
@@ -81,11 +45,7 @@ function guardarUsuarios(usuarios) {
   }
 }
 
-/**
- * Busca un usuario por su RUN normalizado.
- * @param {string} run
- * @returns {object|null}
- */
+// Busca un usuario por RUN normalizado
 function buscarUsuarioPorRun(run) {
   const limpiar = typeof normalizarRun === "function" ? normalizarRun(run) : String(run);
   const usuarios = obtenerUsuarios();
@@ -95,11 +55,7 @@ function buscarUsuarioPorRun(run) {
   }) || null;
 }
 
-/**
- * Busca un usuario por su correo (sin importar mayúsculas).
- * @param {string} correo
- * @returns {object|null}
- */
+// Busca un usuario por correo (case-insensitive)
 function buscarUsuarioPorCorreo(correo) {
   const correoBuscado = String(correo || "").trim().toLowerCase();
   const usuarios = obtenerUsuarios();
@@ -108,11 +64,7 @@ function buscarUsuarioPorCorreo(correo) {
   }) || null;
 }
 
-/**
- * Rellena un select con las regiones disponibles.
- * @param {HTMLElement} select - El select de región
- * @param {string} [seleccionado] - Región que debe quedar seleccionada
- */
+// Llena un select con las regiones disponibles
 function llenarSelectRegiones(select, seleccionado) {
   if (!select || typeof REGIONES_COMUNAS === "undefined") return;
 
@@ -131,12 +83,7 @@ function llenarSelectRegiones(select, seleccionado) {
   });
 }
 
-/**
- * Rellena el select de comunas según la región elegida.
- * @param {HTMLElement} selectRegion - El select de región
- * @param {HTMLElement} selectComuna - El select de comuna
- * @param {string} [seleccionada] - Comuna que debe quedar seleccionada
- */
+// Llena el select de comunas según la región elegida
 function llenarSelectComunas(selectRegion, selectComuna, seleccionada) {
   if (!selectRegion || !selectComuna || typeof REGIONES_COMUNAS === "undefined") return;
 
@@ -172,20 +119,12 @@ function llenarSelectComunas(selectRegion, selectComuna, seleccionada) {
   }
 }
 
-/**
- * Da formato de RUN legible usando la utilidad de validaciones.js.
- * @param {string} run
- * @returns {string}
- */
+// RUN con formato legible (XX.XXX.XXX-X)
 function runLegible(run) {
   return (typeof formatearRun === "function") ? formatearRun(run) : run;
 }
 
-/**
- * Busca el nombre de un mes para la fecha de nacimiento legible.
- * @param {string} fecha - Fecha ISO (ej: 1995-05-10)
- * @returns {string}
- */
+// Fecha ISO a texto legible (10 de mayo de 1995)
 function fechaLegible(fecha) {
   if (!fecha) return "—";
   try {
@@ -202,15 +141,9 @@ function fechaLegible(fecha) {
   }
 }
 
-/* ============================================================================
-   LISTADO (admin-usuarios.html)
-   ========================================================================== */
+// --- Listado (admin-usuarios.html) ---
 
-/**
- * Rellena un select con los tipos de usuario.
- * @param {HTMLElement} select
- * @param {string} [seleccionado]
- */
+// Llena un select con los tipos de usuario
 function llenarSelectTipos(select, seleccionado) {
   if (!select) return;
   select.innerHTML = "";
@@ -229,11 +162,7 @@ function llenarSelectTipos(select, seleccionado) {
   });
 }
 
-/**
- * Devuelve el badge según el tipo de usuario.
- * @param {string} tipo
- * @returns {string} HTML del badge
- */
+// Badge según el tipo de usuario
 function badgeTipoUsuario(tipo) {
   let clase = "admin-badge-cliente";
   if (tipo === "Administrador") clase = "admin-badge-admin";
@@ -242,10 +171,7 @@ function badgeTipoUsuario(tipo) {
   return '<span class="admin-badge ' + clase + '">' + tipo + "</span>";
 }
 
-/**
- * Renderiza la tabla completa del listado de usuarios.
- * @param {Array<object>} usuarios - Arreglo a mostrar
- */
+// Renderiza la tabla completa del listado de usuarios
 function renderListadoUsuarios(usuarios) {
   const contenedor = document.getElementById("listaUsuarios");
   if (!contenedor) return;
@@ -293,6 +219,7 @@ function renderListadoUsuarios(usuarios) {
   html += "</tbody></table></div>";
   contenedor.innerHTML = html;
 
+  // Botones eliminar
   contenedor.querySelectorAll("[data-eliminar]").forEach(function (boton) {
     boton.addEventListener("click", function () {
       eliminarUsuarioHandler(boton.getAttribute("data-eliminar"));
@@ -300,11 +227,7 @@ function renderListadoUsuarios(usuarios) {
   });
 }
 
-/**
- * Filtra el listado según el rol (y el buscador).
- * @param {HTMLElement} selectTipo - Select de perfil
- * @param {HTMLElement} [buscador] - Input de búsqueda (nombre, correo o RUN)
- */
+// Filtra por perfil y buscador (nombre, correo o RUN)
 function aplicarFiltrosUsuarios(selectTipo, buscador) {
   let usuarios = obtenerUsuarios();
   const tipo = selectTipo ? selectTipo.value : "";
@@ -326,10 +249,7 @@ function aplicarFiltrosUsuarios(selectTipo, buscador) {
   renderListadoUsuarios(usuarios);
 }
 
-/**
- * Elimina un usuario tras confirmar. No permite eliminar la propia sesión.
- * @param {string} run
- */
+// Elimina un usuario tras confirmar. No permite eliminar la propia sesión.
 function eliminarUsuarioHandler(run) {
   const usuario = buscarUsuarioPorRun(run);
   if (!usuario) return;
@@ -353,9 +273,7 @@ function eliminarUsuarioHandler(run) {
   }
 }
 
-/**
- * Inicializa la página de listado de usuarios (solo Administrador).
- */
+// Inicializa la página de listado (solo Administrador)
 function inicializarListadoUsuarios() {
   const esAdmin = (typeof esAdministrador === "function") && esAdministrador();
   if (!esAdmin) {
@@ -382,13 +300,9 @@ function inicializarListadoUsuarios() {
   aplicarFiltrosUsuarios(selectTipo, buscador);
 }
 
-/* ============================================================================
-   VALIDACIONES DEL FORMULARIO (nuevo / editar)
-   ========================================================================== */
+// --- Validaciones del formulario (nuevo / editar) ---
 
-/**
- * Actualiza la pista del perfil seleccionado en el formulario.
- */
+// Actualiza la pista del perfil seleccionado
 function actualizarPistaPerfil(campoTipo) {
   const pista = document.getElementById("pistaPerfil");
   if (!pista) return;
@@ -396,12 +310,7 @@ function actualizarPistaPerfil(campoTipo) {
   pista.textContent = descripcion ? "Perfil: " + descripcion : "";
 }
 
-/**
- * Valida el RUN en tiempo real.
- * @param {HTMLElement} campo
- * @param {string} [runOriginal] - RUN que se está editando
- * @returns {boolean}
- */
+// Valida RUN: requerido, 7-9 chars, dígito verificador, sin duplicados
 function validarCampoRunUsuario(campo, runOriginal) {
   const valor = campo.value.trim();
   const limpio = typeof normalizarRun === "function" ? normalizarRun(valor) : valor;
@@ -416,7 +325,6 @@ function validarCampoRunUsuario(campo, runOriginal) {
     return mostrarError(campo, "El dígito verificador del RUN no es válido.");
   }
 
-  // El RUN no puede repetirse (excepto en edición con el mismo usuario)
   const duplicado = buscarUsuarioPorRun(valor);
   if (duplicado && String(duplicado.run) !== String(runOriginal)) {
     return mostrarError(campo, "Ya existe un usuario con el RUN '" + runLegible(valor) + "'.");
@@ -425,11 +333,7 @@ function validarCampoRunUsuario(campo, runOriginal) {
   return marcarValido(campo);
 }
 
-/**
- * Valida el nombre (requerido, máx. 50).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida nombre: requerido, máx. 50
 function validarCampoNombreUsuario(campo) {
   const valor = campo.value.trim();
 
@@ -442,11 +346,7 @@ function validarCampoNombreUsuario(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida los apellidos (requerido, máx. 100).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida apellidos: requerido, máx. 100
 function validarCampoApellidosUsuario(campo) {
   const valor = campo.value.trim();
 
@@ -459,12 +359,7 @@ function validarCampoApellidosUsuario(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida el correo (requerido, máx. 100, dominios permitidos, sin repetir).
- * @param {HTMLElement} campo
- * @param {string} [correoOriginal] - Correo del usuario en edición
- * @returns {boolean}
- */
+// Valida correo: requerido, máx. 100, dominios permitidos, sin duplicados
 function validarCampoCorreoUsuario(campo, correoOriginal) {
   const valor = campo.value.trim();
 
@@ -486,11 +381,7 @@ function validarCampoCorreoUsuario(campo, correoOriginal) {
   return marcarValido(campo);
 }
 
-/**
- * Valida la fecha de nacimiento (opcional, no futura).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida fecha de nacimiento: opcional, no puede ser futura
 function validarCampoFechaNacimiento(campo) {
   const valor = campo.value.trim();
   if (!validarNoVacio(valor)) return limpiarEstado(campo);
@@ -508,11 +399,7 @@ function validarCampoFechaNacimiento(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida el tipo de usuario (select requerido).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida tipo de usuario: select requerido
 function validarCampoTipoUsuario(campo) {
   if (!validarNoVacio(campo.value)) {
     return mostrarError(campo, "Selecciona un perfil para el usuario.");
@@ -520,11 +407,7 @@ function validarCampoTipoUsuario(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida la región (requerida).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida región: requerida
 function validarCampoRegionUsuario(campo) {
   if (!validarNoVacio(campo.value)) {
     return mostrarError(campo, "Selecciona una región.");
@@ -532,12 +415,7 @@ function validarCampoRegionUsuario(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida la comuna (requerida y coherente con la región).
- * @param {HTMLElement} campoComuna
- * @param {HTMLElement} campoRegion
- * @returns {boolean}
- */
+// Valida comuna: requerida y coherente con la región
 function validarCampoComunaUsuario(campoComuna, campoRegion) {
   if (!validarNoVacio(campoComuna.value)) {
     return mostrarError(campoComuna, "Elige una comuna de la región seleccionada.");
@@ -548,11 +426,7 @@ function validarCampoComunaUsuario(campoComuna, campoRegion) {
   return marcarValido(campoComuna);
 }
 
-/**
- * Valida la dirección (requerida, máx. 300).
- * @param {HTMLElement} campo
- * @returns {boolean}
- */
+// Valida dirección: requerida, máx. 300
 function validarCampoDireccionUsuario(campo) {
   const valor = campo.value.trim();
 
@@ -565,13 +439,7 @@ function validarCampoDireccionUsuario(campo) {
   return marcarValido(campo);
 }
 
-/**
- * Valida la contraseña. En "crear" es obligatoria; en "editar" opcional.
- * @param {HTMLElement} campo
- * @param {boolean} obligatoria
- * @param {HTMLElement} [campoConfirmar] - Campo de confirmación
- * @returns {boolean}
- */
+// Valida contraseña: requerida en crear, opcional en editar; 4-10 chars
 function validarCampoPasswordUsuario(campo, obligatoria, campoConfirmar) {
   const valor = campo.value;
 
@@ -590,12 +458,7 @@ function validarCampoPasswordUsuario(campo, obligatoria, campoConfirmar) {
   return marcarValido(campo);
 }
 
-/**
- * Valida la confirmación de la contraseña.
- * @param {HTMLElement} campoConfirmar
- * @param {HTMLElement} campoPassword
- * @returns {boolean}
- */
+// Valida confirmación de contraseña
 function validarCampoConfirmarPassword(campoConfirmar, campoPassword) {
   const valor = campoConfirmar.value;
 
@@ -608,19 +471,14 @@ function validarCampoConfirmarPassword(campoConfirmar, campoPassword) {
   return marcarValido(campoConfirmar);
 }
 
-/* ============================================================================
-   FORMULARIO NUEVO / EDITAR (admin-usuario-nuevo.html / ...-editar.html)
-   ========================================================================== */
+// --- Formulario nuevo / editar ---
 
-/**
- * Inicializa el formulario de usuario en modo "crear" o "editar".
- * @param {string} modo - "crear" o "editar"
- */
+// Inicializa el formulario de usuario (modo "crear" o "editar")
 function inicializarFormularioUsuario(modo) {
   const form = document.getElementById("formUsuario");
   if (!form) return;
 
-  // Nuevo y editar solo disponibles para el Administrador
+  // Solo admin puede crear o editar
   const esAdmin = (typeof esAdministrador === "function") && esAdministrador();
   if (!esAdmin) {
     window.location.href = "admin-usuarios.html";
@@ -650,7 +508,7 @@ function inicializarFormularioUsuario(modo) {
   let runOriginal = null;
   let correoOriginal = null;
 
-  // Modo editar: se cargan los datos desde la URL (?run=...)
+  // Modo editar: carga datos desde la URL (?run=...)
   if (modo === "editar") {
     const params = new URLSearchParams(window.location.search);
     const runParam = params.get("run");
@@ -680,7 +538,7 @@ function inicializarFormularioUsuario(modo) {
     llenarSelectComunas(campoRegion, campoComuna);
   }
 
-  /* ---------- Región/comuna vinculadas ---------- */
+  // Región/comuna vinculadas
   campoRegion.addEventListener("change", function () {
     llenarSelectComunas(campoRegion, campoComuna);
     validarCampoRegionUsuario(campoRegion);
@@ -690,14 +548,14 @@ function inicializarFormularioUsuario(modo) {
     validarCampoComunaUsuario(campoComuna, campoRegion);
   });
 
-  /* ---------- Pista del perfil ---------- */
+  // Pista del perfil
   campoTipo.addEventListener("change", function () {
     validarCampoTipoUsuario(campoTipo);
     actualizarPistaPerfil(campoTipo);
   });
   actualizarPistaPerfil(campoTipo);
 
-  /* ---------- Validación en tiempo real ---------- */
+  // Validación en tiempo real
   campoRun.addEventListener("input", function () {
     validarCampoRunUsuario(campoRun, runOriginal);
   });
@@ -731,7 +589,7 @@ function inicializarFormularioUsuario(modo) {
     validarCampoConfirmarPassword(campoConfirmar, campoPassword);
   });
 
-  /* ---------- Contadores de caracteres ---------- */
+  // Contadores de caracteres
   if (typeof conectarContador === "function") {
     conectarContador(campoNombre, USUARIO_LIMITES.nombre);
     conectarContador(campoApellidos, USUARIO_LIMITES.apellidos);
@@ -739,7 +597,7 @@ function inicializarFormularioUsuario(modo) {
     conectarContador(campoDireccion, USUARIO_LIMITES.direccion);
   }
 
-  /* ---------- Envío ---------- */
+  // Envío del formulario
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     ocultarAvisoUsuario();
@@ -786,7 +644,7 @@ function inicializarFormularioUsuario(modo) {
     }
   });
 
-  /* ---------- Aviso general ---------- */
+  // Avisos del formulario
   function mostrarAvisoUsuario(texto) {
     if (!aviso) return;
     aviso.textContent = texto;
@@ -813,7 +671,7 @@ function inicializarFormularioUsuario(modo) {
     const usuarios = obtenerUsuarios().map(function (u) {
       const limpiar = typeof normalizarRun === "function" ? normalizarRun(u.run) : String(u.run);
       if (limpiar === normalizarRun(runOriginalValue)) {
-        // Si no se escribió contraseña nueva, se conserva la actual
+        // Conservar contraseña actual si no se escribió una nueva
         if (!usuario.password) usuario.password = u.password;
         return usuario;
       }
@@ -823,13 +681,9 @@ function inicializarFormularioUsuario(modo) {
   }
 }
 
-/* ============================================================================
-   DETALLE (admin-usuario-mostrar.html)
-   ========================================================================== */
+// --- Detalle (admin-usuario-mostrar.html) ---
 
-/**
- * Inicializa la vista de detalle de un usuario (solo Administrador).
- */
+// Inicializa la vista de detalle de un usuario (solo Administrador)
 function inicializarDetalleUsuario() {
   const esAdmin = (typeof esAdministrador === "function") && esAdministrador();
   if (!esAdmin) {
@@ -881,9 +735,7 @@ function inicializarDetalleUsuario() {
     '</div>';
 }
 
-/* ============================================================================
-   ARRANQUE SEGÚN LA PÁGINA
-   ========================================================================== */
+// --- Arranque según la página ---
 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("listaUsuarios")) inicializarListadoUsuarios();

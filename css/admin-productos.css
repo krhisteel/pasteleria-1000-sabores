@@ -1,13 +1,6 @@
-/* ============================================================================
-   ADMIN-PRODUCTOS.CSS — Estilos específicos del mantenedor de productos
-   ----------------------------------------------------------------------------
-   Jael Reyes (Módulo 3).
-   Complementa a css/admin.css (layout del panel). Aquí se estilizan el filtro
-   por categoría, las filas de la tabla según stock, la tarjeta de la imagen y
-   las secciones del formulario nuevo/editar producto.
-   ========================================================================== */
+/* admin-productos.css — Mantenedor de productos (Módulo 3) */
 
-/* ---------- Barra de filtros del listado ---------- */
+/* Barra de filtros del listado */
 .admin-filtro-barra {
   display: flex;
   gap: 0.75rem;
@@ -27,7 +20,7 @@
   max-width: 320px;
 }
 
-/* ---------- Fila con stock crítico o agotado ---------- */
+/* Fila con stock crítico o agotado */
 .admin-tabla tr.stock-critico {
   background: #FDECEA;
 }
@@ -36,14 +29,14 @@
   background: #F5F5F5;
 }
 
-/* ---------- Precio en la tabla ---------- */
+/* Precio en la tabla */
 .admin-precio {
   font-weight: 700;
   color: var(--color-chocolate);
   white-space: nowrap;
 }
 
-/* ---------- Imagen placeholder en la tabla ---------- */
+/* Imagen placeholder en la tabla */
 .admin-sin-imagen {
   display: flex;
   align-items: center;
@@ -59,7 +52,7 @@
   text-align: center;
 }
 
-/* ---------- Formulario nuevo / editar producto ---------- */
+/* Formulario nuevo / editar producto */
 .admin-form-seccion {
   border-top: 1px solid rgba(255, 192, 203, 0.5);
   padding-top: var(--espaciado-md);
@@ -79,14 +72,14 @@
   margin-top: var(--espaciado-xl);
 }
 
-/* ---------- Categoría representada como badge ---------- */
+/* Categoría representada como badge */
 .admin-badge-categoria {
   background: var(--color-crema);
   border: 1px solid var(--color-chocolate);
   color: var(--color-chocolate);
 }
 
-/* ---------- Encabezados ordenables de la tabla ---------- */
+/* Encabezados ordenables de la tabla */
 .admin-col-orden {
   cursor: pointer;
   white-space: nowrap;
@@ -121,12 +114,12 @@
   border-top: 7px solid var(--color-chocolate);
 }
 
-/* Descripción destacando el estado crítico/agotado en el detalle */
+/* Detalle: resalta stock crítico/agotado */
 .admin-detalle-fila.stock-critico dd {
   color: var(--color-error);
 }
 
-/* Placeholder grande para el detalle del producto */
+/* Placeholder grande del detalle */
 .admin-sin-imagen-grande {
   width: 100%;
   height: 300px;

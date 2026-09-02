@@ -1,19 +1,12 @@
-/* ============================================================================
-   ADMIN-USUARIOS.CSS — Estilos específicos del mantenedor de usuarios
-   ----------------------------------------------------------------------------
-   Jael Reyes (Módulo 3). Complementa a css/admin.css. Estiliza el filtro por
-   rol, las filas de la tabla de usuarios, el combo región/comuna del
-   formulario y los badges según el tipo de usuario (Administrador, Vendedor,
-   Cliente).
-   ========================================================================== */
+/* admin-usuarios.css — Mantenedor de usuarios (Módulo 3) */
 
-/* ---------- Filtro por rol en el listado ---------- */
+/* Filtro por rol en el listado */
 .admin-filtro-barra select {
   flex-basis: 220px;
   max-width: 260px;
 }
 
-/* ---------- Badge según tipo de usuario ---------- */
+/* Badge según tipo de usuario */
 .admin-badge-admin {
   background: var(--color-chocolate);
   color: var(--color-blanco);
@@ -30,26 +23,26 @@
   color: var(--color-chocolate);
 }
 
-/* ---------- Fila que resalta al usuario con sesión activa ---------- */
+/* Fila que resalta al usuario con sesión activa */
 .admin-tabla tr.usuario-activo {
   background: rgba(255, 192, 203, 0.15);
 }
 
-/* ---------- Región y comuna en el formulario ---------- */
+/* Región y comuna en el formulario */
 .admin-campos-region {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--espaciado-md);
 }
 
-/* Pista visual del perfil seleccionado en el formulario */
+/* Pista visual del perfil seleccionado */
 .admin-perfil-pista {
   font-size: 0.82rem;
   color: var(--color-texto-claro);
   margin-top: 0.2rem;
 }
 
-/* ---------- Detalle de usuario ---------- */
+/* Detalle de usuario */
 .admin-detalle-fila dd .admin-badge {
   margin-right: 0.25rem;
 }

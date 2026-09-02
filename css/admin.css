@@ -1,15 +1,6 @@
-/* ============================================================================
-   ADMIN.CSS — Layout general del panel de administración
-   ----------------------------------------------------------------------------
-   Jael Reyes (Módulo 3, rol especialista CSS).
-   Este archivo importa la hoja global (css/global.css) en cada página y aquí
-   se definen el menú lateral, la barra superior y el layout general del panel.
+/* admin.css — Layout del panel de administración (Módulo 3) */
 
-   El diseño sigue el mockup de la Figura 11: menú vertical visible y el
-   contenido al centro. Usa las variables de color y tipografía de global.css.
-   ========================================================================== */
-
-/* ---------- Barra superior del panel ---------- */
+/* Barra superior */
 .admin-topbar {
   background: var(--color-blanco);
   box-shadow: var(--sombra-suave);
@@ -73,12 +64,11 @@
 
 .admin-btn-ver-tienda {
   font-weight: 700;
-  color: var(--color-texto);
+  color: var(--color-chocolate);
   font-size: 0.85rem;
   padding: 0.4rem 0.85rem;
   border-radius: var(--radio-xl);
   border: 2px solid var(--color-chocolate);
-  color: var(--color-chocolate);
   background: transparent;
   transition: background var(--transicion-rapida), color var(--transicion-rapida);
 }
@@ -93,7 +83,7 @@
   padding: 0.4rem 0.85rem;
 }
 
-/* Botón hamburguesa del menú lateral (solo visible en pantallas angostas) */
+/* Botón hamburguesa (solo visible en pantallas angostas) */
 .admin-toggle {
   display: none;
   flex-direction: column;
@@ -109,7 +99,7 @@
   transition: transform var(--transicion-rapida);
 }
 
-/* ---------- Layout: menú lateral + contenido ---------- */
+/* Layout: menú lateral + contenido */
 .admin-layout {
   max-width: 1400px;
   margin: 0 auto;
@@ -120,7 +110,7 @@
   align-items: start;
 }
 
-/* ---------- Menú lateral ---------- */
+/* Menú lateral */
 .admin-menu {
   background: var(--color-blanco);
   border-radius: var(--radio-lg);
@@ -164,7 +154,7 @@
   padding-top: 0.25rem;
 }
 
-/* ---------- Contenido principal ---------- */
+/* Contenido principal */
 .admin-contenido {
   background: var(--color-blanco);
   border-radius: var(--radio-lg);
@@ -185,7 +175,7 @@
   margin-bottom: var(--espaciado-xl);
 }
 
-/* ---------- Tarjetas del home (Figura 11) ---------- */
+/* Tarjetas del home */
 .admin-tarjetas {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -226,7 +216,7 @@
   margin-top: var(--espaciado-sm);
 }
 
-/* ---------- Acciones superiores (botones de la página) ---------- */
+/* Acciones superiores */
 .admin-acciones {
   display: flex;
   gap: 0.75rem;
@@ -239,7 +229,7 @@
   padding: 0.55rem 1.1rem;
 }
 
-/* ---------- Tablas ---------- */
+/* Tablas */
 .admin-tabla-contenedor {
   overflow-x: auto;
 }
@@ -279,7 +269,7 @@
   display: table-cell;
 }
 
-/* ---------- Thumbnail de producto en la tabla ---------- */
+/* Thumbnail en la tabla */
 .admin-tabla-img {
   width: 48px;
   height: 48px;
@@ -289,7 +279,7 @@
   background: var(--color-crema);
 }
 
-/* ---------- Badges / etiquetas ---------- */
+/* Badges / etiquetas */
 .admin-badge {
   display: inline-block;
   padding: 0.2rem 0.6rem;
@@ -320,7 +310,7 @@
   color: var(--color-chocolate);
 }
 
-/* ---------- Botones de acción en la tabla ---------- */
+/* Botones de acción en la tabla */
 .admin-acciones-fila {
   display: flex;
   gap: 0.35rem;
@@ -369,7 +359,7 @@
   color: var(--color-blanco);
 }
 
-/* ---------- Formularios del panel ---------- */
+/* Formularios del panel */
 .admin-form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -381,7 +371,7 @@
   color: var(--color-error);
 }
 
-/* ---------- Detalle (mostrar) ---------- */
+/* Detalle (mostrar) */
 .admin-detalle {
   display: grid;
   grid-template-columns: minmax(220px, 1fr) 2fr;
@@ -443,7 +433,7 @@
   flex-wrap: wrap;
 }
 
-/* ---------- Alerta de stock crítico ---------- */
+/* Alerta de stock crítico */
 .admin-alerta {
   display: flex;
   gap: 0.5rem;
@@ -470,14 +460,14 @@
   color: inherit;
 }
 
-/* ---------- Estado vacío de las tablas ---------- */
+/* Estado vacío de las tablas */
 .admin-vacio {
   text-align: center;
   padding: var(--espaciado-xl);
   color: var(--color-texto-claro);
 }
 
-/* ---------- Pie del panel ---------- */
+/* Pie del panel */
 .admin-footer {
   margin-top: var(--espaciado-md);
   padding-top: var(--espaciado-lg) !important;
@@ -487,7 +477,7 @@
   padding-bottom: var(--espaciado-lg);
 }
 
-/* ---------- Responsive ---------- */
+/* Responsive */
 @media (max-width: 900px) {
   .admin-layout {
     grid-template-columns: 1fr;
