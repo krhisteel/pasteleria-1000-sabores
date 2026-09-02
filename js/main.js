@@ -17,10 +17,6 @@ function obtenerUsuarioActual() {
   }
 }
 
-function haySesion() {
-  return obtenerUsuarioActual() !== null;
-}
-
 function cerrarSesion() {
   localStorage.removeItem(CLAVE_SESION);
   window.location.href = "index.html";
@@ -34,11 +30,6 @@ function esAdministrador() {
 function esVendedor() {
   const usuario = obtenerUsuarioActual();
   return usuario !== null && usuario.tipo === "Vendedor";
-}
-
-function esCliente() {
-  const usuario = obtenerUsuarioActual();
-  return usuario !== null && usuario.tipo === "Cliente";
 }
 
 function renderizarSesionEnHeader() {
