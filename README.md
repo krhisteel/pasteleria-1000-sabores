@@ -9,8 +9,8 @@ Tienda online desarrollada con HTML5, CSS3 y JavaScript sin frameworks.
 | Nombre | Rol de especialista | Módulo |
 |--------|---------------------|--------|
 | Aileen Oyaneder | Estructura HTML semántica + validaciones JS | Módulo 1 — Contenido y Acceso |
-| Benjamín Riquelme | Lógica de negocio (catálogo y carrito) | Módulo 2 — Compra |
-| Jael Reyes | Hoja de estilos global | Módulo 3 — Administración |
+| Jael Reyes | Lógica de negocio (catálogo y carrito) | Módulo 2 — Compra |
+| Benjamín Riquelme | Hoja de estilos global | Módulo 3 — Administración |
 
 ## Cómo ejecutar
 
