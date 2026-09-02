@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Carrito de compras | Pastelería 1000 Sabores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/carrito.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <header class="site-header">
+    <nav class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="img/logo.png" class="logo-img" alt="Logo de Pastelería Mil Sabores" width="44" height="38">
+        <span class="logo-texto">Pastelería 1000 Sabores</span>
+      </a>
+      <button type="button" class="menu-toggle" id="menuToggle"
+              aria-label="Abrir menú de navegación" aria-controls="navLinks" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="productos.html">Productos</a></li>
+        <li><a href="pedido.html">Mis pedidos</a></li>
+        <li><a href="nosotros.html">Nosotros</a></li>
+        <li><a href="blogs.html">Blog</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+      <div class="nav-acciones">
+        <a href="login.html" class="btn-login">Iniciar Sesión</a>
+        <a href="registro.html" class="btn-registro">Registrarse</a>
+        <div class="carrito-dropdown" id="carritoDropdown">
+          <button type="button" class="btn-carrito" id="btnAbrirCarrito" aria-haspopup="true" aria-expanded="false">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Carrito (<span id="contador-carrito">0</span>)
+          </button>
+          <div class="carrito-panel hidden" id="carritoPanel" aria-label="Panel de carrito y pedidos">
+            <div class="carrito-tabs">
+              <button type="button" class="carrito-tab activo" data-tab="carrito">Carrito</button>
+              <button type="button" class="carrito-tab" data-tab="pedidos">Mis pedidos</button>
+            </div>
+            <div class="carrito-panel-cuerpo">
+              <div class="carrito-tab-contenido" id="panelCarrito"></div>
+              <div class="carrito-tab-contenido hidden" id="panelPedidos"></div>
+            </div>
+            <div class="carrito-panel-footer">
+              <a href="carrito.html" class="ver-todo">Ir al carrito</a>
+              <a href="pedido.html">Ver mis pedidos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="contenido" class="pagina-carrito">
+    <h1 class="seccion-titulo">Carrito de compras</h1>
+
+    <p id="carritoVacio" class="carrito-vacio">
+      Tu carrito está vacío. <a href="productos.html">Ver productos</a>
+    </p>
+
+    <div class="carrito-layout">
+      <section id="carritoLista" class="carrito-lista" aria-label="Productos en el carrito"></section>
+
+      <aside id="resumenCompra" class="resumen" aria-label="Resumen de la compra">
+        <h2>Resumen</h2>
+        <div class="resumen-fila">
+          <span>Subtotal</span>
+          <span id="subtotalCarrito">$0</span>
+        </div>
+        <div class="resumen-fila resumen-total">
+          <span>Total</span>
+          <span id="totalCarrito">$0</span>
+        </div>
+        <button id="btnPagar" class="btn-primary resumen-pagar">Pagar</button>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>Pastelería 1000 Sabores</h3>
+        <p>Cincuenta años de repostería artesanal. Los mejores sabores para los momentos más dulces de tu vida.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="blogs.html">Blog</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <ul>
+          <li>Av. Dulce 123, Santiago</li>
+          <li>+56 9 1234 5678</li>
+          <li>contacto@1000sabores.cl</li>
+          <li>Lun-Dom: 9:00 - 20:00</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Redes Sociales</h4>
+        <div class="redes-sociales">
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en Facebook">Facebook</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en Instagram">Instagram</a>
+          <a href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="Síguenos en TikTok">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p class="newsletter-texto">Suscríbete y entérate de nuestras novedades y promociones.</p>
+        <form class="newsletter-form" id="formNewsletter" novalidate>
+          <div class="campo-grupo">
+            <label class="sr-only" for="correoNewsletter">Correo electrónico para el newsletter</label>
+            <div class="newsletter-fila">
+              <input type="email" id="correoNewsletter" name="correoNewsletter" class="campo newsletter-campo" placeholder="tunombre@duoc.cl" maxlength="100" autocomplete="email" required aria-describedby="error-newsletter">
+              <button type="submit" class="btn-newsletter">Suscribirse</button>
+            </div>
+            <div class="mensaje-error" id="error-newsletter" role="alert" aria-live="polite"></div>
+          </div>
+        </form>
+        <p class="newsletter-exito hidden" id="newsletterExito" role="status">¡Gracias! Ya estás suscrito.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+      <ul class="medios-pago" aria-label="Medios de pago aceptados">
+        <li>Visa</li><li>Mastercard</li><li>American Express</li><li>Webpay</li>
+      </ul>
+    </div>
+  </footer>
+
+  <script src="js/validaciones.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/admin-productos.js"></script>
+  <script src="js/carrito.js"></script>
+</body>
+</html>
