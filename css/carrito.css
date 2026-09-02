@@ -1,0 +1,166 @@
+/* CARRITO.CSS — Módulo 2 (Compra) */
+
+.pagina-carrito {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--espaciado-xl) var(--espaciado-md);
+}
+
+.carrito-vacio {
+  text-align: center;
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-xxl);
+}
+
+.carrito-vacio a {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.carrito-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--espaciado-xl);
+  align-items: start;
+}
+
+.carrito-lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaciado-md);
+}
+
+.carrito-item {
+  display: grid;
+  grid-template-columns: 90px 1fr auto auto auto;
+  gap: var(--espaciado-md);
+  align-items: center;
+  background: var(--color-blanco);
+  border-radius: var(--radio-md);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-md);
+}
+
+.carrito-item-img {
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: var(--radio-sm);
+  background: var(--color-crema);
+}
+
+.carrito-item-info h3 {
+  font-size: 0.95rem;
+  margin-bottom: var(--espaciado-xs);
+}
+
+.carrito-item-cat {
+  color: var(--color-texto-claro);
+  font-size: 0.8rem;
+}
+
+.carrito-item-precio {
+  color: var(--color-texto-claro);
+  font-size: 0.85rem;
+}
+
+.carrito-item-cantidad {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+}
+
+.btn-cantidad {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  font-size: 1.1rem;
+  font-weight: 700;
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.btn-cantidad:hover {
+  background: var(--color-chocolate);
+  color: var(--color-blanco);
+}
+
+.cantidad-valor {
+  font-weight: 700;
+  min-width: 24px;
+  text-align: center;
+}
+
+.carrito-item-subtotal {
+  font-weight: 700;
+  color: var(--color-chocolate);
+  min-width: 90px;
+  text-align: right;
+}
+
+.btn-eliminar {
+  color: var(--color-error);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.resumen {
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-lg);
+  position: sticky;
+  top: 90px;
+}
+
+.resumen h2 {
+  font-size: 1.3rem;
+  margin-bottom: var(--espaciado-md);
+}
+
+.resumen-fila {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--espaciado-sm) 0;
+}
+
+.resumen-total {
+  border-top: 2px solid var(--color-crema);
+  margin-top: var(--espaciado-sm);
+  padding-top: var(--espaciado-md);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-chocolate);
+}
+
+.resumen-pagar {
+  width: 100%;
+  margin-top: var(--espaciado-lg);
+}
+
+/* Nota: el panel de seguimiento de envío vive en su propia página (pedido.html)
+   con su hoja de estilos css/pedido.css. */
+
+@media (max-width: 820px) {
+  .carrito-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .resumen {
+    position: static;
+  }
+
+  .carrito-item {
+    grid-template-columns: 80px 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .carrito-item-cantidad,
+  .carrito-item-subtotal,
+  .btn-eliminar {
+    grid-column: 2;
+  }
+}
