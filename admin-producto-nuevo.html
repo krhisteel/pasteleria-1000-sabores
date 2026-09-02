@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crear un nuevo producto en el panel de administración de Pastelería 1000 Sabores.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Nuevo Producto — Panel de Administración</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="css/admin-productos.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- ==================== Barra superior del panel ==================== -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <button type="button" class="admin-toggle" id="adminToggle"
+              aria-label="Mostrar u ocultar el menú" aria-controls="adminMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="admin-home.html" class="admin-brand">
+        <img src="img/logo.png" class="admin-logo" alt="Logo de Pastelería Mil Sabores" width="30" height="32">
+        <span class="admin-brand-texto">Panel de Administración</span>
+      </a>
+      <div class="admin-topbar-acciones">
+        <span class="admin-usuario" id="adminUsuario" aria-live="polite"></span>
+        <a href="index.html" class="admin-btn-ver-tienda">Ver tienda</a>
+        <button type="button" class="btn-primary btn-salir-panel" id="btnCerrarSesion">Cerrar Sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- ==================== Menú lateral ==================== -->
+    <nav class="admin-menu" id="adminMenu" aria-label="Menú de administración">
+      <ul class="admin-menu-lista">
+        <li><a href="admin-home.html" class="admin-menu-enlace">Inicio</a></li>
+
+        <li class="admin-menu-seccion">Productos</li>
+        <li><a href="admin-productos.html" class="admin-menu-enlace">Listado de Productos</a></li>
+        <li><a href="admin-producto-nuevo.html" class="admin-menu-enlace activo" aria-current="page">Nuevo Producto</a></li>
+
+        <li class="admin-menu-seccion">Usuarios</li>
+        <li><a href="admin-usuarios.html" class="admin-menu-enlace" data-roles="Administrador">Listado de Usuarios</a></li>
+        <li><a href="admin-usuario-nuevo.html" class="admin-menu-enlace" data-roles="Administrador">Nuevo Usuario</a></li>
+
+        <li class="admin-menu-seccion">Tienda</li>
+        <li><a href="index.html" class="admin-menu-enlace">Volver a la tienda</a></li>
+      </ul>
+    </nav>
+
+    <!-- ==================== Contenido ==================== -->
+    <main class="admin-contenido" id="contenido">
+      <header>
+        <h1 id="tituloPagina">Nuevo Producto</h1>
+        <p class="admin-subtitulo">Completa los datos del producto. Los campos con * son obligatorios.</p>
+      </header>
+
+      <div id="avisoProducto" class="aviso-formulario hidden" role="alert" aria-live="assertive"></div>
+
+      <form id="formProducto" novalidate>
+        <p class="form-nota">Los campos marcados con <span class="campo-requerido">*</span> son obligatorios y se validan al escribir.</p>
+
+        <div class="admin-form-grid">
+          <div class="campo-grupo">
+            <label for="codigo">Código del producto <span class="campo-requerido">*</span></label>
+            <input type="text" id="codigo" name="codigo" class="campo"
+                   placeholder="Ej: TC003" minlength="3" maxlength="20" required
+                   autocomplete="off" aria-describedby="ayuda-codigo error-codigo">
+            <small class="campo-ayuda" id="ayuda-codigo">Mínimo 3 caracteres, sin espacios. No puede repetirse.</small>
+            <div class="mensaje-error" id="error-codigo" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="categoriaProducto">Categoría <span class="campo-requerido">*</span></label>
+            <select id="categoriaProducto" name="categoria" class="campo" required
+                    aria-describedby="ayuda-categoria error-categoria">
+              <option value="">Selecciona una categoría</option>
+            </select>
+            <small class="campo-ayuda" id="ayuda-categoria">Categorías del catálogo de la tienda.</small>
+            <div class="mensaje-error" id="error-categoria" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="nombreProducto">Nombre <span class="campo-requerido">*</span></label>
+            <input type="text" id="nombreProducto" name="nombre" class="campo"
+                   placeholder="Ej: Torta Cuadrada de Chocolate" maxlength="100" required
+                   autocomplete="off" aria-describedby="ayuda-nombre error-nombre">
+            <small class="campo-ayuda" id="ayuda-nombre">Nombre visible en la tienda (máx. 100 caracteres).</small>
+            <span class="contador-caracteres" aria-live="polite"></span>
+            <div class="mensaje-error" id="error-nombre" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="precioProducto">Precio (CLP) <span class="campo-requerido">*</span></label>
+            <input type="text" id="precioProducto" name="precio" class="campo"
+                   placeholder="Ej: 45000 o 45000.50" min="0" inputmode="decimal" required
+                   autocomplete="off" aria-describedby="ayuda-precio error-precio">
+            <small class="campo-ayuda" id="ayuda-precio">Mínimo 0 (producto FREE). Acepta decimales.</small>
+            <div class="mensaje-error" id="error-precio" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="stockProducto">Stock <span class="campo-requerido">*</span></label>
+            <input type="text" id="stockProducto" name="stock" class="campo"
+                   placeholder="0" min="0" inputmode="numeric" required
+                   autocomplete="off" aria-describedby="ayuda-stock error-stock">
+            <small class="campo-ayuda" id="ayuda-stock">Cantidad en el inventario. Solo números enteros.</small>
+            <div class="mensaje-error" id="error-stock" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="stockCriticoProducto">Stock crítico</label>
+            <input type="text" id="stockCriticoProducto" name="stockCritico" class="campo"
+                   placeholder="Opcional" min="0" inputmode="numeric"
+                   autocomplete="off" aria-describedby="ayuda-stock-critico error-stock-critico">
+            <small class="campo-ayuda" id="ayuda-stock-critico">Si el stock llega a este valor (o menos) se alerta.</small>
+            <div class="mensaje-error" id="error-stock-critico" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
+            <label for="imagenProducto">Imagen (URL)</label>
+            <input type="url" id="imagenProducto" name="imagen" class="campo"
+                   placeholder="Opcional, ej: img/torta-chocolate.png"
+                   autocomplete="off" aria-describedby="ayuda-imagen error-imagen">
+            <small class="campo-ayuda" id="ayuda-imagen">URL de una imagen, o déjalo vacío.</small>
+            <div class="mensaje-error" id="error-imagen" role="alert" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="admin-form-seccion">
+          <h2>Descripción (opcional)</h2>
+          <div class="campo-grupo">
+            <label for="descripcionProducto">Descripción del producto</label>
+            <textarea id="descripcionProducto" name="descripcion" class="campo" rows="4"
+                      maxlength="500" autocomplete="off"
+                      aria-describedby="ayuda-descripcion error-descripcion"
+                      placeholder="Describe ingredientes y detalles del producto..."></textarea>
+            <small class="campo-ayuda" id="ayuda-descripcion">Máx. 500 caracteres.</small>
+            <span class="contador-caracteres" aria-live="polite"></span>
+            <div class="mensaje-error" id="error-descripcion" role="alert" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <div class="admin-form-acciones">
+          <button type="submit" class="btn-primary">Guardar Producto</button>
+          <a href="admin-productos.html" class="btn-secondary">Cancelar</a>
+        </div>
+      </form>
+    </main>
+  </div>
+
+  <!-- ==================== Pie del panel ==================== -->
+  <footer class="site-footer admin-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>Pastelería 1000 Sabores</h3>
+        <p>Panel de administración de la tienda online.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Accesos</h4>
+        <ul>
+          <li><a href="admin-productos.html">Productos</a></li>
+          <li><a href="admin-usuarios.html">Usuarios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/validaciones.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/admin-productos.js"></script>
+</body>
+</html>

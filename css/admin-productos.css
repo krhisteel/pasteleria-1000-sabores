@@ -1,0 +1,99 @@
+/* ============================================================================
+   ADMIN-PRODUCTOS.CSS — Estilos específicos del mantenedor de productos
+   ----------------------------------------------------------------------------
+   Jael Reyes (Módulo 3).
+   Complementa a css/admin.css (layout del panel). Aquí se estilizan el filtro
+   por categoría, las filas de la tabla según stock, la tarjeta de la imagen y
+   las secciones del formulario nuevo/editar producto.
+   ========================================================================== */
+
+/* ---------- Barra de filtros del listado ---------- */
+.admin-filtro-barra {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--espaciado-lg);
+}
+
+.admin-filtro-barra label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-texto);
+}
+
+.admin-filtro-barra select {
+  flex: 1 1 240px;
+  max-width: 320px;
+}
+
+/* ---------- Fila con stock crítico o agotado ---------- */
+.admin-tabla tr.stock-critico {
+  background: #FDECEA;
+}
+
+.admin-tabla tr.stock-agotado {
+  background: #F5F5F5;
+}
+
+/* ---------- Precio en la tabla ---------- */
+.admin-precio {
+  font-weight: 700;
+  color: var(--color-chocolate);
+  white-space: nowrap;
+}
+
+/* ---------- Imagen placeholder en la tabla ---------- */
+.admin-sin-imagen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radio-sm);
+  border: 1px dashed var(--color-rosa-oscuro);
+  background: var(--color-crema);
+  color: var(--color-texto-claro);
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ---------- Formulario nuevo / editar producto ---------- */
+.admin-form-seccion {
+  border-top: 1px solid rgba(255, 192, 203, 0.5);
+  padding-top: var(--espaciado-md);
+  margin-top: var(--espaciado-md);
+}
+
+.admin-form-seccion h2 {
+  font-size: 1.05rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-md);
+}
+
+.admin-form-acciones {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: var(--espaciado-xl);
+}
+
+/* ---------- Categoría representada como badge ---------- */
+.admin-badge-categoria {
+  background: var(--color-crema);
+  border: 1px solid var(--color-chocolate);
+  color: var(--color-chocolate);
+}
+
+/* ---------- Detalle con stock crítico destacado ---------- */
+.admin-detalle-fila.stock-critico dd {
+  color: var(--color-error);
+}
+
+/* Responsive puntual del filtro */
+@media (max-width: 640px) {
+  .admin-filtro-barra select {
+    max-width: none;
+  }
+}
