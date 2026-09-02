@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panel de administración de Pastelería 1000 Sabores: resumen de la tienda.">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Panel de Administración — Pastelería 1000 Sabores</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Pacifico&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
+
+  <!-- ==================== Barra superior del panel ==================== -->
+  <header class="admin-topbar">
+    <div class="admin-topbar-inner">
+      <button type="button" class="admin-toggle" id="adminToggle"
+              aria-label="Mostrar u ocultar el menú" aria-controls="adminMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="admin-home.html" class="admin-brand">
+        <img src="img/logo.png" class="admin-logo" alt="Logo de Pastelería Mil Sabores" width="30" height="32">
+        <span class="admin-brand-texto">Panel de Administración</span>
+      </a>
+      <div class="admin-topbar-acciones">
+        <span class="admin-usuario" id="adminUsuario" aria-live="polite"></span>
+        <a href="index.html" class="admin-btn-ver-tienda">Ver tienda</a>
+        <button type="button" class="btn-primary btn-salir-panel" id="btnCerrarSesion">Cerrar Sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="admin-layout">
+    <!-- ==================== Menú lateral ==================== -->
+    <nav class="admin-menu" id="adminMenu" aria-label="Menú de administración">
+      <ul class="admin-menu-lista">
+        <li><a href="admin-home.html" class="admin-menu-enlace activo" aria-current="page">Inicio</a></li>
+
+        <li class="admin-menu-seccion">Productos</li>
+        <li><a href="admin-productos.html" class="admin-menu-enlace" data-roles="Administrador,Vendedor">Listado de Productos</a></li>
+        <li><a href="admin-producto-nuevo.html" class="admin-menu-enlace" data-roles="Administrador">Nuevo Producto</a></li>
+
+        <li class="admin-menu-seccion">Usuarios</li>
+        <li><a href="admin-usuarios.html" class="admin-menu-enlace" data-roles="Administrador">Listado de Usuarios</a></li>
+        <li><a href="admin-usuario-nuevo.html" class="admin-menu-enlace" data-roles="Administrador">Nuevo Usuario</a></li>
+
+        <li class="admin-menu-seccion">Tienda</li>
+        <li><a href="index.html" class="admin-menu-enlace">Volver a la tienda</a></li>
+      </ul>
+    </nav>
+
+    <!-- ==================== Contenido ==================== -->
+    <main class="admin-contenido" id="contenido">
+      <header>
+        <h1>Bienvenido al Panel</h1>
+        <p class="admin-subtitulo">Gestiona los productos y usuarios de Pastelería 1000 Sabores.</p>
+      </header>
+
+      <section class="admin-tarjetas" aria-label="Resumen de la tienda" id="tarjetasResumen">
+        <article class="admin-tarjeta">
+          <h2 class="admin-tarjeta-titulo">Productos</h2>
+          <p class="admin-tarjeta-valor" id="totalProductos">0</p>
+          <p class="admin-tarjeta-descripcion">Total en el catálogo</p>
+        </article>
+        <article class="admin-tarjeta">
+          <h2 class="admin-tarjeta-titulo">Unidades en stock</h2>
+          <p class="admin-tarjeta-valor" id="totalStock">0</p>
+          <p class="admin-tarjeta-descripcion">Suma de todo el inventario</p>
+        </article>
+        <article class="admin-tarjeta">
+          <h2 class="admin-tarjeta-titulo">Stock crítico</h2>
+          <p class="admin-tarjeta-valor critico" id="totalCritico">0</p>
+          <p class="admin-tarjeta-descripcion">Productos bajo su stock crítico</p>
+        </article>
+        <article class="admin-tarjeta">
+          <h2 class="admin-tarjeta-titulo">Usuarios</h2>
+          <p class="admin-tarjeta-valor" id="totalUsuarios">0</p>
+          <p class="admin-tarjeta-descripcion">Registrados en el sistema</p>
+        </article>
+      </section>
+
+      <section aria-labelledby="tituloAccesos">
+        <h2 id="tituloAccesos">Accesos rápidos</h2>
+        <div class="admin-acciones">
+          <a href="admin-productos.html" class="btn-secondary" data-roles="Administrador,Vendedor">Ver productos</a>
+          <a href="admin-producto-nuevo.html" class="btn-secondary" data-roles="Administrador">Nuevo producto</a>
+          <a href="admin-usuarios.html" class="btn-secondary" data-roles="Administrador">Ver usuarios</a>
+          <a href="admin-usuario-nuevo.html" class="btn-secondary" data-roles="Administrador">Nuevo usuario</a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==================== Pie del panel ==================== -->
+  <footer class="site-footer admin-footer">
+    <div class="footer-contenido">
+      <div class="footer-col">
+        <h3>Pastelería 1000 Sabores</h3>
+        <p>Panel de administración de la tienda online.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Accesos</h4>
+        <ul>
+          <li><a href="admin-productos.html">Productos</a></li>
+          <li><a href="admin-usuarios.html">Usuarios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Tienda</h4>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Pastelería 1000 Sabores. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/admin-productos.js"></script>
+  <script src="js/admin-usuarios.js"></script>
+</body>
+</html>

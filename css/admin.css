@@ -1,0 +1,532 @@
+/* ============================================================================
+   ADMIN.CSS — Layout general del panel de administración
+   ----------------------------------------------------------------------------
+   Jael Reyes (Módulo 3, rol especialista CSS).
+   Este archivo importa la hoja global (css/global.css) en cada página y aquí
+   se definen el menú lateral, la barra superior y el layout general del panel.
+
+   El diseño sigue el mockup de la Figura 11: menú vertical visible y el
+   contenido al centro. Usa las variables de color y tipografía de global.css.
+   ========================================================================== */
+
+/* ---------- Barra superior del panel ---------- */
+.admin-topbar {
+  background: var(--color-blanco);
+  box-shadow: var(--sombra-suave);
+  position: sticky;
+  top: 0;
+  z-index: 900;
+}
+
+.admin-topbar-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-titulo);
+  font-size: 1.15rem;
+  color: var(--color-chocolate);
+}
+
+.admin-logo {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.admin-topbar-acciones {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-usuario {
+  font-weight: 700;
+  color: var(--color-texto);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-usuario-rol {
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio-xl);
+}
+
+.admin-btn-ver-tienda {
+  font-weight: 700;
+  color: var(--color-texto);
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radio-xl);
+  border: 2px solid var(--color-chocolate);
+  color: var(--color-chocolate);
+  background: transparent;
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.admin-btn-ver-tienda:hover {
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+}
+
+.btn-salir-panel {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.85rem;
+}
+
+/* Botón hamburguesa del menú lateral (solo visible en pantallas angostas) */
+.admin-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+}
+
+.admin-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--color-chocolate);
+  border-radius: 2px;
+  transition: transform var(--transicion-rapida);
+}
+
+/* ---------- Layout: menú lateral + contenido ---------- */
+.admin-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* ---------- Menú lateral ---------- */
+.admin-menu {
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: 1rem 0.75rem;
+  position: sticky;
+  top: 84px;
+}
+
+.admin-menu-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.admin-menu-seccion {
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-texto-claro);
+  padding: 0.75rem 0.75rem 0.25rem;
+}
+
+.admin-menu-enlace {
+  display: block;
+  padding: 0.6rem 0.75rem;
+  border-radius: var(--radio-md);
+  font-weight: 600;
+  color: var(--color-texto);
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.admin-menu-enlace:hover,
+.admin-menu-enlace.activo {
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+}
+
+.admin-menu-seccion:first-child {
+  padding-top: 0.25rem;
+}
+
+/* ---------- Contenido principal ---------- */
+.admin-contenido {
+  background: var(--color-blanco);
+  border-radius: var(--radio-lg);
+  box-shadow: var(--sombra-suave);
+  padding: var(--espaciado-xl);
+  min-width: 0;
+}
+
+.admin-contenido h1 {
+  font-family: var(--font-titulo);
+  font-size: 2rem;
+  color: var(--color-chocolate);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.admin-contenido .admin-subtitulo {
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-xl);
+}
+
+/* ---------- Tarjetas del home (Figura 11) ---------- */
+.admin-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--espaciado-md);
+  margin-bottom: var(--espaciado-xl);
+}
+
+.admin-tarjeta {
+  background: var(--color-crema);
+  border: 2px solid var(--color-rosa);
+  border-radius: var(--radio-md);
+  padding: var(--espaciado-md);
+}
+
+.admin-tarjeta-titulo {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-texto-claro);
+  margin-bottom: var(--espaciado-sm);
+}
+
+.admin-tarjeta-valor {
+  font-family: var(--font-titulo);
+  font-size: 1.9rem;
+  color: var(--color-chocolate);
+  line-height: 1.1;
+}
+
+.admin-tarjeta-valor.critico {
+  color: var(--color-error);
+}
+
+.admin-tarjeta-descripcion {
+  font-size: 0.8rem;
+  color: var(--color-texto-claro);
+  margin-top: var(--espaciado-sm);
+}
+
+/* ---------- Acciones superiores (botones de la página) ---------- */
+.admin-acciones {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: var(--espaciado-lg);
+}
+
+.admin-acciones .btn-secondary {
+  padding: 0.55rem 1.1rem;
+}
+
+/* ---------- Tablas ---------- */
+.admin-tabla-contenedor {
+  overflow-x: auto;
+}
+
+.admin-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.admin-tabla thead {
+  background: var(--color-crema);
+}
+
+.admin-tabla th {
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  color: var(--color-chocolate);
+  font-weight: 900;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 2px solid var(--color-rosa);
+}
+
+.admin-tabla td {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid rgba(255, 192, 203, 0.35);
+  vertical-align: middle;
+}
+
+.admin-tabla tbody tr:hover {
+  background: rgba(255, 245, 225, 0.6);
+}
+
+.admin-tabla .oculto-movil {
+  display: table-cell;
+}
+
+/* ---------- Thumbnail de producto en la tabla ---------- */
+.admin-tabla-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--radio-sm);
+  border: 1px solid var(--color-rosa);
+  background: var(--color-crema);
+}
+
+/* ---------- Badges / etiquetas ---------- */
+.admin-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radio-xl);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.admin-badge-stock {
+  background: var(--color-exito);
+  color: var(--color-blanco);
+}
+
+.admin-badge-stock-critico {
+  background: var(--color-error);
+  color: var(--color-blanco);
+}
+
+.admin-badge-stock-agotado {
+  background: #6D6D6D;
+  color: var(--color-blanco);
+}
+
+.admin-badge-rol {
+  background: var(--color-rosa);
+  color: var(--color-chocolate);
+}
+
+/* ---------- Botones de acción en la tabla ---------- */
+.admin-acciones-fila {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.btn-accion {
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radio-sm);
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  transition: background var(--transicion-rapida), color var(--transicion-rapida);
+}
+
+.btn-ver {
+  background: var(--color-crema);
+  border-color: var(--color-chocolate);
+  color: var(--color-chocolate);
+}
+
+.btn-ver:hover {
+  background: var(--color-chocolate);
+  color: var(--color-crema);
+}
+
+.btn-editar {
+  background: var(--color-chocolate);
+  color: var(--color-blanco);
+}
+
+.btn-editar:hover {
+  background: var(--color-chocolate-claro);
+}
+
+.btn-eliminar {
+  background: #FDECEA;
+  border-color: var(--color-error);
+  color: #8B2C22;
+}
+
+.btn-eliminar:hover {
+  background: var(--color-error);
+  color: var(--color-blanco);
+}
+
+/* ---------- Formularios del panel ---------- */
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--espaciado-md);
+  margin-top: var(--espaciado-sm);
+}
+
+.campo-grupo span.campo-requerido {
+  color: var(--color-error);
+}
+
+/* ---------- Detalle (mostrar) ---------- */
+.admin-detalle {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) 2fr;
+  gap: var(--espaciado-lg);
+  align-items: start;
+}
+
+.admin-detalle-imagen {
+  border-radius: var(--radio-lg);
+  overflow: hidden;
+  border: 2px solid var(--color-rosa);
+  background: var(--color-crema);
+}
+
+.admin-detalle-imagen img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.admin-detalle-lista {
+  display: grid;
+  gap: var(--espaciado-md);
+}
+
+.admin-detalle-fila {
+  border-bottom: 1px solid rgba(255, 192, 203, 0.35);
+  padding-bottom: var(--espaciado-sm);
+}
+
+.admin-detalle-fila dt {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-texto-claro);
+  margin-bottom: 0.15rem;
+}
+
+.admin-detalle-fila dd {
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+.admin-detalle-acciones {
+  margin-top: var(--espaciado-lg);
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- Alerta de stock crítico ---------- */
+.admin-alerta {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  background: #FDECEA;
+  border-left: 4px solid var(--color-error);
+  color: #8B2C22;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radio-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--espaciado-md);
+}
+
+.admin-alerta ol,
+.admin-alerta ul {
+  list-style: disc;
+  padding-left: 1.1rem;
+  margin-top: 0.25rem;
+}
+
+.admin-alerta a {
+  text-decoration: underline;
+  color: inherit;
+}
+
+/* ---------- Estado vacío de las tablas ---------- */
+.admin-vacio {
+  text-align: center;
+  padding: var(--espaciado-xl);
+  color: var(--color-texto-claro);
+}
+
+/* ---------- Pie del panel ---------- */
+.admin-footer {
+  margin-top: var(--espaciado-md);
+  padding-top: var(--espaciado-lg) !important;
+}
+
+.admin-footer .footer-contenido {
+  padding-bottom: var(--espaciado-lg);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .admin-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-menu {
+    position: static;
+    display: none;
+  }
+
+  .admin-menu.activo {
+    display: block;
+  }
+
+  .admin-toggle {
+    display: flex;
+  }
+
+  .admin-contenido {
+    padding: var(--espaciado-md);
+  }
+
+  .admin-detalle {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-topbar-inner {
+    flex-wrap: wrap;
+    padding: 0.6rem 1rem;
+  }
+
+  .admin-topbar-acciones {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .admin-brand-texto {
+    font-size: 0.95rem;
+  }
+
+  .admin-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-usuario {
+    font-size: 0.8rem;
+  }
+
+  .admin-tabla .oculto-movil {
+    display: none;
+  }
+}
