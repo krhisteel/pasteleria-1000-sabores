@@ -86,6 +86,41 @@
   color: var(--color-chocolate);
 }
 
+/* ---------- Encabezados ordenables de la tabla ---------- */
+.admin-col-orden {
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.admin-col-orden:hover,
+.admin-col-orden:focus-visible,
+.admin-col-orden.activo {
+  color: var(--color-chocolate);
+  text-decoration: underline;
+}
+
+.admin-col-orden:focus-visible {
+  outline: 2px solid var(--color-chocolate);
+  outline-offset: 2px;
+}
+
+.admin-col-orden .admin-flecha {
+  display: inline-block;
+  margin-left: 0.3em;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  vertical-align: middle;
+}
+
+.admin-col-orden .admin-flecha.up {
+  border-bottom: 7px solid var(--color-chocolate);
+}
+
+.admin-col-orden .admin-flecha.down {
+  border-top: 7px solid var(--color-chocolate);
+}
+
 /* Descripción destacando el estado crítico/agotado en el detalle */
 .admin-detalle-fila.stock-critico dd {
   color: var(--color-error);

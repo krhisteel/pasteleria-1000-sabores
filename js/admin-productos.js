@@ -153,6 +153,63 @@ function esStockAgotado(producto) {
   return Number(producto.stock) === 0;
 }
 
+/* ---------- Ordenamiento del listado ---------- */
+let ordenProductos = { campo: null, direccion: 1 };
+
+/**
+ * Devuelve una copia de los productos ordenados según el estado actual.
+ * El primer clic ordena ascendente; el siguiente en la misma columna invierte.
+ * @param {Array<object>} lista
+ * @returns {Array<object>}
+ */
+function ordenarProductos(lista) {
+  const campo = ordenProductos.campo;
+  if (!campo) return lista;
+
+  const dir = ordenProductos.direccion;
+  return lista.slice().sort(function (a, b) {
+    if (campo === "precio" || campo === "stock") {
+      const av = Number(a[campo]) || 0;
+      const bv = Number(b[campo]) || 0;
+      return (av - bv) * dir;
+    }
+    if (campo === "estado") {
+      const av = rangoEstado(a);
+      const bv = rangoEstado(b);
+      return (av - bv) * dir;
+    }
+    const av = String(a[campo] || "").toLowerCase();
+    const bv = String(b[campo] || "").toLowerCase();
+    return av.localeCompare(bv, "es") * dir;
+  });
+}
+
+/**
+ * Orden lógico de los estados: Agotado (0), Stock crítico (1), Disponible (2).
+ * @param {object} producto
+ * @returns {number}
+ */
+function rangoEstado(producto) {
+  if (esStockAgotado(producto)) return 0;
+  if (esStockCritico(producto)) return 1;
+  return 2;
+}
+
+/**
+ * Devuelve el HTML de una columna ordenable del encabezado.
+ * @param {string} texto - Etiqueta visible
+ * @param {string} campo - Campo de orden ("codigo", "nombre", ...)
+ * @param {string} [clase] - Clase extra (ej: "oculto-movil")
+ * @returns {string} HTML del <th>
+ */
+function thOrdenable(texto, campo, clase) {
+  const activo = ordenProductos.campo === campo;
+  const flecha = activo ? (ordenProductos.direccion === 1 ? ' <span class="admin-flecha up"></span>' : ' <span class="admin-flecha down"></span>') : "";
+  const ariaSort = activo ? (ordenProductos.direccion === 1 ? "ascending" : "descending") : "none";
+  const clases = ["admin-col-orden"].concat(clase ? [clase] : []).join(" ");
+  return '<th scope="col" class="' + clases + '" data-orden="' + campo + '" tabindex="0" role="button" aria-sort="' + ariaSort + '">' + texto + flecha + '</th>';
+}
+
 /* ============================================================================
    LISTADO (admin-productos.html)
    ========================================================================== */
@@ -226,16 +283,18 @@ function renderListadoProductos(productos, contenedorId) {
   let html = '<div class="admin-tabla-contenedor"><table class="admin-tabla">';
   html += "<thead><tr>";
   html += "<th scope=\"col\">Imagen</th>";
-  html += "<th scope=\"col\">Código</th>";
-  html += "<th scope=\"col\">Nombre</th>";
-  html += "<th scope=\"col\" class=\"oculto-movil\">Categoría</th>";
-  html += "<th scope=\"col\">Precio</th>";
-  html += "<th scope=\"col\">Stock</th>";
-  html += "<th scope=\"col\">Estado</th>";
+  html += thOrdenable("Código", "codigo");
+  html += thOrdenable("Nombre", "nombre");
+  html += thOrdenable("Categoría", "categoria", "oculto-movil");
+  html += thOrdenable("Precio", "precio");
+  html += thOrdenable("Stock", "stock");
+  html += thOrdenable("Estado", "estado");
   html += "<th scope=\"col\">Acciones</th>";
   html += "</tr></thead><tbody>";
 
-  productos.forEach(function (producto) {
+  const productosOrdenados = ordenarProductos(productos);
+
+  productosOrdenados.forEach(function (producto) {
     let filaClase = "";
     if (esStockAgotado(producto)) filaClase = "stock-agotado";
     else if (esStockCritico(producto)) filaClase = "stock-critico";
@@ -265,6 +324,30 @@ function renderListadoProductos(productos, contenedorId) {
 
   html += "</tbody></table></div>";
   contenedor.innerHTML = html;
+
+  // Ordenar al hacer clic en los encabezados ordenables
+  contenedor.querySelectorAll("th[data-orden]").forEach(function (th) {
+    function cambiarOrden() {
+      const campo = th.getAttribute("data-orden");
+      if (ordenProductos.campo === campo) {
+        ordenProductos.direccion = ordenProductos.direccion === 1 ? -1 : 1;
+      } else {
+        ordenProductos.campo = campo;
+        ordenProductos.direccion = 1;
+      }
+      aplicarFiltrosProductos(
+        document.getElementById("filtroCategoria"),
+        document.getElementById("buscadorProducto")
+      );
+    }
+    th.addEventListener("click", cambiarOrden);
+    th.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        cambiarOrden();
+      }
+    });
+  });
 
   // Conectar los botones "Eliminar" (solo los crea si hay sesión de admin)
   contenedor.querySelectorAll("[data-eliminar]").forEach(function (boton) {
