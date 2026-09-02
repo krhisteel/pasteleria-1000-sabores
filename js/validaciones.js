@@ -1,6 +1,6 @@
 /* ============================================================================
    VALIDACIONES REUTILIZABLES
-   ----------------------------------------------------------------------------
+   ------
    Archivo especialista creado por Aileen Oyaneder (Módulo 1).
    Utilizado por:
      - Aileen Oyaneder: js/registro.js, js/contacto.js, js/login.js
@@ -14,7 +14,7 @@
 
 "use strict";
 
-/* ---------- Reglas de negocio centralizadas ---------- */
+/*  Reglas de negocio centralizadas  */
 
 /** Dominios de correo autorizados por el enunciado. */
 const DOMINIOS_PERMITIDOS = ["duoc.cl", "profesor.duoc.cl", "gmail.com"];
@@ -34,7 +34,7 @@ const LARGOS = {
   password: 10
 };
 
-/* ---------- Validaciones de datos ---------- */
+/*  Validaciones de datos  */
 
 /**
  * Quita puntos, guiones y espacios de un RUN para poder compararlo.
@@ -183,7 +183,7 @@ function validarLargoMinimo(valor, minimo) {
   return String(valor == null ? "" : valor).trim().length >= minimo;
 }
 
-/* ---------- Mensajes de error y sugerencias en pantalla ---------- */
+/*  Mensajes de error y sugerencias en pantalla  */
 
 /**
  * Busca el contenedor de error que ya existe en el HTML del campo.
