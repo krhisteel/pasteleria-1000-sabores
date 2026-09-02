@@ -49,20 +49,35 @@ pasteleria mil sabores/
 ├── contacto.html           Formulario de contacto validado
 ├── registro.html           Registro de usuario validado
 ├── login.html              Inicio de sesión validado
+├── admin-home.html         Panel: portada con resumen (Jael Reyes)
+├── admin-productos.html    Panel: listado de productos (Jael Reyes)
+├── admin-producto-nuevo.html   Panel: crear producto (Jael Reyes)
+├── admin-producto-editar.html  Panel: editar producto (Jael Reyes)
+├── admin-producto-mostrar.html Panel: detalle de producto (Jael Reyes)
+├── admin-usuarios.html     Panel: listado de usuarios (Jael Reyes)
+├── admin-usuario-nuevo.html    Panel: crear usuario (Jael Reyes)
+├── admin-usuario-editar.html   Panel: editar usuario (Jael Reyes)
+├── admin-usuario-mostrar.html  Panel: detalle de usuario (Jael Reyes)
 ├── css/
 │   ├── global.css          Variables, reset, header, footer y utilidades (Jael Reyes)
 │   ├── home.css            Estilos de index.html
 │   ├── nosotros.css        Estilos de nosotros.html
 │   ├── blogs.css           Estilos de blogs.html y de los detalles
 │   ├── contacto.css        Estilos de contacto.html
-│   └── auth.css            Estilos de registro.html y login.html
+│   ├── auth.css            Estilos de registro.html y login.html
+│   ├── admin.css           Panel: layout general y menú lateral (Jael Reyes)
+│   ├── admin-productos.css Panel: mantenedor de productos (Jael Reyes)
+│   └── admin-usuarios.css  Panel: mantenedor de usuarios (Jael Reyes)
 ├── js/
 │   ├── main.js             Menú responsive, sesión de usuario y contador de carrito
 │   ├── validaciones.js     Funciones de validación reutilizables (Aileen Oyaneder)
 │   ├── contacto.js         Validación del formulario de contacto
 │   ├── registro.js         Validación del registro y cálculo de beneficios
 │   ├── login.js            Validación del login y guardado de la sesión
-│   └── regiones-comunas.js Arreglo de regiones y comunas (Jael Reyes)
+│   ├── regiones-comunas.js Arreglo de regiones y comunas (Jael Reyes)
+│   ├── admin.js            Panel: protección por rol, menú y portada (Jael Reyes)
+│   ├── admin-productos.js  Panel: CRUD de productos + validaciones (Jael Reyes)
+│   └── admin-usuarios.js   Panel: CRUD de usuarios + validaciones (Jael Reyes)
 ├── img/                    Imágenes propias del proyecto
 └── README.md
 ```
@@ -130,6 +145,71 @@ completa el formulario:
 - 50% de descuento de por vida para personas de 50 años o más.
 - 10% de descuento de por vida con el código promocional `FELICES50`.
 - Torta gratis de cumpleaños para correos de la comunidad Duoc.
+
+## Módulo 3 — Administración
+
+### Panel de administración
+
+Nueve páginas protegidas (`admin-*.html`) con un menú lateral visible y
+contenido al centro, según el mockup (Figura 11). Comparten su propio layout
+en `css/admin.css` e importan `css/global.css` (variables, tipografías y
+botones de la marca).
+
+| Vista | Archivo |
+|-------|---------|
+| Portada | `admin-home.html` |
+| Productos (listado, nuevo, editar, detalle) | `admin-productos.html`, `admin-producto-nuevo.html`, `admin-producto-editar.html`, `admin-producto-mostrar.html` |
+| Usuarios (listado, nuevo, editar, detalle) | `admin-usuarios.html`, `admin-usuario-nuevo.html`, `admin-usuario-editar.html`, `admin-usuario-mostrar.html` |
+
+### Permisos por rol
+
+`js/admin.js` se carga en todas las páginas del panel y, usando la sesión que
+guarda Aileen en `localStorage` (clave `usuarioActivo`):
+
+- Sin sesión iniciada, redirige a `login.html`.
+- Con sesión de **Cliente**, redirige a `index.html` (el cliente solo usa la tienda).
+- El menú se filtra con `data-roles` en cada enlace: el **Vendedor** solo ve
+  Productos (listado y detalle); el **Administrador** ve todo.
+- Además, `admin-usuarios.js` y `admin-productos.js` vuelven a validar el rol
+  en cada página, por si se accede directo por URL.
+
+### CRUD de productos (`js/admin-productos.js`)
+
+CRUD simulado sobre la clave `productos` de `localStorage`. Si la clave no
+existe, se siembran los 16 productos del caso (códigos TC001...TE002). Reglas
+validadas en tiempo real:
+
+| Campo | Regla |
+|-------|-------|
+| Código | Requerido, texto, mín. 3, sin espacios, no repetible |
+| Nombre | Requerido, máx. 100 |
+| Descripción | Opcional, máx. 500 |
+| Precio | Requerido, mín. 0, decimales permitidos |
+| Stock | Requerido, mín. 0, solo enteros |
+| Stock crítico | Opcional, mín. 0, enteros; alerta cuando stock ≤ crítico |
+| Categoría | Requerida (select con las 8 categorías del caso) |
+| Imagen | Opcional (URL) |
+
+### CRUD de usuarios (`js/admin-usuarios.js`)
+
+CRUD simulado sobre la clave `usuarios` de `localStorage` (la misma que usa el
+registro del Módulo 1). Reutiliza `js/validaciones.js` de Aileen y
+`js/regiones-comunas.js`:
+
+| Campo | Regla |
+|-------|-------|
+| RUN | Requerido, DV válido, sin puntos ni guion, 7-9 caracteres |
+| Nombre | Requerido, máx. 50 |
+| Apellidos | Requerido, máx. 100 |
+| Correo | Requerido, máx. 100, solo `@duoc.cl`, `@profesor.duoc.cl` y `@gmail.com` |
+| Fecha nacimiento | Opcional, no futura |
+| Tipo de usuario | Select: Administrador, Cliente, Vendedor |
+| Región / Comuna | Requeridas; las comunas se cargan según la región |
+| Dirección | Requerida, máx. 300 |
+| Contraseña | Requerida (nuevo) / opcional (editar), 4-10 caracteres |
+
+No se permite eliminar el usuario con la sesión activa. Los usuarios creados
+aquí pueden iniciar sesión en la tienda porque comparten la clave `usuarios`.
 
 ## Cómo trabajar en equipo
 
@@ -233,16 +313,23 @@ Claves compartidas en `localStorage`:
 | `usuarios` | Aileen Oyaneder (`registro.js`) | Aileen Oyaneder (`login.js`), Jael Reyes (`admin-usuarios.js`) |
 | `usuarioActivo` | Aileen Oyaneder (`login.js`) | Aileen Oyaneder (`main.js`), Jael Reyes (panel admin) |
 | `carrito` | Benjamín Riquelme (`carrito.js`) | Aileen Oyaneder (`main.js`, contador del header) |
+| `productos` | Jael Reyes (`admin-productos.js`) | Benjamín Riquelme (`productos-data.js`, catálogo) |
 
 Funciones globales expuestas por `js/main.js` para el resto del equipo:
 `obtenerUsuarioActual()`, `haySesion()`, `cerrarSesion()`, `esAdministrador()`,
 `esVendedor()`, `esCliente()` y `actualizarContadorCarrito()`.
 
+Funciones globales expuestas por `js/validaciones.js` (integradas en el panel):
+`validarRun()`, `validarCorreo()`, `validarPassword()`, `validarNoVacio()`,
+`validarLargoMinimo()`, `validarLargoMaximo()`, `mostrarError()`,
+`marcarValido()`, `limpiarEstado()` y `conectarContador()`.
+
 ## Pendiente de otros módulos
 
 Los enlaces `productos.html`, `producto-detalle.html` y `carrito.html` ya están
-en la navegación de las 8 páginas, pero esas vistas corresponden al Módulo 2.
-El panel `admin-*.html` corresponde al Módulo 3.
+en la navegación de las 8 páginas, pero esas vistas corresponden al Módulo 2
+(Benjamín). El catálogo de esas páginas debe leer la clave `productos` de
+`localStorage` que ya siembra el panel.
 
 ## Tecnologías
 
