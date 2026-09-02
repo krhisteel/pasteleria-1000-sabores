@@ -1,10 +1,30 @@
-// admin-productos.js — CRUD de productos con ordenamiento
+/* ============================================================================
+   ADMIN-PRODUCTOS.JS — Mantenedor de productos (CRUD simulado)
+   ----------------------------------------------------------------------------
+   Jael Reyes (Módulo 3). Usa js/validaciones.js (Aileen Oyaneder) y las
+   funciones de sesión de js/main.js.
+
+   Reglas de negocio del Anexo 1 (productos):
+     - Código: requerido, texto, mínimo 3 caracteres, sin límite máximo.
+     - Nombre: requerido, máximo 100 caracteres.
+     - Descripción: opcional, máximo 500 caracteres.
+     - Precio: requerido, mínimo 0 (FREE), decimales permitidos.
+     - Stock: requerido, mínimo 0, solo números enteros.
+     - Stock crítico: opcional, mínimo 0, solo números enteros. Alerta cuando
+       el stock es igual o inferior al crítico.
+     - Categoría: requerida (select con las categorías del caso).
+     - Imagen: opcional.
+
+   Persistencia: localStorage con la clave "productos" (nuevo acuerdo de
+   integración del equipo: la lee también el catálogo de la tienda).
+   ========================================================================== */
+
 "use strict";
 
-// Clave de integración en localStorage (la lee la tienda también)
+/* ---------- Clave de integración en localStorage ---------- */
 const CLAVE_PRODUCTOS = "productos";
 
-// Categorías del caso (Forma C)
+/* ---------- Categorías del caso (FORMA C) ---------- */
 const CATEGORIAS_PRODUCTOS = [
   "Tortas Cuadradas",
   "Tortas Circulares",
@@ -16,14 +36,16 @@ const CATEGORIAS_PRODUCTOS = [
   "Tortas Especiales"
 ];
 
-// Límites de validación (sin máximo para código según anexo)
+/* ---------- Límites de validación ---------- */
 const PRODUCTO_LIMITES = {
   codigo: 3,
   nombre: 100,
   descripcion: 500
 };
 
-// 16 productos del caso. Se siembran solo la primera vez.
+/* ---------- Catálogo inicial (16 productos del caso Forma C) ----------
+   Códigos, categorías, nombres y precios tomados textualmente del Anexo 1.
+   Se siembran en localStorage solo la primera vez que se abre el panel.    */
 const PRODUCTOS_INICIALES = [
   { codigo: "TC001", categoria: "Tortas Cuadradas", nombre: "Torta Cuadrada de Chocolate", descripcion: "Deliciosa torta de chocolate con capas de ganache y un toque de avellanas. Personalizable con mensajes especiales.", precio: 45000, stock: 25, stockCritico: 6, imagen: "img/productos/TC001.jpg" },
   { codigo: "TC002", categoria: "Tortas Cuadradas", nombre: "Torta Cuadrada de Frutas", descripcion: "Una mezcla de frutas frescas y crema chantilly sobre un suave bizcocho de vainilla, ideal para celebraciones.", precio: 50000, stock: 4, stockCritico: 6, imagen: "img/productos/TC002.jpg" },
@@ -43,20 +65,28 @@ const PRODUCTOS_INICIALES = [
   { codigo: "TE002", categoria: "Tortas Especiales", nombre: "Torta Especial de Boda", descripcion: "Elegante y deliciosa, esta torta está diseñada para ser el centro de atención en cualquier boda.", precio: 60000, stock: 9, stockCritico: 5, imagen: "img/productos/TE002.jpg" }
 ];
 
-// --- Acceso a los datos ---
+/* ============================================================================
+   ACCESO A LOS DATOS
+   ========================================================================== */
 
-// Siembra productos demo solo si la clave no existe en localStorage
+/**
+ * Siembra el catálogo inicial en localStorage solo si la clave "productos"
+ * aún no existe (no se vuelve a sembrar si el usuario eliminó todo).
+ */
 function sembrarProductosDemo() {
   try {
     if (localStorage.getItem(CLAVE_PRODUCTOS) === null) {
       localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(PRODUCTOS_INICIALES));
     }
   } catch (e) {
-    // Navegador bloquea localStorage: se trabaja solo en memoria
+    // Si el navegador bloquea localStorage, se trabaja solo en memoria
   }
 }
 
-// Devuelve el arreglo de productos de localStorage
+/**
+ * Devuelve el arreglo de productos guardado en localStorage.
+ * @returns {Array<object>}
+ */
 function obtenerProductos() {
   sembrarProductosDemo();
   try {
@@ -66,7 +96,11 @@ function obtenerProductos() {
   }
 }
 
-// Guarda el arreglo completo de productos
+/**
+ * Guarda el arreglo completo de productos en localStorage.
+ * @param {Array<object>} productos
+ * @returns {boolean} true si se guardó
+ */
 function guardarProductos(productos) {
   try {
     localStorage.setItem(CLAVE_PRODUCTOS, JSON.stringify(productos));
@@ -76,7 +110,11 @@ function guardarProductos(productos) {
   }
 }
 
-// Busca un producto por código (case-insensitive)
+/**
+ * Busca un producto por su código.
+ * @param {string} codigo
+ * @returns {object|null}
+ */
 function buscarProducto(codigo) {
   const productos = obtenerProductos();
   return productos.find(function (p) {
@@ -84,12 +122,20 @@ function buscarProducto(codigo) {
   }) || null;
 }
 
-// Formatea un precio como CLP
+/**
+ * Formatea un precio como moneda chilena (CLP).
+ * @param {number} precio
+ * @returns {string}
+ */
 function formatearPrecio(precio) {
   return "$" + Number(precio || 0).toLocaleString("es-CL");
 }
 
-// Indica si el stock es igual o menor al crítico
+/**
+ * Indica si un producto tiene stock crítico (stock igual o menor al crítico).
+ * @param {object} producto
+ * @returns {boolean}
+ */
 function esStockCritico(producto) {
   const stock = Number(producto.stock) || 0;
   const critico = (producto.stockCritico !== undefined && producto.stockCritico !== "" && producto.stockCritico !== null)
@@ -98,16 +144,24 @@ function esStockCritico(producto) {
   return critico > 0 && stock <= critico;
 }
 
-// Indica si el producto está agotado (stock 0)
+/**
+ * Indica si un producto está agotado (stock 0).
+ * @param {object} producto
+ * @returns {boolean}
+ */
 function esStockAgotado(producto) {
   return Number(producto.stock) === 0;
 }
 
-// --- Ordenamiento del listado ---
-
+/* ---------- Ordenamiento del listado ---------- */
 let ordenProductos = { campo: null, direccion: 1 };
 
-// Devuelve copia ordenada según la columna y dirección actuales
+/**
+ * Devuelve una copia de los productos ordenados según el estado actual.
+ * El primer clic ordena ascendente; el siguiente en la misma columna invierte.
+ * @param {Array<object>} lista
+ * @returns {Array<object>}
+ */
 function ordenarProductos(lista) {
   const campo = ordenProductos.campo;
   if (!campo) return lista;
@@ -130,14 +184,24 @@ function ordenarProductos(lista) {
   });
 }
 
-// Orden lógico de estados: Agotado (0) < Stock crítico (1) < Disponible (2)
+/**
+ * Orden lógico de los estados: Agotado (0), Stock crítico (1), Disponible (2).
+ * @param {object} producto
+ * @returns {number}
+ */
 function rangoEstado(producto) {
   if (esStockAgotado(producto)) return 0;
   if (esStockCritico(producto)) return 1;
   return 2;
 }
 
-// Devuelve HTML de un <th> ordenable con flecha y aria-sort
+/**
+ * Devuelve el HTML de una columna ordenable del encabezado.
+ * @param {string} texto - Etiqueta visible
+ * @param {string} campo - Campo de orden ("codigo", "nombre", ...)
+ * @param {string} [clase] - Clase extra (ej: "oculto-movil")
+ * @returns {string} HTML del <th>
+ */
 function thOrdenable(texto, campo, clase) {
   const activo = ordenProductos.campo === campo;
   const flecha = activo ? (ordenProductos.direccion === 1 ? ' <span class="admin-flecha up"></span>' : ' <span class="admin-flecha down"></span>') : "";
@@ -146,9 +210,15 @@ function thOrdenable(texto, campo, clase) {
   return '<th scope="col" class="' + clases + '" data-orden="' + campo + '" tabindex="0" role="button" aria-sort="' + ariaSort + '">' + texto + flecha + '</th>';
 }
 
-// --- Listado (admin-productos.html) ---
+/* ============================================================================
+   LISTADO (admin-productos.html)
+   ========================================================================== */
 
-// Llena un select con las categorías del caso
+/**
+ * Llena el select de filtro y el de categorías del formulario.
+ * @param {HTMLElement} select - El <select> a llenar
+ * @param {string} [seleccionado] - Categoría que debe quedar seleccionada
+ */
 function llenarSelectCategorias(select, seleccionado) {
   if (!select) return;
   select.innerHTML = "";
@@ -167,7 +237,11 @@ function llenarSelectCategorias(select, seleccionado) {
   });
 }
 
-// Badge de stock: Agotado / Stock crítico / Disponible
+/**
+ * Devuelve la etiqueta de badge de stock para un producto.
+ * @param {object} producto
+ * @returns {string} HTML del badge
+ */
 function badgeStock(producto) {
   if (esStockAgotado(producto)) {
     return '<span class="admin-badge admin-badge-stock-agotado">Agotado</span>';
@@ -178,7 +252,11 @@ function badgeStock(producto) {
   return '<span class="admin-badge admin-badge-stock">Disponible</span>';
 }
 
-// Celda de imagen del producto (o placeholder si no tiene)
+/**
+ * Renderiza una celda con la imagen del producto o un placeholder.
+ * @param {object} producto
+ * @returns {string} HTML
+ */
 function celdaImagen(producto) {
   if (producto.imagen) {
     return '<img src="' + producto.imagen + '" alt="Imagen de ' + producto.nombre + '" class="admin-tabla-img">';
@@ -186,7 +264,11 @@ function celdaImagen(producto) {
   return '<span class="admin-sin-imagen" role="img" aria-label="Producto ' + producto.nombre + ' sin imagen">Sin imagen</span>';
 }
 
-// Renderiza la tabla completa del listado de productos
+/**
+ * Renderiza la tabla completa del listado de productos.
+ * @param {Array<object>} productos - Arreglo a mostrar
+ * @param {string} [contenedorId] - Id del contenedor (default "listaProductos")
+ */
 function renderListadoProductos(productos, contenedorId) {
   const contenedor = document.getElementById(contenedorId || "listaProductos");
   if (!contenedor) return;
@@ -243,7 +325,7 @@ function renderListadoProductos(productos, contenedorId) {
   html += "</tbody></table></div>";
   contenedor.innerHTML = html;
 
-  // Clic/tecla en encabezados cambia el orden
+  // Ordenar al hacer clic en los encabezados ordenables
   contenedor.querySelectorAll("th[data-orden]").forEach(function (th) {
     function cambiarOrden() {
       const campo = th.getAttribute("data-orden");
@@ -267,7 +349,7 @@ function renderListadoProductos(productos, contenedorId) {
     });
   });
 
-  // Botones eliminar
+  // Conectar los botones "Eliminar" (solo los crea si hay sesión de admin)
   contenedor.querySelectorAll("[data-eliminar]").forEach(function (boton) {
     boton.addEventListener("click", function () {
       eliminarProductoHandler(boton.getAttribute("data-eliminar"));
@@ -275,7 +357,9 @@ function renderListadoProductos(productos, contenedorId) {
   });
 }
 
-// Muestra alerta de productos con stock crítico o agotado
+/**
+ * Muestra la alerta de productos con stock crítico o agotado.
+ */
 function mostrarAlertaStockCritico() {
   const alerta = document.getElementById("alertaStockCritico");
   const lista = document.getElementById("listaStockCritico");
@@ -309,7 +393,11 @@ function mostrarAlertaStockCritico() {
   });
 }
 
-// Filtra por categoría y buscador, luego renderiza
+/**
+ * Filtra el listado según la categoría elegida y el buscador (si existe).
+ * @param {HTMLElement} selectFiltro - Select de categoría
+ * @param {HTMLElement} [buscador] - Input de búsqueda por nombre/código
+ */
 function aplicarFiltrosProductos(selectFiltro, buscador) {
   let productos = obtenerProductos();
   const categoria = selectFiltro ? selectFiltro.value : "";
@@ -329,7 +417,10 @@ function aplicarFiltrosProductos(selectFiltro, buscador) {
   renderListadoProductos(productos);
 }
 
-// Elimina un producto tras confirmar y refresca el listado
+/**
+ * Elimina un producto luego de confirmar, y refresca el listado.
+ * @param {string} codigo
+ */
 function eliminarProductoHandler(codigo) {
   const producto = buscarProducto(codigo);
   if (!producto) return;
@@ -347,7 +438,9 @@ function eliminarProductoHandler(codigo) {
   }
 }
 
-// Inicializa la página de listado de productos
+/**
+ * Inicializa la página de listado de productos.
+ */
 function inicializarListadoProductos() {
   sembrarProductosDemo();
 
@@ -371,15 +464,26 @@ function inicializarListadoProductos() {
   mostrarAlertaStockCritico();
 }
 
-// --- Validaciones del formulario (nuevo / editar) ---
+/* ============================================================================
+   VALIDACIONES DEL FORMULARIO (nuevo / editar)
+   ========================================================================== */
 
-// Devuelve el valor numérico de un campo (acepta coma o punto decimal)
+/**
+ * Devuelve el valor numérico de un campo o 0.
+ * @param {HTMLElement} campo
+ * @returns {number}
+ */
 function numeroDe(campo) {
   const valor = campo.value.replace(/\./g, "").replace(",", ".");
   return parseFloat(valor) || 0;
 }
 
-// Valida código: requerido, mín. 3, sin espacios, sin duplicados
+/**
+ * Valida el código del producto en tiempo real.
+ * @param {HTMLElement} campo
+ * @param {string} [codigoOriginal] - Código que se está editando (para permitir duplicado consigo mismo)
+ * @returns {boolean}
+ */
 function validarCampoCodigoProducto(campo, codigoOriginal) {
   const valor = campo.value.trim();
 
@@ -390,10 +494,12 @@ function validarCampoCodigoProducto(campo, codigoOriginal) {
     return mostrarError(campo, "El código debe tener al menos " + PRODUCTO_LIMITES.codigo + " caracteres.");
   }
 
+  // Sin límites de máximo, pero no se aceptan espacios internos
   if (/\s/.test(valor)) {
     return mostrarError(campo, "El código no puede contener espacios.");
   }
 
+  // El código no puede repetirse con otro producto (salvo que sea el mismo en edición)
   const duplicado = buscarProducto(valor);
   if (duplicado && duplicado.codigo !== codigoOriginal) {
     return mostrarError(campo, "Ya existe un producto con el código '" + valor + "'.");
@@ -402,7 +508,11 @@ function validarCampoCodigoProducto(campo, codigoOriginal) {
   return marcarValido(campo);
 }
 
-// Valida nombre: requerido, máx. 100
+/**
+ * Valida el nombre del producto.
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoNombreProducto(campo) {
   const valor = campo.value.trim();
 
@@ -415,7 +525,11 @@ function validarCampoNombreProducto(campo) {
   return marcarValido(campo);
 }
 
-// Valida descripción: opcional, máx. 500
+/**
+ * Valida la descripción (opcional, máx. 500).
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoDescripcionProducto(campo) {
   const valor = campo.value.trim();
   if (!validarNoVacio(valor)) return limpiarEstado(campo);
@@ -426,7 +540,11 @@ function validarCampoDescripcionProducto(campo) {
   return marcarValido(campo);
 }
 
-// Valida precio: requerido, mín. 0, decimales permitidos
+/**
+ * Valida el precio (requerido, mín. 0, decimales permitidos).
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoPrecioProducto(campo) {
   const valor = campo.value.trim();
 
@@ -442,7 +560,11 @@ function validarCampoPrecioProducto(campo) {
   return marcarValido(campo);
 }
 
-// Valida stock: requerido, mín. 0, solo enteros
+/**
+ * Valida el stock (requerido, mín. 0, números enteros).
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoStockProducto(campo) {
   const valor = campo.value.trim();
 
@@ -458,7 +580,12 @@ function validarCampoStockProducto(campo) {
   return marcarValido(campo);
 }
 
-// Valida stock crítico: opcional, enteros, sugiere que sea menor al stock
+/**
+ * Valida el stock crítico (opcional, mín. 0, enteros).
+ * @param {HTMLElement} campo
+ * @param {HTMLElement} campoStock - Para sugerir que el crítico sea coherente con el stock
+ * @returns {boolean}
+ */
 function validarCampoStockCritico(campo, campoStock) {
   const valor = campo.value.trim();
 
@@ -482,7 +609,11 @@ function validarCampoStockCritico(campo, campoStock) {
   return marcarValido(campo);
 }
 
-// Valida categoría: select requerido
+/**
+ * Valida la categoría (select requerido).
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoCategoriaProducto(campo) {
   if (!validarNoVacio(campo.value)) {
     return mostrarError(campo, "Selecciona una categoría para el producto.");
@@ -490,25 +621,34 @@ function validarCampoCategoriaProducto(campo) {
   return marcarValido(campo);
 }
 
-// Valida imagen: opcional, acepta rutas locales y URLs
+/**
+ * Valida la imagen solo si trae contenido: debe ser una URL de imagen.
+ * @param {HTMLElement} campo
+ * @returns {boolean}
+ */
 function validarCampoImagenProducto(campo) {
   const valor = campo.value.trim();
   if (!validarNoVacio(valor)) return limpiarEstado(campo);
 
-  const ok = /(\.(png|jpe?g|gif|webp|svg|avif)|img\/productos\/)/i.test(valor);
-  if (!ok) return mostrarError(campo, "Escribe una ruta válida de imagen (png, jpg, gif, webp, svg, avif) o déjalo vacío.");
+  const ok = /\.(png|jpe?g|gif|webp|svg|avif)(\?[^#]*)?(#.*)?$/i.test(valor);
+  if (!ok) return mostrarError(campo, "Escribe una URL válida de imagen (png, jpg, gif, webp, svg, avif) o déjalo vacío.");
 
   return marcarValido(campo);
 }
 
-// --- Formulario nuevo / editar ---
+/* ============================================================================
+   FORMULARIO NUEVO / EDITAR (admin-producto-nuevo.html / ...-editar.html)
+   ========================================================================== */
 
-// Inicializa el formulario de producto (modo "crear" o "editar")
+/**
+ * Inicializa el formulario de producto en modo "crear" o "editar".
+ * @param {string} modo - "crear" o "editar"
+ */
 function inicializarFormularioProducto(modo) {
   const form = document.getElementById("formProducto");
   if (!form) return;
 
-  // Solo admin puede crear o editar
+  // Nuevo y editar solo están disponibles para el Administrador
   const esAdmin = (typeof esAdministrador === "function") && esAdministrador();
   if (!esAdmin) {
     window.location.href = "admin-productos.html";
@@ -531,7 +671,7 @@ function inicializarFormularioProducto(modo) {
 
   let codigoOriginal = null;
 
-  // Modo editar: carga datos desde la URL
+  // Modo editar: se cargan los datos del producto desde la URL
   if (modo === "editar") {
     const params = new URLSearchParams(window.location.search);
     const codigoParam = params.get("codigo");
@@ -557,7 +697,7 @@ function inicializarFormularioProducto(modo) {
     llenarSelectCategorias(campoCategoria, producto.categoria);
   }
 
-  // Validación en tiempo real
+  /* ---------- Validación en tiempo real ---------- */
   campoCodigo.addEventListener("input", function () {
     validarCampoCodigoProducto(campoCodigo, codigoOriginal);
   });
@@ -593,13 +733,13 @@ function inicializarFormularioProducto(modo) {
     validarCampoImagenProducto(campoImagen);
   });
 
-  // Contadores de caracteres (sugerencias en vivo)
+  /* ---------- Contadores de caracteres (sugerencias en vivo) ---------- */
   if (typeof conectarContador === "function") {
     conectarContador(campoNombre, PRODUCTO_LIMITES.nombre);
     conectarContador(campoDescripcion, PRODUCTO_LIMITES.descripcion);
   }
 
-  // Envío del formulario
+  /* ---------- Envío ---------- */
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     ocultarAvisoProducto();
@@ -636,7 +776,7 @@ function inicializarFormularioProducto(modo) {
     }
   });
 
-  // Avisos del formulario
+  /* ---------- Aviso general ---------- */
   function mostrarAvisoProducto(texto) {
     if (!aviso) return;
     aviso.textContent = texto;
@@ -668,9 +808,14 @@ function inicializarFormularioProducto(modo) {
   }
 }
 
-// --- Detalle (admin-producto-mostrar.html) ---
+/* ============================================================================
+   DETALLE (admin-producto-mostrar.html)
+   ========================================================================== */
 
-// Inicializa la vista de detalle. Disponible para admin y vendedor.
+/**
+ * Inicializa la vista de detalle de un producto.
+ * Disponible para Administrador y Vendedor (rol que solo puede visualizar).
+ */
 function inicializarDetalleProducto() {
   const params = new URLSearchParams(window.location.search);
   const codigo = params.get("codigo");
@@ -724,7 +869,9 @@ function inicializarDetalleProducto() {
     '</div>';
 }
 
-// --- Arranque según la página ---
+/* ============================================================================
+   ARRANQUE SEGÚN LA PÁGINA
+   ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("listaProductos")) inicializarListadoProductos();
