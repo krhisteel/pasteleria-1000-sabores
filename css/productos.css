@@ -114,8 +114,87 @@
   color: var(--color-texto-claro);
 }
 
-@media (max-width: 640px) {
-  .filtro-grupo {
-    min-width: 100%;
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+  .pagina-productos {
+    padding: var(--espaciado-lg) var(--espaciado-md);
   }
+
+  /* Título */
+  .pagina-productos h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+  }
+
+  .subtitulo-pagina {
+    font-size: 1rem;
+    margin-bottom: var(--espaciado-lg);
+  }
+
+  /* Filtros */
+  .filtros {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--espaciado-md);
+  }
+
+  .filtro-grupo {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .filtro-grupo select,
+  .filtro-grupo input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Productos en una sola columna */
+  .productos-grid {
+    grid-template-columns: 1fr;
+    gap: var(--espaciado-lg);
+  }
+
+  /* Tarjetas */
+  .producto-card {
+    width: 100%;
+  }
+
+  .producto-card img {
+    height: 230px;
+  }
+
+}
+
+
+/* =========================================
+   CELULARES PEQUEÑOS
+   ========================================= */
+
+@media (max-width: 480px) {
+
+  .pagina-productos {
+    padding: var(--espaciado-lg) var(--espaciado-sm);
+  }
+
+  .pagina-productos h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitulo-pagina {
+    font-size: 0.95rem;
+  }
+
+  .producto-card img {
+    height: 210px;
+  }
+
+  .producto-info {
+    padding: var(--espaciado-md);
+  }
+
 }
