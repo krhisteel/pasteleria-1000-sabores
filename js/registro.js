@@ -1,12 +1,3 @@
-/*
-  REGISTRO.JS — Validación del registro de usuarios
-  Aileen Oyaneder (Módulo 1).
-  Anexo 1: RUN válido (7-9), nombre máx. 50, apellidos máx. 100,
-  correo máx. 100, fecha de nacimiento opcional, dirección máx. 300.
-  Beneficios del caso: 50% a mayores de 50, 10% con FELICES50,
-  torta gratis con correo Duoc.
-*/
-
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {

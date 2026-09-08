@@ -1,28 +1,7 @@
-/* ============================================================================
-   VALIDACIONES REUTILIZABLES
-   ----------------------------------------------------------------------------
-   Archivo especialista creado por Aileen Oyaneder (Módulo 1).
-   Utilizado por:
-     - Aileen Oyaneder: js/registro.js, js/contacto.js, js/login.js
-     - Jael Reyes: js/admin-usuarios.js
-
-   Reglas de negocio tomadas del Anexo 1 de la evaluación:
-     - Correo: solo @duoc.cl, @profesor.duoc.cl y @gmail.com (máx. 100)
-     - Contraseña: entre 4 y 10 caracteres
-     - RUN: sin puntos ni guion (ej: 19011022K), mín. 7 y máx. 9 caracteres
-   ========================================================================== */
-
 "use strict";
 
-/* ---------- Reglas de negocio centralizadas ---------- */
-
-/** Dominios de correo autorizados por el enunciado. */
 const DOMINIOS_PERMITIDOS = ["duoc.cl", "profesor.duoc.cl", "gmail.com"];
-
-/** Texto reutilizable para los mensajes de error y las sugerencias. */
 const TEXTO_DOMINIOS = "@duoc.cl, @profesor.duoc.cl o @gmail.com";
-
-/** Largos máximos por campo, según el Anexo 1. */
 const LARGOS = {
   correo: 100,
   nombreRegistro: 50,

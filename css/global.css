@@ -1,38 +1,8 @@
-/* ============================================================================
-
+/* ========================================================================
    GLOBAL.CSS — Estilos globales compartidos
-
-   ----------------------------------------------------------------------------
-
-
-   Versión inicial creada por Aileen Oyaneder.
-
-   Este archivo define variables de color, tipografías y reset base.
-
-   Colores de la marca:
-
-     - Crema Pastel: #FFF5E1
-
-     - Rosa: #FFC0CB
-
-     - Chocolate: #8B4513
-
-     - Texto: #5D4037
-
-   Tipografías:
-
-     - Pacifico: para títulos decorativos
-
-     - Lato: para todo el texto del sitio
-
-   ========================================================================== */
-
-/* ---------- Variables CSS ---------- */
+   ======================================================================== */
 
 :root {
-
-  /* Colores de la marca */
-
   --color-crema: #FFF5E1;
 
   --color-rosa: #FFC0CB;
@@ -50,23 +20,14 @@
   --color-blanco: #FFFFFF;
 
   --color-negro: #2C1810;
-
-  /* Colores de utilidad */
-
   --color-exito: #4CAF50;
 
   --color-error: #F44336;
 
   --color-advertencia: #FF9800;
-
-  /* Tipografías */
-
   --font-titulo: 'Pacifico', cursive;
 
   --font-cuerpo: 'Lato', sans-serif;
-
-  /* Espaciado */
-
   --espaciado-xs: 0.25rem;
 
   --espaciado-sm: 0.5rem;
@@ -78,9 +39,6 @@
   --espaciado-xl: 2rem;
 
   --espaciado-xxl: 3rem;
-
-  /* Bordes */
-
   --radio-sm: 4px;
 
   --radio-md: 8px;
@@ -88,24 +46,16 @@
   --radio-lg: 16px;
 
   --radio-xl: 24px;
-
-  /* Sombras */
-
   --sombra-suave: 0 2px 8px rgba(93, 64, 55, 0.1);
 
   --sombra-media: 0 4px 16px rgba(93, 64, 55, 0.15);
 
   --sombra-fuerte: 0 8px 32px rgba(93, 64, 55, 0.2);
-
-  /* Transiciones */
-
   --transicion-rapida: 0.15s ease;
 
   --transicion-normal: 0.3s ease;
 
 }
-
-/* ---------- Reset Base ---------- */
 
 *,
 
@@ -189,8 +139,6 @@ input, textarea, select {
 
 }
 
-/* ---------- Utilidades de texto ---------- */
-
 h1, h2, h3, h4, h5, h6 {
 
   font-family: var(--font-cuerpo);
@@ -202,20 +150,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-chocolate);
 
 }
-
-/* ---------- Contenedor principal ---------- */
-
-.site-container {
-
-  max-width: 1200px;
-
-  margin: 0 auto;
-
-  padding: 0 var(--espaciado-md);
-
-}
-
-/* ---------- Estilos de formulario ---------- */
 
 .campo {
 
@@ -253,10 +187,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* El campo válido se declara primero para que, ante cualquier duda,
-
-   el estado de error sea el que gane en la cascada. */
-
 .campo-valido {
 
   border-color: var(--color-exito) !important;
@@ -269,8 +199,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* Nota de campos obligatorios al inicio de un formulario */
-
 .form-nota {
 
   font-size: 0.82rem;
@@ -280,8 +208,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--espaciado-sm);
 
 }
-
-/* Texto de ayuda bajo la etiqueta: la "sugerencia" que pide la rúbrica */
 
 .campo-ayuda {
 
@@ -294,8 +220,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.2rem;
 
 }
-
-/* Contador de caracteres para los campos con largo máximo */
 
 .contador-caracteres {
 
@@ -331,8 +255,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* Solo ocupa espacio cuando efectivamente hay un mensaje que mostrar */
-
 .mensaje-error.visible {
 
   min-height: 1.2em;
@@ -350,8 +272,6 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
 
 }
-
-/* ---------- Botones ---------- */
 
 .btn-primary {
 
@@ -416,8 +336,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-blanco);
 
 }
-
-/* ---------- Header ---------- */
 
 .site-header {
 
@@ -572,8 +490,6 @@ h1, h2, h3, h4, h5, h6 {
   gap: 0.3rem;
 
 }
-
-/* ---------- Panel desplegable de carrito / pedidos ---------- */
 
 .carrito-dropdown {
 
@@ -853,8 +769,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* Menú hamburguesa */
-
 .menu-toggle {
 
   display: none;
@@ -880,8 +794,6 @@ h1, h2, h3, h4, h5, h6 {
   transition: transform var(--transicion-rapida);
 
 }
-
-/* ---------- Footer ---------- */
 
 .site-footer {
 
@@ -977,7 +889,7 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* ---------- Responsive ---------- */
+.hidden {
 
 @media (max-width: 768px) {
 
@@ -1051,21 +963,11 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* ============================================================================
-
-   UTILIDADES COMPARTIDAS — Aileen Oyaneder (Módulo 1)
-
-   ========================================================================== */
-
-/* ---------- Mostrar / ocultar bloques desde JavaScript ---------- */
-
 .hidden {
 
   display: none !important;
 
 }
-
-/* ---------- Enlace de salto (accesibilidad) ---------- */
 
 .skip-link {
 
@@ -1094,8 +996,6 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
 
 }
-
-/* ---------- Video embebido responsivo (16:9) ---------- */
 
 .video-contenedor {
 
@@ -1154,8 +1054,6 @@ h1, h2, h3, h4, h5, h6 {
   text-align: center;
 
 }
-
-/* ---------- Sesión activa en el header ---------- */
 
 .sesion-activa {
 
@@ -1245,8 +1143,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* ---------- Aviso general de un formulario ---------- */
-
 .aviso-formulario {
 
   background: #FDECEA;
@@ -1266,8 +1162,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: var(--espaciado-md);
 
 }
-
-/* ---------- Bloque de beneficios detectados (caso Forma C) ---------- */
 
 .bloque-beneficios {
 
@@ -1302,8 +1196,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.2rem;
 
 }
-
-/* ---------- Mensaje de éxito reutilizable ---------- */
 
 .mensaje-exito-container {
 
@@ -1357,8 +1249,6 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
-/* ---------- Responsive de las utilidades ---------- */
-
 @media (max-width: 768px) {
 
   .sesion-activa {
@@ -1388,14 +1278,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 
 }
-
-/* ============================================================================
-
-   NEWSLETTER Y MEDIOS DE PAGO EN EL FOOTER — Aileen Oyaneder (Módulo 1)
-
-   ========================================================================== */
-
-/* Etiqueta visible solo para lectores de pantalla */
 
 .sr-only {
 
@@ -1528,12 +1410,6 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.85;
 
 }
-
-/* ---------- Pantallas muy angostas: el header no cabe en una sola fila ----------
-
-   Por debajo de 560px el logo más los botones de sesión y carrito superan el
-
-   ancho de la pantalla, así que las acciones bajan a una segunda fila. */
 
 @media (max-width: 560px) {
 

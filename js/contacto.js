@@ -1,9 +1,3 @@
-/*
-  CONTACTO.JS — Validación del formulario de contacto
-  Aileen Oyaneder (Módulo 1).
-  Anexo 1: nombre máx. 100, correo máx. 100, comentario máx. 500.
-*/
-
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {

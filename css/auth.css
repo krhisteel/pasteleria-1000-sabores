@@ -1,4 +1,4 @@
-/*  AUTH.CSS — Estilos compartidos para Login y Registro  */
+/* AUTH.CSS — Estilos compartidos para Login y Registro */
 
 .auth-main {
   min-height: calc(100vh - 200px);
@@ -114,7 +114,6 @@
   }
 }
 
-/*  Cuentas de prueba (solo para la demostración)  */
 .auth-demo {
   margin-top: var(--espaciado-lg);
   padding: var(--espaciado-md);
@@ -135,7 +134,6 @@
   margin-bottom: 0.15rem;
 }
 
-/*  Mensaje de éxito dentro de la tarjeta  */
 .auth-card .mensaje-exito-container {
   box-shadow: none;
   padding: var(--espaciado-lg) 0 0;

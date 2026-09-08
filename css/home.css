@@ -1,6 +1,5 @@
-/*  HOME.CSS — Estilos de la página principal (index.html)  */
+/* HOME.CSS — Estilos de la página principal */
 
-/*  Hero Banner  */
 .hero {
   background: linear-gradient(135deg, var(--color-rosa) 0%, var(--color-crema) 100%);
   padding: 5rem 1.5rem;
@@ -62,7 +61,6 @@
   box-shadow: var(--sombra-fuerte);
 }
 
-/*  Secciones Comunes  */
 .seccion-titulo {
   font-family: var(--font-titulo);
   font-size: 2rem;
@@ -71,7 +69,6 @@
   margin-bottom: var(--espaciado-xl);
 }
 
-/*  Categorías Destacadas  */
 .categorias-destacadas {
   padding: var(--espaciado-xxl) 1.5rem;
   max-width: 1200px;
@@ -129,7 +126,6 @@
   padding: 0 var(--espaciado-md) var(--espaciado-md);
 }
 
-/*  Productos Estrella  */
 .productos-estrella {
   padding: var(--espaciado-xxl) 1.5rem;
   max-width: 1200px;
@@ -229,7 +225,6 @@
   background: var(--color-chocolate-claro);
 }
 
-/*  Video Sección  */
 .video-seccion {
   padding: var(--espaciado-xxl) 1.5rem;
   max-width: 1200px;
@@ -237,12 +232,10 @@
   text-align: center;
 }
 
-/*  El contenedor 16:9 del video vive en global.css; aquí solo el espaciado.  */
 .video-seccion .video-figura {
   margin-top: var(--espaciado-lg);
 }
 
-/*  Sobre Nosotros Preview  */
 .sobre-nosotros-preview {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -296,7 +289,6 @@
   object-fit: cover;
 }
 
-/*  CTA Final  */
 .cta-final {
   background: linear-gradient(135deg, var(--color-chocolate) 0%, var(--color-chocolate-claro) 100%);
   padding: var(--espaciado-xxl) 1.5rem;
@@ -333,15 +325,6 @@
   box-shadow: var(--sombra-fuerte);
 }
 
-/*  Logo  */
-.logo-img {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
-/*  Responsive  */
 @media (max-width: 768px) {
   .hero-titulo {
     font-size: 2rem;

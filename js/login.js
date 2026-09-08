@@ -1,10 +1,3 @@
-/*
-  LOGIN.JS — Validación del inicio de sesión
-  Aileen Oyaneder (Módulo 1).
-  Anexo 1: correo máx. 100 con dominios permitidos, contraseña 4-10.
-  Guarda la sesión y el rol en localStorage bajo "usuarioActivo".
-*/
-
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
