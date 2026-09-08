@@ -1,11 +1,4 @@
-/* ============================================================================
-   REGIONES-COMUNAS.JS — Arreglo de regiones y comunas de Chile
-   ----------------------------------------------------------------------------
-   Archivo compartido, asignado a Benjamín Riquelme (Módulo 3).
-   Versión inicial creada por Aileen Oyaneder. Utilizado por:
-     - Aileen Oyaneder: js/registro.js (registro.html)
-     - Benjamín Riquelme: js/admin-usuarios.js (panel de administración)
-   ========================================================================== */
+/* REGIONES-COMUNAS.JS — Arreglo de regiones y comunas de Chile */
 
 "use strict";
 

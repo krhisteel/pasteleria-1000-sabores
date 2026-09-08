@@ -3,9 +3,7 @@
 var CLAVE_CARRITO = "carrito";
 var CLAVE_PEDIDO = "pedidoActual";
 
-/* ============================================================================
-   OPERACIONES BÁSICAS DEL CARRITO (localStorage key "carrito")
-   ============================================================================ */
+/* Operaciones básicas del carrito (localStorage "carrito") */
 
 function cargarCarrito() {
   try {
@@ -102,9 +100,7 @@ function vaciarCarritoCompleto() {
   actualizarContadorCarrito();
 }
 
-/* ============================================================================
-   PEDIDO (localStorage key "pedidoActual")
-   ============================================================================ */
+/* Pedido (localStorage "pedidoActual") */
 
 function generarNumeroPedido() {
   var fecha = new Date();
@@ -129,9 +125,7 @@ function cargarPedido() {
   }
 }
 
-/* ============================================================================
-   RENDERIZADO DE LA PÁGINA CARRITO (solo corre en carrito.html)
-   ============================================================================ */
+/* Renderizado de la página carrito (solo carrito.html) */
 
 function renderizarPaginaCarrito() {
   var lista = document.getElementById("carritoLista");
@@ -182,9 +176,7 @@ function renderizarResumen() {
   document.getElementById("totalCarrito").textContent = formatearPrecio(total);
 }
 
-/* ============================================================================
-   PAGAR: crea el pedido y redirige a la página de seguimiento (pedido.html)
-   ============================================================================ */
+/* Pagar: crea el pedido y va a pedido.html */
 
 function finalizarCompra() {
   var carrito = cargarCarrito();
