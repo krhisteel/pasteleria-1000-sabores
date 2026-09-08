@@ -2,6 +2,7 @@
 
 const CLAVE_SESION = "usuarioActivo";
 
+// Devuelve el usuario con sesión activa desde localStorage, o null
 function obtenerUsuarioActual() {
   try {
     return JSON.parse(localStorage.getItem(CLAVE_SESION) || "null");
@@ -10,22 +11,24 @@ function obtenerUsuarioActual() {
   }
 }
 
+// Verifica si hay un usuario con sesión iniciada
 function haySesion() {
   return obtenerUsuarioActual() !== null;
 }
 
+// Elimina la sesión y redirige al inicio
 function cerrarSesion() {
   localStorage.removeItem(CLAVE_SESION);
   window.location.href = "index.html";
 }
 
+// Comprueba si el usuario activo tiene rol de Administrador
 function esAdministrador() {
   const usuario = obtenerUsuarioActual();
   return usuario !== null && usuario.tipo === "Administrador";
 }
 
-
-
+// Actualiza el header mostrando nombre, rol y botón de cerrar sesión
 function renderizarSesionEnHeader() {
   const acciones = document.querySelector(".nav-acciones");
   if (!acciones) return;
@@ -71,6 +74,7 @@ function renderizarSesionEnHeader() {
   acciones.insertBefore(bloque, acciones.firstChild);
 }
 
+// Lee el carrito de localStorage y actualiza el número en el header
 function actualizarContadorCarrito() {
   try {
     const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
@@ -83,6 +87,7 @@ function actualizarContadorCarrito() {
   }
 }
 
+// Valida y procesa la suscripción al newsletter del footer
 function conectarNewsletter() {
   const formulario = document.getElementById("formNewsletter");
   if (!formulario) return;
@@ -120,6 +125,7 @@ function conectarNewsletter() {
   });
 }
 
+// Guarda el correo suscrito en localStorage sin duplicados
 function guardarSuscriptor(correo) {
   try {
     const suscriptores = JSON.parse(localStorage.getItem("suscriptores") || "[]");
@@ -131,6 +137,7 @@ function guardarSuscriptor(correo) {
   }
 }
 
+// Lee y parsea un arreglo desde localStorage de forma segura
 function leerDatosLocal(clave) {
   try {
     return JSON.parse(localStorage.getItem(clave) || "[]");
@@ -139,6 +146,7 @@ function leerDatosLocal(clave) {
   }
 }
 
+// Lee el pedido en curso desde localStorage
 function leerPedidoActual() {
   try {
     return JSON.parse(localStorage.getItem("pedidoActual") || "null");
@@ -147,11 +155,13 @@ function leerPedidoActual() {
   }
 }
 
+// Formatea un número como precio chileno ($XX.XXX)
 function formatearMoneda(valor) {
   if (typeof formatearPrecio === "function") return formatearPrecio(valor);
   return "$" + Number(valor || 0).toLocaleString("es-CL");
 }
 
+// Renderiza los productos del carrito en el panel desplegable
 function renderizarPanelCarrito() {
   const cont = document.getElementById("panelCarrito");
   if (!cont) return;
@@ -179,6 +189,7 @@ function renderizarPanelCarrito() {
   cont.innerHTML = html;
 }
 
+// Renderiza los pedidos pendientes de envío en el panel
 function renderizarPanelPedidos() {
   const cont = document.getElementById("panelPedidos");
   if (!cont) return;
@@ -218,6 +229,7 @@ function renderizarPanelPedidos() {
   cont.innerHTML = html;
 }
 
+// Configura el panel desplegable del carrito (abrir/cerrar/pestañas)
 function inicializarCarritoDropdown() {
   const dropdown = document.getElementById("carritoDropdown");
   if (!dropdown) return;

@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Valida el nombre: obligatorio, 3-100 caracteres
   function validarCampoNombre() {
     const valor = campoNombre.value.trim();
 
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoNombre);
   }
 
+  // Valida el correo: obligatorio, dominios permitidos, máx. 100
   function validarCampoCorreo() {
     const valor = campoCorreo.value.trim();
 
@@ -76,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoCorreo);
   }
 
+  // Valida el comentario: obligatorio, 10-500 caracteres
   function validarCampoComentario() {
     const valor = campoComentario.value.trim();
 
@@ -91,6 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoComentario);
   }
 
+  // Limpia los estados de error/validez de todos los campos
   function limpiarMarcas() {
     [campoNombre, campoCorreo, campoComentario].forEach(limpiarEstado);
   }

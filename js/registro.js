@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
     mostrarExito(usuario, beneficios);
   });
 
+  // Pobla el select de regiones desde REGIONES_COMUNAS
   function cargarRegiones() {
     selectRegion.innerHTML = '<option value="">Selecciona una región</option>';
 
@@ -123,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+  // Pobla el select de comunas según la región seleccionada
   function cargarComunas(regionNombre) {
     selectComuna.innerHTML = '<option value="">Selecciona una comuna</option>';
     selectComuna.disabled = true;
@@ -145,6 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     selectComuna.disabled = false;
   }
 
+  // Valida el RUN: obligatorio, 7-9 caracteres, dígito verificador válido
   function validarCampoRun() {
     const valor = campoRun.value.trim();
     const limpio = normalizarRun(valor);
@@ -164,6 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoRun);
   }
 
+  // Valida el nombre: obligatorio, 2-50 caracteres
   function validarCampoNombre() {
     const valor = campoNombre.value.trim();
 
@@ -179,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoNombre);
   }
 
+  // Valida los apellidos: obligatorio, máx. 100 caracteres
   function validarCampoApellidos() {
     const valor = campoApellidos.value.trim();
 
@@ -191,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoApellidos);
   }
 
+  // Valida el correo: obligatorio, dominios permitidos, máx. 100
   function validarCampoCorreo() {
     const valor = campoCorreo.value.trim();
 
@@ -206,6 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoCorreo);
   }
 
+  // Valida la fecha de nacimiento: opcional, no futura, edad ≤ 120
   function validarCampoFecha() {
     const valor = campoFecha.value;
 
@@ -229,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoFecha);
   }
 
+  // Valida que se haya seleccionado una región
   function validarCampoRegion() {
     if (!selectRegion.value) {
       return mostrarError(selectRegion, "Selecciona una región.");
@@ -236,6 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(selectRegion);
   }
 
+  // Valida que se haya seleccionado una comuna
   function validarCampoComuna() {
     if (!selectRegion.value) {
       return mostrarError(selectComuna, "Primero selecciona una región.");
@@ -246,6 +255,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(selectComuna);
   }
 
+  // Valida la dirección: obligatoria, máx. 300 caracteres
   function validarCampoDireccion() {
     const valor = campoDireccion.value.trim();
 
@@ -258,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoDireccion);
   }
 
+  // Valida el teléfono: opcional, 8-15 dígitos
   function validarCampoTelefono() {
     const valor = campoTelefono.value.trim();
 
@@ -274,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoTelefono);
   }
 
+  // Valida la contraseña: obligatoria, 4-10 caracteres
   function validarCampoPassword() {
     const valor = campoPassword.value;
 
@@ -286,6 +298,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoPassword);
   }
 
+  // Valida que la confirmación coincida con la contraseña
   function validarCampoConfirmPassword() {
     const valor = campoConfirm.value;
 
@@ -298,6 +311,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoConfirm);
   }
 
+  // Valida el código promocional: opcional, solo "FELICES50"
   function validarCampoPromocion() {
     if (!campoPromocion) return true;
 
@@ -313,6 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoPromocion);
   }
 
+  // Calcula la edad en años a partir de una fecha de nacimiento
   function calcularEdad(fechaTexto) {
     const nacimiento = new Date(fechaTexto + "T00:00:00");
     const hoy = new Date();
@@ -324,6 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return edad;
   }
 
+  // Determina los descuentos aplicables según edad, código y correo
   function calcularBeneficios() {
     const beneficios = [];
     const correo = campoCorreo.value.trim().toLowerCase();
@@ -342,6 +358,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return beneficios;
   }
 
+  // Actualiza el bloque visual que muestra los beneficios detectados
   function refrescarBeneficios() {
     if (!bloqueBeneficios) return;
 
@@ -360,6 +377,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bloqueBeneficios.classList.remove("hidden");
   }
 
+  // Guarda el usuario en localStorage verificando duplicados
   function guardarUsuario(usuario) {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
@@ -391,6 +409,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Oculta el formulario y muestra el mensaje de registro exitoso
   function mostrarExito(usuario, beneficios) {
     if (!mensajeExito) return;
 

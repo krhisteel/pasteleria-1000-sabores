@@ -43,6 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Valida el correo: obligatorio, dominios permitidos, máx. 100
   function validarCampoCorreo() {
     const valor = campoCorreo.value.trim();
 
@@ -58,6 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoCorreo);
   }
 
+  // Valida la contraseña: obligatoria, 4-10 caracteres
   function validarCampoPassword() {
     const valor = campoPassword.value;
 
@@ -70,18 +72,21 @@ document.addEventListener("DOMContentLoaded", function () {
     return marcarValido(campoPassword);
   }
 
+  // Muestra un mensaje de aviso general sobre el formulario
   function mostrarAviso(texto) {
     if (!avisoLogin) return;
     avisoLogin.textContent = texto;
     avisoLogin.classList.remove("hidden");
   }
 
+  // Oculta el aviso general
   function ocultarAviso() {
     if (!avisoLogin) return;
     avisoLogin.textContent = "";
     avisoLogin.classList.add("hidden");
   }
 
+  // Busca un usuario por correo y contraseña en localStorage
   function buscarUsuario(correo, password) {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
@@ -94,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Guarda los datos de sesión del usuario en localStorage
   function guardarSesion(usuario) {
     try {
       const sesion = {
@@ -111,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Crea usuarios de prueba si no existe ninguno registrado
   function sembrarUsuariosDemo() {
     try {
       const usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
