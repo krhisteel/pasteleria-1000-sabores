@@ -243,20 +243,29 @@ function inicializarCarritoDropdown() {
     boton.setAttribute("aria-expanded", "false");
   }
 
+  function abrir() {
+    renderizarPanelCarrito();
+    renderizarPanelPedidos();
+    panel.classList.remove("hidden");
+    boton.setAttribute("aria-expanded", "true");
+  }
+
   boton.addEventListener("click", function (e) {
     e.stopPropagation();
     const abriendo = panel.classList.contains("hidden");
     if (abriendo) {
-      renderizarPanelCarrito();
-      renderizarPanelPedidos();
+      abrir();
+    } else {
+      cerrar();
     }
-    panel.classList.toggle("hidden", !abriendo);
-    boton.setAttribute("aria-expanded", String(abriendo));
   });
 
-  document.addEventListener("click", function (e) {
-    if (!dropdown.contains(e.target)) cerrar();
-  });
+  // Cerrar automáticamente si no hay productos
+  setInterval(function () {
+    if (panel.classList.contains("hidden")) return;
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    if (carrito.length === 0) cerrar();
+  }, 1000);
 
   panel.querySelectorAll(".carrito-tab").forEach(function (tab) {
     tab.addEventListener("click", function () {
