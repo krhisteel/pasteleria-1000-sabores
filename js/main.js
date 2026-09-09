@@ -164,14 +164,18 @@ function formatearMoneda(valor) {
 // Renderiza los productos del carrito en el panel desplegable
 function renderizarPanelCarrito() {
   const cont = document.getElementById("panelCarrito");
+  const footer = document.getElementById("carritoFooter");
   if (!cont) return;
 
   const carrito = leerDatosLocal("carrito");
 
   if (carrito.length === 0) {
     cont.innerHTML = '<p class="carrito-panel-vacio">Tu carrito está vacío.</p>';
+    if (footer) footer.classList.add("hidden");
     return;
   }
+
+  if (footer) footer.classList.remove("hidden");
 
   let total = 0;
   let html = "";
