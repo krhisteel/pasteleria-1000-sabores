@@ -162,7 +162,9 @@ function renderizarPedido() {
 
       var precio = Number(p.precio) || 0;
       var descuento = Number(p.descuento) || 0;
-      var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
+      var descuentoEdad = Number(p.descuentoEdad) || 0;
+      var descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+      var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
       var sub = precioFinal * p.cantidad;
 
       ph += '<div class="sp-producto">';
@@ -176,9 +178,9 @@ function renderizarPedido() {
 
       ph += '  <div class="sp-info">';
       ph += '    <span class="sp-nombre">' + p.nombre + '</span>';
-      if (descuento > 0) {
+      if (descuentoTotal > 0) {
         ph += '    <span class="sp-precio-original">' + formatearPrecio(precio) + ' × ' + p.cantidad + '</span>';
-        ph += '    <span class="sp-precio-descuento">' + formatearPrecio(precioFinal) + ' × ' + p.cantidad + ' (-' + descuento + '%)</span>';
+        ph += '    <span class="sp-precio-descuento">' + formatearPrecio(precioFinal) + ' × ' + p.cantidad + ' (-' + descuentoTotal + '%)</span>';
       } else {
         ph += '    <span class="sp-cant">' + p.cantidad + ' × ' + formatearPrecio(precio) + '</span>';
       }

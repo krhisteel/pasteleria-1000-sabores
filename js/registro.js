@@ -90,6 +90,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const beneficios = calcularBeneficios();
 
+    var descuentoEdad = 0;
+    if (campoFecha.value && calcularEdad(campoFecha.value) >= 50) {
+      descuentoEdad = 50;
+    }
+
     const usuario = {
       run: normalizarRun(campoRun.value),
       nombre: campoNombre.value.trim(),
@@ -103,6 +108,7 @@ document.addEventListener("DOMContentLoaded", function () {
       telefono: campoTelefono.value.trim() || null,
       codigoPromocional: campoPromocion ? campoPromocion.value.trim().toUpperCase() : "",
       beneficios: beneficios,
+      descuentoEdad: descuentoEdad,
       tipo: "Cliente",
       fechaRegistro: new Date().toISOString()
     };

@@ -42,17 +42,21 @@ function crearTarjetaProducto(producto) {
   cat.className = "producto-categoria";
   cat.textContent = producto.categoria;
 
-  var descuento = Number(producto.descuento) || 0;
+  var descuentoProducto = Number(producto.descuento) || 0;
+  var descuentoUsuario = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario, 100);
 
-  if (descuento > 0) {
-    var precioFinal = Math.round(producto.precio * (1 - descuento / 100));
+  var precioBase = Number(producto.precio) || 0;
+
+  if (descuentoTotal > 0) {
+    var precioFinal = Math.round(precioBase * (1 - descuentoTotal / 100));
 
     var preciosDiv = document.createElement("div");
     preciosDiv.className = "producto-precios";
 
     var precioOriginal = document.createElement("span");
     precioOriginal.className = "producto-precio-original";
-    precioOriginal.textContent = formatearPrecio(producto.precio);
+    precioOriginal.textContent = formatearPrecio(precioBase);
 
     var precio = document.createElement("span");
     precio.className = "producto-precio";
@@ -60,7 +64,7 @@ function crearTarjetaProducto(producto) {
 
     var badgeDesc = document.createElement("span");
     badgeDesc.className = "producto-badge-descuento";
-    badgeDesc.textContent = "-" + descuento + "%";
+    badgeDesc.textContent = "-" + descuentoTotal + "%";
 
     preciosDiv.appendChild(precioOriginal);
     preciosDiv.appendChild(precio);
@@ -68,7 +72,7 @@ function crearTarjetaProducto(producto) {
   } else {
     var precio = document.createElement("span");
     precio.className = "producto-precio";
-    precio.textContent = formatearPrecio(producto.precio);
+    precio.textContent = formatearPrecio(precioBase);
   }
 
   var btnDetalle = document.createElement("a");

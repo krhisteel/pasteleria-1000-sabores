@@ -26,13 +26,16 @@ function renderizarDetalleProducto() {
   html += '    <span class="detalle-categoria">' + producto.categoria + '</span>';
   html += '    <h1 class="detalle-nombre">' + producto.nombre + '</h1>';
 
-  var descuento = Number(producto.descuento) || 0;
-  if (descuento > 0) {
-    var precioFinal = Math.round(producto.precio * (1 - descuento / 100));
+  var descuentoProducto = Number(producto.descuento) || 0;
+  var descuentoUsuario = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario, 100);
+
+  if (descuentoTotal > 0) {
+    var precioFinal = Math.round(producto.precio * (1 - descuentoTotal / 100));
     html += '    <div class="detalle-precios">';
     html += '      <span class="detalle-precio-original">' + formatearPrecio(producto.precio) + '</span>';
     html += '      <span class="detalle-precio">' + formatearPrecio(precioFinal) + '</span>';
-    html += '      <span class="detalle-badge-descuento">-' + descuento + '%</span>';
+    html += '      <span class="detalle-badge-descuento">-' + descuentoTotal + '%</span>';
     html += '    </div>';
   } else {
     html += '    <span class="detalle-precio">' + formatearPrecio(producto.precio) + '</span>';
