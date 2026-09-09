@@ -619,6 +619,24 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+.carrito-panel-total {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 0.6rem 0.5rem;
+
+  border-top: 2px solid var(--color-crema);
+
+  font-weight: 700;
+
+  font-size: 0.95rem;
+
+  color: var(--color-chocolate);
+
+}
+
 .carrito-panel-item img {
 
   width: 40px;

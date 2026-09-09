@@ -173,18 +173,28 @@ function renderizarPanelCarrito() {
     return;
   }
 
+  let total = 0;
   let html = "";
   carrito.forEach(function (item) {
-    const sub = item.precio * item.cantidad;
+    const precio = Number(item.precio) || 0;
+    const descuento = Number(item.descuento) || 0;
+    const precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
+    const sub = precioFinal * item.cantidad;
+    total += sub;
     html += '<div class="carrito-panel-item">';
     html += '  <img src="' + item.imagen + '" alt="' + item.nombre + '">';
     html += '  <div class="carrito-panel-item-info">';
     html += '    <span class="carrito-panel-item-nombre">' + item.nombre + '</span>';
-    html += '    <span class="carrito-panel-item-detalle">' + item.cantidad + ' × ' + formatearMoneda(item.precio) + '</span>';
+    html += '    <span class="carrito-panel-item-detalle">' + item.cantidad + ' × ' + formatearMoneda(precioFinal) + '</span>';
     html += '  </div>';
     html += '  <span class="carrito-panel-item-total">' + formatearMoneda(sub) + '</span>';
     html += '</div>';
   });
+
+  html += '<div class="carrito-panel-total">';
+  html += '  <span>Total</span>';
+  html += '  <strong>' + formatearMoneda(total) + '</strong>';
+  html += '</div>';
 
   cont.innerHTML = html;
 }
@@ -229,7 +239,7 @@ function renderizarPanelPedidos() {
   cont.innerHTML = html;
 }
 
-// Configura el panel desplegable del carrito (abrir/cerrar/pestañas)
+// Configura el panel desplegable del carrito (abrir/cerrar)
 function inicializarCarritoDropdown() {
   const dropdown = document.getElementById("carritoDropdown");
   if (!dropdown) return;
@@ -245,7 +255,6 @@ function inicializarCarritoDropdown() {
 
   function abrir() {
     renderizarPanelCarrito();
-    renderizarPanelPedidos();
     panel.classList.remove("hidden");
     boton.setAttribute("aria-expanded", "true");
   }
@@ -266,19 +275,6 @@ function inicializarCarritoDropdown() {
     const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
     if (carrito.length === 0) cerrar();
   }, 1000);
-
-  panel.querySelectorAll(".carrito-tab").forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      panel.querySelectorAll(".carrito-tab").forEach(function (t) {
-        t.classList.toggle("activo", t === tab);
-      });
-      const objetivo = tab.getAttribute("data-tab");
-      const panelCarrito = document.getElementById("panelCarrito");
-      const panelPedidos = document.getElementById("panelPedidos");
-      if (panelCarrito) panelCarrito.classList.toggle("hidden", objetivo !== "carrito");
-      if (panelPedidos) panelPedidos.classList.toggle("hidden", objetivo !== "pedidos");
-    });
-  });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
