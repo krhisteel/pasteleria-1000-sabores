@@ -729,11 +729,13 @@ h1, h2, h3, h4, h5, h6 {
 
   text-align: center;
 
-  padding: var(--espaciado-lg) var(--espaciado-sm);
+  padding: var(--espaciado-sm);
 
   color: var(--color-texto-claro);
 
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+
+  font-style: italic;
 
 }
 
