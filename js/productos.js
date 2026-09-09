@@ -44,7 +44,8 @@ function crearTarjetaProducto(producto) {
 
   var descuentoProducto = Number(producto.descuento) || 0;
   var descuentoUsuario = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
-  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario, 100);
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
+  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario + descuentoCodigo, 100);
 
   var precioBase = Number(producto.precio) || 0;
 

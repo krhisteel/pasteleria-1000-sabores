@@ -95,6 +95,11 @@ document.addEventListener("DOMContentLoaded", function () {
       descuentoEdad = 50;
     }
 
+    var descuentoCodigo = 0;
+    if (campoPromocion && campoPromocion.value.trim().toUpperCase() === "FELICES50") {
+      descuentoCodigo = 10;
+    }
+
     const usuario = {
       run: normalizarRun(campoRun.value),
       nombre: campoNombre.value.trim(),
@@ -109,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
       codigoPromocional: campoPromocion ? campoPromocion.value.trim().toUpperCase() : "",
       beneficios: beneficios,
       descuentoEdad: descuentoEdad,
+      descuentoCodigo: descuentoCodigo,
       tipo: "Cliente",
       fechaRegistro: new Date().toISOString()
     };

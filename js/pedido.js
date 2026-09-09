@@ -163,7 +163,8 @@ function renderizarPedido() {
       var precio = Number(p.precio) || 0;
       var descuento = Number(p.descuento) || 0;
       var descuentoEdad = Number(p.descuentoEdad) || 0;
-      var descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+      var descuentoCodigo = Number(p.descuentoCodigo) || 0;
+      var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
       var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
       var sub = precioFinal * p.cantidad;
 

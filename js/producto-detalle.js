@@ -28,7 +28,8 @@ function renderizarDetalleProducto() {
 
   var descuentoProducto = Number(producto.descuento) || 0;
   var descuentoUsuario = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
-  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario, 100);
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
+  var descuentoTotal = Math.min(descuentoProducto + descuentoUsuario + descuentoCodigo, 100);
 
   if (descuentoTotal > 0) {
     var precioFinal = Math.round(producto.precio * (1 - descuentoTotal / 100));

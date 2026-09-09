@@ -43,6 +43,7 @@ function agregarAlCarrito(codigo, cantidad) {
   if (!producto) return;
 
   var descuentoEdad = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
 
   var existente = carrito.find(function (item) {
     return item.codigo === codigo;
@@ -52,6 +53,7 @@ function agregarAlCarrito(codigo, cantidad) {
     existente.cantidad = Math.min(existente.cantidad + cantidad, Number(producto.stock));
     existente.descuento = Number(producto.descuento) || 0;
     existente.descuentoEdad = descuentoEdad;
+    existente.descuentoCodigo = descuentoCodigo;
   } else {
     carrito.push({
       codigo: producto.codigo,
@@ -60,6 +62,7 @@ function agregarAlCarrito(codigo, cantidad) {
       precio: producto.precio,
       descuento: Number(producto.descuento) || 0,
       descuentoEdad: descuentoEdad,
+      descuentoCodigo: descuentoCodigo,
       imagen: producto.imagen,
       stock: producto.stock,
       cantidad: cantidad
@@ -100,7 +103,8 @@ function subtotalCarrito() {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
     var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
+    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
     var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
     return s + precioFinal * item.cantidad;
   }, 0);
@@ -111,7 +115,8 @@ function totalDescuentoCarrito() {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
     var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
+    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
     if (descuentoTotal <= 0) return s;
     var ahorro = Math.round(precio * descuentoTotal / 100);
     return s + ahorro * item.cantidad;
@@ -173,7 +178,8 @@ function renderizarPaginaCarrito() {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
     var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
+    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
     var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
     var subtotal = precioFinal * item.cantidad;
 

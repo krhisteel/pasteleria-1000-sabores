@@ -23,6 +23,13 @@ function obtenerDescuentoEdad() {
   return Number(usuario.descuentoEdad) || 0;
 }
 
+// Devuelve el descuento por código promocional del usuario activo (0 si no tiene)
+function obtenerDescuentoCodigo() {
+  var usuario = obtenerUsuarioActual();
+  if (!usuario) return 0;
+  return Number(usuario.descuentoCodigo) || 0;
+}
+
 // Elimina la sesión y redirige al inicio
 function cerrarSesion() {
   localStorage.removeItem(CLAVE_SESION);
@@ -190,7 +197,8 @@ function renderizarPanelCarrito() {
     const precio = Number(item.precio) || 0;
     const descuento = Number(item.descuento) || 0;
     const descuentoEdad = Number(item.descuentoEdad) || 0;
-    const descuentoTotal = Math.min(descuento + descuentoEdad, 100);
+    const descuentoCodigo = Number(item.descuentoCodigo) || 0;
+    const descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
     const precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
     const sub = precioFinal * item.cantidad;
     total += sub;
