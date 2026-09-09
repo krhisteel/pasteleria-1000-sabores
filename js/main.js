@@ -270,12 +270,21 @@ function inicializarCarritoDropdown() {
 
   boton.addEventListener("click", function (e) {
     e.stopPropagation();
-    const abriendo = panel.classList.contains("hidden");
-    if (abriendo) {
-      abrir();
-    } else {
+
+    // Si ya está abierto, cerrar
+    if (!panel.classList.contains("hidden")) {
       cerrar();
+      return;
     }
+
+    // Si no hay productos, no abrir nada
+    const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
+    if (carrito.length === 0) return;
+
+    // Abrir y renderizar
+    renderizarPanelCarrito();
+    panel.classList.remove("hidden");
+    boton.setAttribute("aria-expanded", "true");
   });
 
   // Cerrar automáticamente si no hay productos
