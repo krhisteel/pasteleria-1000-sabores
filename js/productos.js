@@ -178,6 +178,13 @@ document.addEventListener("DOMContentLoaded", function () {
       agregarAlCarrito(btn.dataset.codigo, 1);
       btn.textContent = "A\u00f1adido \u2713";
       btn.disabled = true;
+
+      // Cerrar el dropdown del carrito después de agregar
+      var panel = document.getElementById("carritoPanel");
+      var botonCarrito = document.getElementById("btnAbrirCarrito");
+      if (panel) panel.classList.add("hidden");
+      if (botonCarrito) botonCarrito.setAttribute("aria-expanded", "false");
+
       setTimeout(function () {
         btn.textContent = "A\u00f1adir al carrito";
         btn.disabled = false;

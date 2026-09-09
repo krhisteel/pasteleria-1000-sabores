@@ -591,7 +591,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .carrito-panel-cuerpo {
 
-  max-height: 340px;
+  max-height: 280px;
 
   overflow-y: auto;
 
@@ -754,6 +754,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .carrito-panel-footer .ver-todo:hover {
+
+  background: var(--color-chocolate-claro);
+
+}
+
+.carrito-panel-footer .btn-ir-pagar {
+
+  background: var(--color-chocolate);
+
+  color: var(--color-blanco);
+
+  border-radius: var(--radio-md);
+
+  margin-bottom: 0.4rem;
+
+}
+
+.carrito-panel-footer .btn-ir-pagar:hover {
 
   background: var(--color-chocolate-claro);
 
