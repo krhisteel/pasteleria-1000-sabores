@@ -1509,6 +1509,14 @@ h1, h2, h3, h4, h5, h6 {
 
     justify-content: flex-start;
 
+    flex-wrap: wrap;
+
+  }
+
+  .sesion-badge-duoc {
+
+    margin-right: 0;
+
   }
 
 }

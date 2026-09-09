@@ -100,7 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
       descuentoCodigo = 10;
     }
 
-    var esCorreoDuoc = correo.endsWith("@duocuc.cl") || correo.endsWith("@duoc.cl") || correo.endsWith("@profesor.duoc.cl");
+    var correoUsuario = campoCorreo.value.trim().toLowerCase();
+    var esCorreoDuoc = correoUsuario.endsWith("@duocuc.cl") || correoUsuario.endsWith("@duoc.cl") || correoUsuario.endsWith("@profesor.duoc.cl");
 
     const usuario = {
       run: normalizarRun(campoRun.value),

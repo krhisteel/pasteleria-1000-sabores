@@ -42,9 +42,6 @@ function agregarAlCarrito(codigo, cantidad) {
   var producto = typeof buscarProducto === "function" ? buscarProducto(codigo) : null;
   if (!producto) return;
 
-  var descuentoEdad = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
-  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
-
   var existente = carrito.find(function (item) {
     return item.codigo === codigo;
   });
@@ -52,8 +49,6 @@ function agregarAlCarrito(codigo, cantidad) {
   if (existente) {
     existente.cantidad = Math.min(existente.cantidad + cantidad, Number(producto.stock));
     existente.descuento = Number(producto.descuento) || 0;
-    existente.descuentoEdad = descuentoEdad;
-    existente.descuentoCodigo = descuentoCodigo;
   } else {
     carrito.push({
       codigo: producto.codigo,
@@ -61,8 +56,6 @@ function agregarAlCarrito(codigo, cantidad) {
       categoria: producto.categoria,
       precio: producto.precio,
       descuento: Number(producto.descuento) || 0,
-      descuentoEdad: descuentoEdad,
-      descuentoCodigo: descuentoCodigo,
       imagen: producto.imagen,
       stock: producto.stock,
       cantidad: cantidad
@@ -102,10 +95,7 @@ function subtotalCarrito() {
   return cargarCarrito().reduce(function (s, item) {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
-    var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
-    var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
+    var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
     return s + precioFinal * item.cantidad;
   }, 0);
 }
@@ -114,11 +104,8 @@ function totalDescuentoCarrito() {
   return cargarCarrito().reduce(function (s, item) {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
-    var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
-    if (descuentoTotal <= 0) return s;
-    var ahorro = Math.round(precio * descuentoTotal / 100);
+    if (descuento <= 0) return s;
+    var ahorro = Math.round(precio * descuento / 100);
     return s + ahorro * item.cantidad;
   }, 0);
 }
@@ -177,10 +164,7 @@ function renderizarPaginaCarrito() {
   carrito.forEach(function (item) {
     var precio = Number(item.precio) || 0;
     var descuento = Number(item.descuento) || 0;
-    var descuentoEdad = Number(item.descuentoEdad) || 0;
-    var descuentoCodigo = Number(item.descuentoCodigo) || 0;
-    var descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
-    var precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
+    var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
     var subtotal = precioFinal * item.cantidad;
 
     html += '<div class="carrito-item" data-codigo="' + item.codigo + '">';
@@ -188,9 +172,9 @@ function renderizarPaginaCarrito() {
     html += '  <div class="carrito-item-info">';
     html += '    <h3>' + item.nombre + '</h3>';
     html += '    <p class="carrito-item-cat">' + item.categoria + '</p>';
-    if (descuentoTotal > 0) {
+    if (descuento > 0) {
       html += '    <p class="carrito-item-precio-original">' + formatearPrecio(precio) + ' c/u</p>';
-      html += '    <p class="carrito-item-precio">' + formatearPrecio(precioFinal) + ' c/u <span class="carrito-item-descuento">-' + descuentoTotal + '%</span></p>';
+      html += '    <p class="carrito-item-precio">' + formatearPrecio(precioFinal) + ' c/u <span class="carrito-item-descuento">-' + descuento + '%</span></p>';
     } else {
       html += '    <p class="carrito-item-precio">' + formatearPrecio(precio) + ' c/u</p>';
     }

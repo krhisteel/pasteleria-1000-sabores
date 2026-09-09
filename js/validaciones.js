@@ -1,7 +1,7 @@
 "use strict";
 
-const DOMINIOS_PERMITIDOS = ["duoc.cl", "profesor.duoc.cl", "gmail.com"];
-const TEXTO_DOMINIOS = "@duoc.cl, @profesor.duoc.cl o @gmail.com";
+const DOMINIOS_PERMITIDOS = ["duoc.cl", "profesor.duoc.cl", "duocuc.cl", "gmail.com"];
+const TEXTO_DOMINIOS = "@duoc.cl, @profesor.duoc.cl, @duocuc.cl o @gmail.com";
 const LARGOS = {
   correo: 100,
   nombreRegistro: 50,

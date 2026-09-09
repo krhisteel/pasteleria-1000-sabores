@@ -211,10 +211,7 @@ function renderizarPanelCarrito() {
   carrito.forEach(function (item) {
     const precio = Number(item.precio) || 0;
     const descuento = Number(item.descuento) || 0;
-    const descuentoEdad = Number(item.descuentoEdad) || 0;
-    const descuentoCodigo = Number(item.descuentoCodigo) || 0;
-    const descuentoTotal = Math.min(descuento + descuentoEdad + descuentoCodigo, 100);
-    const precioFinal = descuentoTotal > 0 ? Math.round(precio * (1 - descuentoTotal / 100)) : precio;
+    const precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
     const sub = precioFinal * item.cantidad;
     total += sub;
     html += '<div class="carrito-panel-item">';

@@ -109,6 +109,9 @@ document.addEventListener("DOMContentLoaded", function () {
         correo: usuario.correo,
         tipo: usuario.tipo || "Cliente",
         beneficios: usuario.beneficios || [],
+        descuentoEdad: usuario.descuentoEdad || 0,
+        descuentoCodigo: usuario.descuentoCodigo || 0,
+        tortaGratisDuoc: usuario.tortaGratisDuoc || false,
         fechaLogin: new Date().toISOString()
       };
       localStorage.setItem(CLAVE_SESION, JSON.stringify(sesion));
