@@ -170,7 +170,7 @@ function renderizarPanelCarrito() {
   const carrito = leerDatosLocal("carrito");
 
   if (carrito.length === 0) {
-    cont.innerHTML = '<p class="carrito-panel-vacio">Tu carrito está vacío.</p>';
+    cont.innerHTML = "";
     if (footer) footer.classList.add("hidden");
     return;
   }
