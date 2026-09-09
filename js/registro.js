@@ -100,6 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
       descuentoCodigo = 10;
     }
 
+    var esCorreoDuoc = correo.endsWith("@duocuc.cl") || correo.endsWith("@duoc.cl") || correo.endsWith("@profesor.duoc.cl");
+
     const usuario = {
       run: normalizarRun(campoRun.value),
       nombre: campoNombre.value.trim(),
@@ -115,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
       beneficios: beneficios,
       descuentoEdad: descuentoEdad,
       descuentoCodigo: descuentoCodigo,
+      tortaGratisDuoc: esCorreoDuoc,
       tipo: "Cliente",
       fechaRegistro: new Date().toISOString()
     };
@@ -363,7 +366,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (codigo === "FELICES50") {
       beneficios.push("10% de descuento de por vida por el código FELICES50");
     }
-    if (correo.endsWith("@duoc.cl") || correo.endsWith("@profesor.duoc.cl")) {
+    if (correo.endsWith("@duocuc.cl") || correo.endsWith("@duoc.cl") || correo.endsWith("@profesor.duoc.cl")) {
       beneficios.push("Torta gratis en tu cumpleaños por ser de la comunidad Duoc UC");
     }
 

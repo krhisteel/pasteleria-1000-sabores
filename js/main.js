@@ -30,6 +30,13 @@ function obtenerDescuentoCodigo() {
   return Number(usuario.descuentoCodigo) || 0;
 }
 
+// Verifica si el usuario activo tiene torta gratis por correo Duoc
+function tieneTortaGratisDuoc() {
+  var usuario = obtenerUsuarioActual();
+  if (!usuario) return false;
+  return usuario.tortaGratisDuoc === true;
+}
+
 // Elimina la sesión y redirige al inicio
 function cerrarSesion() {
   localStorage.removeItem(CLAVE_SESION);
@@ -69,6 +76,14 @@ function renderizarSesionEnHeader() {
 
   bloque.appendChild(saludo);
   bloque.appendChild(rol);
+
+  if (usuario.tortaGratisDuoc) {
+    const badgeDuoc = document.createElement("span");
+    badgeDuoc.className = "sesion-badge-duoc";
+    badgeDuoc.textContent = "Torta gratis";
+    badgeDuoc.title = "Torta gratis en tu cumpleaños por ser de la comunidad Duoc UC";
+    bloque.appendChild(badgeDuoc);
+  }
 
   if (usuario.tipo === "Administrador" || usuario.tipo === "Vendedor") {
     const panel = document.createElement("a");
