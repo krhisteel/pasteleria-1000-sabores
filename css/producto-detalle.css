@@ -52,6 +52,29 @@
   font-size: 1.5rem;
 }
 
+.detalle-precios {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+  flex-wrap: wrap;
+}
+
+.detalle-precio-original {
+  color: var(--color-texto-claro);
+  font-size: 1rem;
+  text-decoration: line-through;
+}
+
+.detalle-badge-descuento {
+  display: inline-block;
+  background: var(--color-error);
+  color: var(--color-blanco);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radio-sm);
+}
+
 .detalle-descripcion {
   color: var(--color-texto);
   line-height: 1.6;

@@ -160,7 +160,10 @@ function renderizarPedido() {
 
     productos.forEach(function (p) {
 
-      var sub = p.precio * p.cantidad;
+      var precio = Number(p.precio) || 0;
+      var descuento = Number(p.descuento) || 0;
+      var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
+      var sub = precioFinal * p.cantidad;
 
       ph += '<div class="sp-producto">';
 
@@ -171,22 +174,17 @@ function renderizarPedido() {
         p.nombre +
         '">';
 
-      ph +=
-        '  <div class="sp-info">' +
-          '<span class="sp-nombre">' +
-            p.nombre +
-          '</span>' +
-          '<span class="sp-cant">' +
-            p.cantidad +
-            ' × ' +
-            formatearPrecio(p.precio) +
-          '</span>' +
-        '</div>';
+      ph += '  <div class="sp-info">';
+      ph += '    <span class="sp-nombre">' + p.nombre + '</span>';
+      if (descuento > 0) {
+        ph += '    <span class="sp-precio-original">' + formatearPrecio(precio) + ' × ' + p.cantidad + '</span>';
+        ph += '    <span class="sp-precio-descuento">' + formatearPrecio(precioFinal) + ' × ' + p.cantidad + ' (-' + descuento + '%)</span>';
+      } else {
+        ph += '    <span class="sp-cant">' + p.cantidad + ' × ' + formatearPrecio(precio) + '</span>';
+      }
+      ph += '  </div>';
 
-      ph +=
-        '  <strong>' +
-        formatearPrecio(sub) +
-        '</strong>';
+      ph += '  <strong>' + formatearPrecio(sub) + '</strong>';
 
       ph += '</div>';
     });

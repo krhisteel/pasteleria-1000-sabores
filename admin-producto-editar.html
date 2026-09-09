@@ -107,6 +107,15 @@
           </div>
 
           <div class="campo-grupo">
+            <label for="descuentoProducto">Descuento (%)</label>
+            <input type="text" id="descuentoProducto" name="descuento" class="campo"
+                   placeholder="0" min="0" max="100" inputmode="numeric"
+                   autocomplete="off" aria-describedby="ayuda-descuento error-descuento">
+            <small class="campo-ayuda" id="ayuda-descuento">Porcentaje de descuento (0-100). Vacío o 0 = sin descuento.</small>
+            <div class="mensaje-error" id="error-descuento" role="alert" aria-live="polite"></div>
+          </div>
+
+          <div class="campo-grupo">
             <label for="stockProducto">Stock <span class="campo-requerido">*</span></label>
             <input type="text" id="stockProducto" name="stock" class="campo"
                    placeholder="0" min="0" inputmode="numeric" required

@@ -501,6 +501,21 @@ function validarCampoImagenProducto(campo) {
   return marcarValido(campo);
 }
 
+// Valida descuento: opcional, 0-100
+function validarCampoDescuentoProducto(campo) {
+  const valor = campo.value.trim();
+  if (!validarNoVacio(valor)) return limpiarEstado(campo);
+
+  if (!/^\d+$/.test(valor)) {
+    return mostrarError(campo, "El descuento solo acepta números enteros.");
+  }
+  const numero = parseInt(valor, 10);
+  if (numero < 0 || numero > 100) {
+    return mostrarError(campo, "El descuento debe estar entre 0 y 100.");
+  }
+  return marcarValido(campo);
+}
+
 // --- Formulario nuevo / editar ---
 
 // Inicializa el formulario de producto (modo "crear" o "editar")
@@ -522,6 +537,7 @@ function inicializarFormularioProducto(modo) {
   const campoNombre = document.getElementById("nombreProducto");
   const campoDescripcion = document.getElementById("descripcionProducto");
   const campoPrecio = document.getElementById("precioProducto");
+  const campoDescuento = document.getElementById("descuentoProducto");
   const campoStock = document.getElementById("stockProducto");
   const campoStockCritico = document.getElementById("stockCriticoProducto");
   const campoCategoria = document.getElementById("categoriaProducto");
@@ -549,6 +565,9 @@ function inicializarFormularioProducto(modo) {
     campoNombre.value = producto.nombre || "";
     campoDescripcion.value = producto.descripcion || "";
     campoPrecio.value = producto.precio;
+    campoDescuento.value = (producto.descuento !== undefined && producto.descuento !== null && producto.descuento !== "")
+      ? producto.descuento
+      : "";
     campoStock.value = producto.stock;
     campoStockCritico.value = (producto.stockCritico !== undefined && producto.stockCritico !== null && producto.stockCritico !== "")
       ? producto.stockCritico
@@ -575,6 +594,10 @@ function inicializarFormularioProducto(modo) {
 
   campoPrecio.addEventListener("input", function () {
     validarCampoPrecioProducto(campoPrecio);
+  });
+
+  campoDescuento.addEventListener("input", function () {
+    validarCampoDescuentoProducto(campoDescuento);
   });
 
   campoStock.addEventListener("input", function () {
@@ -608,12 +631,13 @@ function inicializarFormularioProducto(modo) {
     const nombreOk = validarCampoNombreProducto(campoNombre);
     const descripcionOk = validarCampoDescripcionProducto(campoDescripcion);
     const precioOk = validarCampoPrecioProducto(campoPrecio);
+    const descuentoOk = validarCampoDescuentoProducto(campoDescuento);
     const stockOk = validarCampoStockProducto(campoStock);
     const criticoOk = validarCampoStockCritico(campoStockCritico, campoStock);
     const categoriaOk = validarCampoCategoriaProducto(campoCategoria);
     const imagenOk = validarCampoImagenProducto(campoImagen);
 
-    if (!codigoOk || !nombreOk || !descripcionOk || !precioOk || !stockOk || !criticoOk || !categoriaOk || !imagenOk) {
+    if (!codigoOk || !nombreOk || !descripcionOk || !precioOk || !descuentoOk || !stockOk || !criticoOk || !categoriaOk || !imagenOk) {
       mostrarAvisoProducto("Revisa los campos marcados en rojo antes de guardar.");
       return;
     }
@@ -623,6 +647,7 @@ function inicializarFormularioProducto(modo) {
       nombre: campoNombre.value.trim(),
       descripcion: campoDescripcion.value.trim(),
       precio: numeroDe(campoPrecio),
+      descuento: campoDescuento.value.trim() ? parseInt(campoDescuento.value, 10) : 0,
       stock: parseInt(campoStock.value, 10),
       stockCritico: campoStockCritico.value.trim() ? parseInt(campoStockCritico.value, 10) : "",
       categoria: campoCategoria.value,
@@ -704,6 +729,15 @@ function inicializarDetalleProducto() {
     ? producto.stockCritico
     : "—";
 
+  const descuento = Number(producto.descuento) || 0;
+  let filaDescuento = '';
+  if (descuento > 0) {
+    const precioFinal = Math.round(producto.precio * (1 - descuento / 100));
+    filaDescuento =
+      '<div class="admin-detalle-fila"><dt>Descuento</dt><dd>' + descuento + '%</dd></div>' +
+      '<div class="admin-detalle-fila"><dt>Precio con descuento</dt><dd class="admin-precio">' + formatearPrecio(precioFinal) + '</dd></div>';
+  }
+
   cuerpo.innerHTML =
     '<div class="admin-detalle">' +
       '<figure class="admin-detalle-imagen">' + imagen +
@@ -713,6 +747,7 @@ function inicializarDetalleProducto() {
         '<div class="admin-detalle-fila"><dt>Código</dt><dd>' + producto.codigo + '</dd></div>' +
         '<div class="admin-detalle-fila"><dt>Categoría</dt><dd><span class="admin-badge admin-badge-categoria">' + producto.categoria + '</span></dd></div>' +
         '<div class="admin-detalle-fila"><dt>Precio</dt><dd class="admin-precio">' + formatearPrecio(producto.precio) + '</dd></div>' +
+        filaDescuento +
         filaStock +
         '<div class="admin-detalle-fila"><dt>Stock crítico</dt><dd>' + stockCriticoTexto + '</dd></div>' +
         '<div class="admin-detalle-fila"><dt>Descripción</dt><dd>' + (producto.descripcion || "Sin descripción.") + '</dd></div>' +

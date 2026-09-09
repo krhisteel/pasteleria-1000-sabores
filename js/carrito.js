@@ -48,12 +48,14 @@ function agregarAlCarrito(codigo, cantidad) {
 
   if (existente) {
     existente.cantidad = Math.min(existente.cantidad + cantidad, Number(producto.stock));
+    existente.descuento = Number(producto.descuento) || 0;
   } else {
     carrito.push({
       codigo: producto.codigo,
       nombre: producto.nombre,
       categoria: producto.categoria,
       precio: producto.precio,
+      descuento: Number(producto.descuento) || 0,
       imagen: producto.imagen,
       stock: producto.stock,
       cantidad: cantidad
@@ -91,7 +93,20 @@ function eliminarDelCarrito(codigo) {
 
 function subtotalCarrito() {
   return cargarCarrito().reduce(function (s, item) {
-    return s + item.precio * item.cantidad;
+    var precio = Number(item.precio) || 0;
+    var descuento = Number(item.descuento) || 0;
+    var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
+    return s + precioFinal * item.cantidad;
+  }, 0);
+}
+
+function totalDescuentoCarrito() {
+  return cargarCarrito().reduce(function (s, item) {
+    var precio = Number(item.precio) || 0;
+    var descuento = Number(item.descuento) || 0;
+    if (descuento <= 0) return s;
+    var ahorro = Math.round(precio * descuento / 100);
+    return s + ahorro * item.cantidad;
   }, 0);
 }
 
@@ -147,13 +162,22 @@ function renderizarPaginaCarrito() {
 
   var html = "";
   carrito.forEach(function (item) {
-    var subtotal = item.precio * item.cantidad;
+    var precio = Number(item.precio) || 0;
+    var descuento = Number(item.descuento) || 0;
+    var precioFinal = descuento > 0 ? Math.round(precio * (1 - descuento / 100)) : precio;
+    var subtotal = precioFinal * item.cantidad;
+
     html += '<div class="carrito-item" data-codigo="' + item.codigo + '">';
     html += '  <img src="' + item.imagen + '" alt="' + item.nombre + '" class="carrito-item-img">';
     html += '  <div class="carrito-item-info">';
     html += '    <h3>' + item.nombre + '</h3>';
     html += '    <p class="carrito-item-cat">' + item.categoria + '</p>';
-    html += '    <p class="carrito-item-precio">' + formatearPrecio(item.precio) + ' c/u</p>';
+    if (descuento > 0) {
+      html += '    <p class="carrito-item-precio-original">' + formatearPrecio(precio) + ' c/u</p>';
+      html += '    <p class="carrito-item-precio">' + formatearPrecio(precioFinal) + ' c/u <span class="carrito-item-descuento">-' + descuento + '%</span></p>';
+    } else {
+      html += '    <p class="carrito-item-precio">' + formatearPrecio(precio) + ' c/u</p>';
+    }
     html += '  </div>';
     html += '  <div class="carrito-item-cantidad">';
     html += '    <button type="button" class="btn-cantidad" data-accion="restar" data-codigo="' + item.codigo + '">−</button>';
@@ -172,7 +196,21 @@ function renderizarPaginaCarrito() {
 function renderizarResumen() {
   var sub = subtotalCarrito();
   var total = sub;
+  var ahorro = totalDescuentoCarrito();
+
   document.getElementById("subtotalCarrito").textContent = formatearPrecio(sub);
+
+  var ahorroEl = document.getElementById("ahorroCarrito");
+  var filaAhorro = document.getElementById("filaAhorro");
+  if (ahorroEl && filaAhorro) {
+    if (ahorro > 0) {
+      ahorroEl.textContent = "-" + formatearPrecio(ahorro);
+      filaAhorro.classList.remove("hidden");
+    } else {
+      filaAhorro.classList.add("hidden");
+    }
+  }
+
   document.getElementById("totalCarrito").textContent = formatearPrecio(total);
 }
 

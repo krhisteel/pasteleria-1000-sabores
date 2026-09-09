@@ -85,6 +85,30 @@
   margin-top: auto;
 }
 
+.producto-precios {
+  display: flex;
+  align-items: center;
+  gap: var(--espaciado-sm);
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.producto-precio-original {
+  color: var(--color-texto-claro);
+  font-size: 0.85rem;
+  text-decoration: line-through;
+}
+
+.producto-badge-descuento {
+  display: inline-block;
+  background: var(--color-error);
+  color: var(--color-blanco);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio-sm);
+}
+
 .btn-ver-mas {
   display: inline-block;
   font-weight: 700;

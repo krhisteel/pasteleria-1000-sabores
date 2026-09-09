@@ -25,7 +25,19 @@ function renderizarDetalleProducto() {
   html += '  <div class="detalle-info">';
   html += '    <span class="detalle-categoria">' + producto.categoria + '</span>';
   html += '    <h1 class="detalle-nombre">' + producto.nombre + '</h1>';
-  html += '    <span class="detalle-precio">' + formatearPrecio(producto.precio) + '</span>';
+
+  var descuento = Number(producto.descuento) || 0;
+  if (descuento > 0) {
+    var precioFinal = Math.round(producto.precio * (1 - descuento / 100));
+    html += '    <div class="detalle-precios">';
+    html += '      <span class="detalle-precio-original">' + formatearPrecio(producto.precio) + '</span>';
+    html += '      <span class="detalle-precio">' + formatearPrecio(precioFinal) + '</span>';
+    html += '      <span class="detalle-badge-descuento">-' + descuento + '%</span>';
+    html += '    </div>';
+  } else {
+    html += '    <span class="detalle-precio">' + formatearPrecio(producto.precio) + '</span>';
+  }
+
   html += '    <p class="detalle-descripcion">' + (producto.descripcion || "Sin descripci\u00f3n.") + '</p>';
   html += '    <p class="detalle-stock">Stock disponible: <strong>' + producto.stock + '</strong> unidades</p>';
 
