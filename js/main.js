@@ -248,12 +248,17 @@ function inicializarCarritoDropdown() {
   const panel = document.getElementById("carritoPanel");
   if (!boton || !panel) return;
 
+  let ultimoCierre = 0;
+
   function cerrar() {
     panel.classList.add("hidden");
     boton.setAttribute("aria-expanded", "false");
+    ultimoCierre = Date.now();
   }
 
   function abrir() {
+    // No abrir si se cerró hace menos de 300ms (evita clics accidentales)
+    if (Date.now() - ultimoCierre < 300) return;
     renderizarPanelCarrito();
     panel.classList.remove("hidden");
     boton.setAttribute("aria-expanded", "true");
@@ -275,6 +280,11 @@ function inicializarCarritoDropdown() {
     const carrito = JSON.parse(localStorage.getItem("carrito") || "[]");
     if (carrito.length === 0) cerrar();
   }, 1000);
+
+  // Cerrar al hacer scroll
+  window.addEventListener("scroll", function () {
+    if (!panel.classList.contains("hidden")) cerrar();
+  }, { passive: true });
 }
 
 document.addEventListener("DOMContentLoaded", function () {
