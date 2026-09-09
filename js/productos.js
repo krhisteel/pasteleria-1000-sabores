@@ -42,7 +42,11 @@ function crearTarjetaProducto(producto) {
   cat.className = "producto-categoria";
   cat.textContent = producto.categoria;
 
-  var descuento = Number(producto.descuento) || 0;
+  var descuentoProducto = Number(producto.descuento) || 0;
+  var descuentoEdad = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
+  var descuentoUsuario = Math.max(descuentoEdad, descuentoCodigo);
+  var descuento = Math.max(descuentoProducto, descuentoUsuario);
 
   var precioBase = Number(producto.precio) || 0;
 

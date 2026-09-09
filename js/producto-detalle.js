@@ -26,7 +26,11 @@ function renderizarDetalleProducto() {
   html += '    <span class="detalle-categoria">' + producto.categoria + '</span>';
   html += '    <h1 class="detalle-nombre">' + producto.nombre + '</h1>';
 
-  var descuento = Number(producto.descuento) || 0;
+  var descuentoProducto = Number(producto.descuento) || 0;
+  var descuentoEdad = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
+  var descuentoUsuario = Math.max(descuentoEdad, descuentoCodigo);
+  var descuento = Math.max(descuentoProducto, descuentoUsuario);
 
   if (descuento > 0) {
     var precioFinal = Math.round(producto.precio * (1 - descuento / 100));

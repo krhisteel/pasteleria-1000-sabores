@@ -42,20 +42,26 @@ function agregarAlCarrito(codigo, cantidad) {
   var producto = typeof buscarProducto === "function" ? buscarProducto(codigo) : null;
   if (!producto) return;
 
+  var descuentoEdad = typeof obtenerDescuentoEdad === "function" ? obtenerDescuentoEdad() : 0;
+  var descuentoCodigo = typeof obtenerDescuentoCodigo === "function" ? obtenerDescuentoCodigo() : 0;
+  var descuentoUsuario = Math.max(descuentoEdad, descuentoCodigo);
+  var descuentoProducto = Number(producto.descuento) || 0;
+  var descuentoFinal = Math.max(descuentoProducto, descuentoUsuario);
+
   var existente = carrito.find(function (item) {
     return item.codigo === codigo;
   });
 
   if (existente) {
     existente.cantidad = Math.min(existente.cantidad + cantidad, Number(producto.stock));
-    existente.descuento = Number(producto.descuento) || 0;
+    existente.descuento = descuentoFinal;
   } else {
     carrito.push({
       codigo: producto.codigo,
       nombre: producto.nombre,
       categoria: producto.categoria,
       precio: producto.precio,
-      descuento: Number(producto.descuento) || 0,
+      descuento: descuentoFinal,
       imagen: producto.imagen,
       stock: producto.stock,
       cantidad: cantidad
